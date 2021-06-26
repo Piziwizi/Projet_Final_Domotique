@@ -1,0 +1,1264 @@
+The system is: Linux - 4.19.118-v7l+ - armv7l
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/3.16.3/CompilerIdC/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_81449/fast && /usr/bin/make -f CMakeFiles/cmTC_81449.dir/build.make CMakeFiles/cmTC_81449.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_81449.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_81449.dir/testCCompiler.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_81449
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_81449.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_81449.dir/testCCompiler.c.o  -o cmTC_81449 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0e51c/fast && /usr/bin/make -f CMakeFiles/cmTC_0e51c.dir/build.make CMakeFiles/cmTC_0e51c.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -v -o CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+Target: arm-linux-gnueabihf
+Configured with: ../src/configure -v --with-pkgversion='Raspbian 8.3.0-6+rpi1' --with-bugurl=file:///usr/share/doc/gcc-8/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++ --prefix=/usr --with-gcc-major-version-only --program-suffix=-8 --program-prefix=arm-linux-gnueabihf- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --with-system-zlib --with-target-system-zlib --enable-objc-gc=auto --enable-multiarch --disable-sjlj-exceptions --with-arch=armv6 --with-fpu=vfp --with-float=hard --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf
+Thread model: posix
+gcc version 8.3.0 (Raspbian 8.3.0-6+rpi1) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp'
+ /usr/lib/gcc/arm-linux-gnueabihf/8/cc1 -quiet -v -imultilib . -imultiarch arm-linux-gnueabihf /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mfloat-abi=hard -mfpu=vfp -mtls-dialect=gnu -marm -march=armv6+fp -auxbase-strip CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccJBjU2b.s
+GNU C17 (Raspbian 8.3.0-6+rpi1) version 8.3.0 (arm-linux-gnueabihf)
+	compiled by GNU C version 8.3.0, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.20-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/local/include/arm-linux-gnueabihf"
+ignoring nonexistent directory "/usr/lib/gcc/arm-linux-gnueabihf/8/../../../../arm-linux-gnueabihf/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include
+ /usr/local/include
+ /usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed
+ /usr/include/arm-linux-gnueabihf
+ /usr/include
+End of search list.
+GNU C17 (Raspbian 8.3.0-6+rpi1) version 8.3.0 (arm-linux-gnueabihf)
+	compiled by GNU C version 8.3.0, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.20-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: bcc8c085e8c103b65550a3bb7c44a354
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp'
+ as -v -march=armv6 -mfloat-abi=hard -mfpu=vfp -meabi=5 -o CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o /tmp/ccJBjU2b.s
+GNU assembler version 2.31.1 (arm-linux-gnueabihf) using BFD version (GNU Binutils for Raspbian) 2.31.1
+COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/
+LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp'
+Linking C executable cmTC_0e51c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0e51c.dir/link.txt --verbose=1
+/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o  -o cmTC_0e51c 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/8/lto-wrapper
+Target: arm-linux-gnueabihf
+Configured with: ../src/configure -v --with-pkgversion='Raspbian 8.3.0-6+rpi1' --with-bugurl=file:///usr/share/doc/gcc-8/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++ --prefix=/usr --with-gcc-major-version-only --program-suffix=-8 --program-prefix=arm-linux-gnueabihf- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --with-system-zlib --with-target-system-zlib --enable-objc-gc=auto --enable-multiarch --disable-sjlj-exceptions --with-arch=armv6 --with-fpu=vfp --with-float=hard --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf
+Thread model: posix
+gcc version 8.3.0 (Raspbian 8.3.0-6+rpi1) 
+COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/
+LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_0e51c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp'
+ /usr/lib/gcc/arm-linux-gnueabihf/8/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/8/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/8/lto-wrapper -plugin-opt=-fresolution=/tmp/cc6A0V7f.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_0e51c /usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/8/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/8 -L/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/8/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/arm-linux-gnueabihf/8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_0e51c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp'
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc/arm-linux-gnueabihf/8/include]
+    add: [/usr/local/include]
+    add: [/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed]
+    add: [/usr/include/arm-linux-gnueabihf]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc/arm-linux-gnueabihf/8/include] ==> [/usr/lib/gcc/arm-linux-gnueabihf/8/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed] ==> [/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed]
+  collapse include dir [/usr/include/arm-linux-gnueabihf] ==> [/usr/include/arm-linux-gnueabihf]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/lib/gcc/arm-linux-gnueabihf/8/include;/usr/local/include;/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed;/usr/include/arm-linux-gnueabihf;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_0e51c/fast && /usr/bin/make -f CMakeFiles/cmTC_0e51c.dir/build.make CMakeFiles/cmTC_0e51c.dir/build]
+  ignore line: [make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [Target: arm-linux-gnueabihf]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Raspbian 8.3.0-6+rpi1' --with-bugurl=file:///usr/share/doc/gcc-8/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ --prefix=/usr --with-gcc-major-version-only --program-suffix=-8 --program-prefix=arm-linux-gnueabihf- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --with-system-zlib --with-target-system-zlib --enable-objc-gc=auto --enable-multiarch --disable-sjlj-exceptions --with-arch=armv6 --with-fpu=vfp --with-float=hard --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 8.3.0 (Raspbian 8.3.0-6+rpi1) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp']
+  ignore line: [ /usr/lib/gcc/arm-linux-gnueabihf/8/cc1 -quiet -v -imultilib . -imultiarch arm-linux-gnueabihf /usr/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mfloat-abi=hard -mfpu=vfp -mtls-dialect=gnu -marm -march=armv6+fp -auxbase-strip CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccJBjU2b.s]
+  ignore line: [GNU C17 (Raspbian 8.3.0-6+rpi1) version 8.3.0 (arm-linux-gnueabihf)]
+  ignore line: [	compiled by GNU C version 8.3.0  GMP version 6.1.2  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.20-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/local/include/arm-linux-gnueabihf"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/arm-linux-gnueabihf/8/../../../../arm-linux-gnueabihf/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc/arm-linux-gnueabihf/8/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed]
+  ignore line: [ /usr/include/arm-linux-gnueabihf]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C17 (Raspbian 8.3.0-6+rpi1) version 8.3.0 (arm-linux-gnueabihf)]
+  ignore line: [	compiled by GNU C version 8.3.0  GMP version 6.1.2  MPFR version 4.0.2  MPC version 1.1.0  isl version isl-0.20-GMP]
+  ignore line: []
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: bcc8c085e8c103b65550a3bb7c44a354]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp']
+  ignore line: [ as -v -march=armv6 -mfloat-abi=hard -mfpu=vfp -meabi=5 -o CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o /tmp/ccJBjU2b.s]
+  ignore line: [GNU assembler version 2.31.1 (arm-linux-gnueabihf) using BFD version (GNU Binutils for Raspbian) 2.31.1]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o' '-c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp']
+  ignore line: [Linking C executable cmTC_0e51c]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0e51c.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o  -o cmTC_0e51c ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/arm-linux-gnueabihf/8/lto-wrapper]
+  ignore line: [Target: arm-linux-gnueabihf]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Raspbian 8.3.0-6+rpi1' --with-bugurl=file:///usr/share/doc/gcc-8/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ --prefix=/usr --with-gcc-major-version-only --program-suffix=-8 --program-prefix=arm-linux-gnueabihf- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-libitm --disable-libquadmath --disable-libquadmath-support --enable-plugin --with-system-zlib --with-target-system-zlib --enable-objc-gc=auto --enable-multiarch --disable-sjlj-exceptions --with-arch=armv6 --with-fpu=vfp --with-float=hard --disable-werror --enable-checking=release --build=arm-linux-gnueabihf --host=arm-linux-gnueabihf --target=arm-linux-gnueabihf]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 8.3.0 (Raspbian 8.3.0-6+rpi1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-linux-gnueabihf/8/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/:/usr/lib/gcc/arm-linux-gnueabihf/8/../../../:/lib/arm-linux-gnueabihf/:/lib/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_0e51c'  '-mfloat-abi=hard' '-mfpu=vfp' '-mtls-dialect=gnu' '-marm' '-march=armv6+fp']
+  link line: [ /usr/lib/gcc/arm-linux-gnueabihf/8/collect2 -plugin /usr/lib/gcc/arm-linux-gnueabihf/8/liblto_plugin.so -plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/8/lto-wrapper -plugin-opt=-fresolution=/tmp/cc6A0V7f.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -export-dynamic -dynamic-linker /lib/ld-linux-armhf.so.3 -X --hash-style=gnu -m armelf_linux_eabi -o cmTC_0e51c /usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crt1.o /usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crti.o /usr/lib/gcc/arm-linux-gnueabihf/8/crtbegin.o -L/usr/lib/gcc/arm-linux-gnueabihf/8 -L/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf -L/usr/lib/gcc/arm-linux-gnueabihf/8/../../.. -L/lib/arm-linux-gnueabihf -L/usr/lib/arm-linux-gnueabihf CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/arm-linux-gnueabihf/8/crtend.o /usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crtn.o]
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/8/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/8/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/usr/lib/gcc/arm-linux-gnueabihf/8/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cc6A0V7f.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux-armhf.so.3] ==> ignore
+    arg [-X] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-m] ==> ignore
+    arg [armelf_linux_eabi] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_0e51c] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crti.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/8/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/8] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/8]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf]
+    arg [-L/usr/lib/gcc/arm-linux-gnueabihf/8/../../..] ==> dir [/usr/lib/gcc/arm-linux-gnueabihf/8/../../..]
+    arg [-L/lib/arm-linux-gnueabihf] ==> dir [/lib/arm-linux-gnueabihf]
+    arg [-L/usr/lib/arm-linux-gnueabihf] ==> dir [/usr/lib/arm-linux-gnueabihf]
+    arg [CMakeFiles/cmTC_0e51c.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--push-state] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--pop-state] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--push-state] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--pop-state] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/8/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf/crtn.o] ==> ignore
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/8] ==> [/usr/lib/gcc/arm-linux-gnueabihf/8]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/8/../../../arm-linux-gnueabihf] ==> [/usr/lib/arm-linux-gnueabihf]
+  collapse library dir [/usr/lib/gcc/arm-linux-gnueabihf/8/../../..] ==> [/usr/lib]
+  collapse library dir [/lib/arm-linux-gnueabihf] ==> [/lib/arm-linux-gnueabihf]
+  collapse library dir [/usr/lib/arm-linux-gnueabihf] ==> [/usr/lib/arm-linux-gnueabihf]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit dirs: [/usr/lib/gcc/arm-linux-gnueabihf/8;/usr/lib/arm-linux-gnueabihf;/usr/lib;/lib/arm-linux-gnueabihf]
+  implicit fwks: []
+
+
+Determining if the include file sys/resource.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f886c/fast && /usr/bin/make -f CMakeFiles/cmTC_f886c.dir/build.make CMakeFiles/cmTC_f886c.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f886c.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_f886c.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_f886c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f886c.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_f886c.dir/CheckIncludeFile.c.o  -o cmTC_f886c 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the getrusage exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_89216/fast && /usr/bin/make -f CMakeFiles/cmTC_89216.dir/build.make CMakeFiles/cmTC_89216.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_89216.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_89216.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_89216
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_89216.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_89216.dir/CheckSymbolExists.c.o  -o cmTC_89216 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/resource.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getrusage
+  return ((int*)(&getrusage))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file fcntl.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f3ad2/fast && /usr/bin/make -f CMakeFiles/cmTC_f3ad2.dir/build.make CMakeFiles/cmTC_f3ad2.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f3ad2.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_f3ad2.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_f3ad2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f3ad2.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_f3ad2.dir/CheckIncludeFile.c.o  -o cmTC_f3ad2  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file inttypes.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ef2dc/fast && /usr/bin/make -f CMakeFiles/cmTC_ef2dc.dir/build.make CMakeFiles/cmTC_ef2dc.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ef2dc.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_ef2dc.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_ef2dc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ef2dc.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_ef2dc.dir/CheckIncludeFile.c.o  -o cmTC_ef2dc  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file stdarg.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6c7a8/fast && /usr/bin/make -f CMakeFiles/cmTC_6c7a8.dir/build.make CMakeFiles/cmTC_6c7a8.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6c7a8.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_6c7a8.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_6c7a8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6c7a8.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_6c7a8.dir/CheckIncludeFile.c.o  -o cmTC_6c7a8  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file strings.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9b789/fast && /usr/bin/make -f CMakeFiles/cmTC_9b789.dir/build.make CMakeFiles/cmTC_9b789.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9b789.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_9b789.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_9b789
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9b789.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_9b789.dir/CheckIncludeFile.c.o  -o cmTC_9b789  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file string.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a0e20/fast && /usr/bin/make -f CMakeFiles/cmTC_a0e20.dir/build.make CMakeFiles/cmTC_a0e20.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a0e20.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_a0e20.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_a0e20
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a0e20.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_a0e20.dir/CheckIncludeFile.c.o  -o cmTC_a0e20  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file syslog.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_76d21/fast && /usr/bin/make -f CMakeFiles/cmTC_76d21.dir/build.make CMakeFiles/cmTC_76d21.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_76d21.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_76d21.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_76d21
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_76d21.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_76d21.dir/CheckIncludeFile.c.o  -o cmTC_76d21  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files stdlib.h;stdarg.h;string.h;float.h exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4c304/fast && /usr/bin/make -f CMakeFiles/cmTC_4c304.dir/build.make CMakeFiles/cmTC_4c304.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4c304.dir/STDC_HEADERS.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_4c304.dir/STDC_HEADERS.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CheckIncludeFiles/STDC_HEADERS.c
+Linking C executable cmTC_4c304
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4c304.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_4c304.dir/STDC_HEADERS.c.o  -o cmTC_4c304  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file unistd.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_93354/fast && /usr/bin/make -f CMakeFiles/cmTC_93354.dir/build.make CMakeFiles/cmTC_93354.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_93354.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_93354.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_93354
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_93354.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_93354.dir/CheckIncludeFile.c.o  -o cmTC_93354  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ca7bf/fast && /usr/bin/make -f CMakeFiles/cmTC_ca7bf.dir/build.make CMakeFiles/cmTC_ca7bf.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ca7bf.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_ca7bf.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_ca7bf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ca7bf.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_ca7bf.dir/CheckIncludeFile.c.o  -o cmTC_ca7bf  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file dlfcn.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6fbb7/fast && /usr/bin/make -f CMakeFiles/cmTC_6fbb7.dir/build.make CMakeFiles/cmTC_6fbb7.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6fbb7.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_6fbb7.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_6fbb7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6fbb7.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_6fbb7.dir/CheckIncludeFile.c.o  -o cmTC_6fbb7  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file endian.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1464b/fast && /usr/bin/make -f CMakeFiles/cmTC_1464b.dir/build.make CMakeFiles/cmTC_1464b.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1464b.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_1464b.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_1464b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1464b.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_1464b.dir/CheckIncludeFile.c.o  -o cmTC_1464b  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file limits.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_84189/fast && /usr/bin/make -f CMakeFiles/cmTC_84189.dir/build.make CMakeFiles/cmTC_84189.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_84189.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_84189.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_84189
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_84189.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_84189.dir/CheckIncludeFile.c.o  -o cmTC_84189  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file locale.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b4e28/fast && /usr/bin/make -f CMakeFiles/cmTC_b4e28.dir/build.make CMakeFiles/cmTC_b4e28.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b4e28.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_b4e28.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_b4e28
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b4e28.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_b4e28.dir/CheckIncludeFile.c.o  -o cmTC_b4e28  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file memory.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_27364/fast && /usr/bin/make -f CMakeFiles/cmTC_27364.dir/build.make CMakeFiles/cmTC_27364.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_27364.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_27364.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_27364
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_27364.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_27364.dir/CheckIncludeFile.c.o  -o cmTC_27364  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e4770/fast && /usr/bin/make -f CMakeFiles/cmTC_e4770.dir/build.make CMakeFiles/cmTC_e4770.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e4770.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_e4770.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_e4770
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e4770.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_e4770.dir/CheckIncludeFile.c.o  -o cmTC_e4770  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file stdlib.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cfac6/fast && /usr/bin/make -f CMakeFiles/cmTC_cfac6.dir/build.make CMakeFiles/cmTC_cfac6.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cfac6.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_cfac6.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_cfac6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cfac6.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_cfac6.dir/CheckIncludeFile.c.o  -o cmTC_cfac6  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/cdefs.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b4d1b/fast && /usr/bin/make -f CMakeFiles/cmTC_b4d1b.dir/build.make CMakeFiles/cmTC_b4d1b.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b4d1b.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_b4d1b.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_b4d1b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b4d1b.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_b4d1b.dir/CheckIncludeFile.c.o  -o cmTC_b4d1b  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/param.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_346fb/fast && /usr/bin/make -f CMakeFiles/cmTC_346fb.dir/build.make CMakeFiles/cmTC_346fb.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_346fb.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_346fb.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_346fb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_346fb.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_346fb.dir/CheckIncludeFile.c.o  -o cmTC_346fb  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/random.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_04d4b/fast && /usr/bin/make -f CMakeFiles/cmTC_04d4b.dir/build.make CMakeFiles/cmTC_04d4b.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_04d4b.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_04d4b.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_04d4b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_04d4b.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_04d4b.dir/CheckIncludeFile.c.o  -o cmTC_04d4b  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/stat.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_778ff/fast && /usr/bin/make -f CMakeFiles/cmTC_778ff.dir/build.make CMakeFiles/cmTC_778ff.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_778ff.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_778ff.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_778ff
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_778ff.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_778ff.dir/CheckIncludeFile.c.o  -o cmTC_778ff  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the INFINITY exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_569a0/fast && /usr/bin/make -f CMakeFiles/cmTC_569a0.dir/build.make CMakeFiles/cmTC_569a0.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_569a0.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_569a0.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_569a0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_569a0.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_569a0.dir/CheckSymbolExists.c.o  -o cmTC_569a0  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef INFINITY
+  return ((int*)(&INFINITY))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the isinf exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3b0b2/fast && /usr/bin/make -f CMakeFiles/cmTC_3b0b2.dir/build.make CMakeFiles/cmTC_3b0b2.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3b0b2.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_3b0b2.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_3b0b2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3b0b2.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_3b0b2.dir/CheckSymbolExists.c.o  -o cmTC_3b0b2  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isinf
+  return ((int*)(&isinf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the isnan exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a727a/fast && /usr/bin/make -f CMakeFiles/cmTC_a727a.dir/build.make CMakeFiles/cmTC_a727a.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a727a.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_a727a.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_a727a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a727a.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_a727a.dir/CheckSymbolExists.c.o  -o cmTC_a727a  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef isnan
+  return ((int*)(&isnan))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the nan exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_56a23/fast && /usr/bin/make -f CMakeFiles/cmTC_56a23.dir/build.make CMakeFiles/cmTC_56a23.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_56a23.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_56a23.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_56a23
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56a23.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_56a23.dir/CheckSymbolExists.c.o  -o cmTC_56a23  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef nan
+  return ((int*)(&nan))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the snprintf exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fd2dc/fast && /usr/bin/make -f CMakeFiles/cmTC_fd2dc.dir/build.make CMakeFiles/cmTC_fd2dc.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fd2dc.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_fd2dc.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_fd2dc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fd2dc.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_fd2dc.dir/CheckSymbolExists.c.o  -o cmTC_fd2dc  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef snprintf
+  return ((int*)(&snprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the vasprintf exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_982c2/fast && /usr/bin/make -f CMakeFiles/cmTC_982c2.dir/build.make CMakeFiles/cmTC_982c2.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_982c2.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_982c2.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_982c2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_982c2.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_982c2.dir/CheckSymbolExists.c.o  -o cmTC_982c2  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vasprintf
+  return ((int*)(&vasprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the vsnprintf exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_5eb50/fast && /usr/bin/make -f CMakeFiles/cmTC_5eb50.dir/build.make CMakeFiles/cmTC_5eb50.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5eb50.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_5eb50.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_5eb50
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5eb50.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_5eb50.dir/CheckSymbolExists.c.o  -o cmTC_5eb50  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vsnprintf
+  return ((int*)(&vsnprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the vprintf exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_10c12/fast && /usr/bin/make -f CMakeFiles/cmTC_10c12.dir/build.make CMakeFiles/cmTC_10c12.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_10c12.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_10c12.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_10c12
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_10c12.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_10c12.dir/CheckSymbolExists.c.o  -o cmTC_10c12  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vprintf
+  return ((int*)(&vprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the open exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c9b68/fast && /usr/bin/make -f CMakeFiles/cmTC_c9b68.dir/build.make CMakeFiles/cmTC_c9b68.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c9b68.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_c9b68.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_c9b68
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c9b68.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_c9b68.dir/CheckSymbolExists.c.o  -o cmTC_c9b68  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <fcntl.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef open
+  return ((int*)(&open))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the realloc exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_16704/fast && /usr/bin/make -f CMakeFiles/cmTC_16704.dir/build.make CMakeFiles/cmTC_16704.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_16704.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_16704.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_16704
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_16704.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_16704.dir/CheckSymbolExists.c.o  -o cmTC_16704  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef realloc
+  return ((int*)(&realloc))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the setlocale exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ecaeb/fast && /usr/bin/make -f CMakeFiles/cmTC_ecaeb.dir/build.make CMakeFiles/cmTC_ecaeb.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ecaeb.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_ecaeb.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_ecaeb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ecaeb.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_ecaeb.dir/CheckSymbolExists.c.o  -o cmTC_ecaeb  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <locale.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef setlocale
+  return ((int*)(&setlocale))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the uselocale exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1f4bc/fast && /usr/bin/make -f CMakeFiles/cmTC_1f4bc.dir/build.make CMakeFiles/cmTC_1f4bc.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1f4bc.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_1f4bc.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_1f4bc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1f4bc.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_1f4bc.dir/CheckSymbolExists.c.o  -o cmTC_1f4bc  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <locale.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef uselocale
+  return ((int*)(&uselocale))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strcasecmp exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0f438/fast && /usr/bin/make -f CMakeFiles/cmTC_0f438.dir/build.make CMakeFiles/cmTC_0f438.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0f438.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_0f438.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_0f438
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0f438.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_0f438.dir/CheckSymbolExists.c.o  -o cmTC_0f438  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <strings.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strcasecmp
+  return ((int*)(&strcasecmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strncasecmp exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_81f87/fast && /usr/bin/make -f CMakeFiles/cmTC_81f87.dir/build.make CMakeFiles/cmTC_81f87.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_81f87.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_81f87.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_81f87
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_81f87.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_81f87.dir/CheckSymbolExists.c.o  -o cmTC_81f87  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <strings.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strncasecmp
+  return ((int*)(&strncasecmp))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strdup exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8fdd6/fast && /usr/bin/make -f CMakeFiles/cmTC_8fdd6.dir/build.make CMakeFiles/cmTC_8fdd6.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8fdd6.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_8fdd6.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_8fdd6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8fdd6.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_8fdd6.dir/CheckSymbolExists.c.o  -o cmTC_8fdd6  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strdup
+  return ((int*)(&strdup))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strerror exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a5872/fast && /usr/bin/make -f CMakeFiles/cmTC_a5872.dir/build.make CMakeFiles/cmTC_a5872.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a5872.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_a5872.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_a5872
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5872.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_a5872.dir/CheckSymbolExists.c.o  -o cmTC_a5872  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strerror
+  return ((int*)(&strerror))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the vsyslog exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e9ef0/fast && /usr/bin/make -f CMakeFiles/cmTC_e9ef0.dir/build.make CMakeFiles/cmTC_e9ef0.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e9ef0.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_e9ef0.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_e9ef0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e9ef0.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_e9ef0.dir/CheckSymbolExists.c.o  -o cmTC_e9ef0  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <syslog.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vsyslog
+  return ((int*)(&vsyslog))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the getrandom exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e7eac/fast && /usr/bin/make -f CMakeFiles/cmTC_e7eac.dir/build.make CMakeFiles/cmTC_e7eac.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e7eac.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_e7eac.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_e7eac
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e7eac.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_e7eac.dir/CheckSymbolExists.c.o  -o cmTC_e7eac  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/random.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getrandom
+  return ((int*)(&getrandom))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strtoll exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a4dbe/fast && /usr/bin/make -f CMakeFiles/cmTC_a4dbe.dir/build.make CMakeFiles/cmTC_a4dbe.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a4dbe.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_a4dbe.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_a4dbe
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a4dbe.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_a4dbe.dir/CheckSymbolExists.c.o  -o cmTC_a4dbe  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtoll
+  return ((int*)(&strtoll))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the strtoull exist passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4edf1/fast && /usr/bin/make -f CMakeFiles/cmTC_4edf1.dir/build.make CMakeFiles/cmTC_4edf1.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4edf1.dir/CheckSymbolExists.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_4edf1.dir/CheckSymbolExists.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_4edf1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4edf1.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_4edf1.dir/CheckSymbolExists.c.o  -o cmTC_4edf1  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+File /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtoull
+  return ((int*)(&strtoull))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ad2d8/fast && /usr/bin/make -f CMakeFiles/cmTC_ad2d8.dir/build.make CMakeFiles/cmTC_ad2d8.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ad2d8.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_ad2d8.dir/CheckIncludeFile.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_ad2d8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ad2d8.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_ad2d8.dir/CheckIncludeFile.c.o  -o cmTC_ad2d8  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of int passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cd52d/fast && /usr/bin/make -f CMakeFiles/cmTC_cd52d.dir/build.make CMakeFiles/cmTC_cd52d.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cd52d.dir/SIZEOF_INT.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_cd52d.dir/SIZEOF_INT.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_INT.c
+Linking C executable cmTC_cd52d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cd52d.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_cd52d.dir/SIZEOF_INT.c.o  -o cmTC_cd52d  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of int64_t passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a482d/fast && /usr/bin/make -f CMakeFiles/cmTC_a482d.dir/build.make CMakeFiles/cmTC_a482d.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a482d.dir/SIZEOF_INT64_T.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_a482d.dir/SIZEOF_INT64_T.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_INT64_T.c
+Linking C executable cmTC_a482d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a482d.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_a482d.dir/SIZEOF_INT64_T.c.o  -o cmTC_a482d  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of long passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_de8d6/fast && /usr/bin/make -f CMakeFiles/cmTC_de8d6.dir/build.make CMakeFiles/cmTC_de8d6.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_de8d6.dir/SIZEOF_LONG.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_de8d6.dir/SIZEOF_LONG.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_LONG.c
+Linking C executable cmTC_de8d6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_de8d6.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_de8d6.dir/SIZEOF_LONG.c.o  -o cmTC_de8d6  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of long long passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_68da5/fast && /usr/bin/make -f CMakeFiles/cmTC_68da5.dir/build.make CMakeFiles/cmTC_68da5.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_68da5.dir/SIZEOF_LONG_LONG.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_68da5.dir/SIZEOF_LONG_LONG.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_LONG_LONG.c
+Linking C executable cmTC_68da5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_68da5.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_68da5.dir/SIZEOF_LONG_LONG.c.o  -o cmTC_68da5  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of size_t passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4cb6b/fast && /usr/bin/make -f CMakeFiles/cmTC_4cb6b.dir/build.make CMakeFiles/cmTC_4cb6b.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4cb6b.dir/SIZEOF_SIZE_T.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_4cb6b.dir/SIZEOF_SIZE_T.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_SIZE_T.c
+Linking C executable cmTC_4cb6b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4cb6b.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_4cb6b.dir/SIZEOF_SIZE_T.c.o  -o cmTC_4cb6b  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of ssize_t passed with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_28da7/fast && /usr/bin/make -f CMakeFiles/cmTC_28da7.dir/build.make CMakeFiles/cmTC_28da7.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_28da7.dir/SIZEOF_SSIZE_T.c.o
+/usr/bin/cc -D_GNU_SOURCE  -fPIE   -o CMakeFiles/cmTC_28da7.dir/SIZEOF_SSIZE_T.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CheckTypeSize/SIZEOF_SSIZE_T.c
+Linking C executable cmTC_28da7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_28da7.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_28da7.dir/SIZEOF_SSIZE_T.c.o  -o cmTC_28da7  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+
+Performing C SOURCE FILE Test HAVE_ATOMIC_BUILTINS succeeded with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_16df3/fast && /usr/bin/make -f CMakeFiles/cmTC_16df3.dir/build.make CMakeFiles/cmTC_16df3.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_16df3.dir/src.c.o
+/usr/bin/cc -D_GNU_SOURCE  -DHAVE_ATOMIC_BUILTINS -fPIE   -o CMakeFiles/cmTC_16df3.dir/src.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_16df3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_16df3.dir/link.txt --verbose=1
+/usr/bin/cc  -DHAVE_ATOMIC_BUILTINS    -rdynamic CMakeFiles/cmTC_16df3.dir/src.c.o  -o cmTC_16df3  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main() { int i, x = 0; i = __sync_add_and_fetch(&x,1); return x; }
+Performing C SOURCE FILE Test HAVE___THREAD succeeded with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_32591/fast && /usr/bin/make -f CMakeFiles/cmTC_32591.dir/build.make CMakeFiles/cmTC_32591.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_32591.dir/src.c.o
+/usr/bin/cc -D_GNU_SOURCE  -DHAVE___THREAD -fPIE   -o CMakeFiles/cmTC_32591.dir/src.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_32591
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_32591.dir/link.txt --verbose=1
+/usr/bin/cc  -DHAVE___THREAD    -rdynamic CMakeFiles/cmTC_32591.dir/src.c.o  -o cmTC_32591  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+__thread int x = 0; int main() { return 0; }
+Performing C SOURCE FILE Test REENTRANT_WORKS succeeded with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7e979/fast && /usr/bin/make -f CMakeFiles/cmTC_7e979.dir/build.make CMakeFiles/cmTC_7e979.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7e979.dir/src.c.o
+/usr/bin/cc -D_GNU_SOURCE  -ffunction-sections -fdata-sections -Werror -Wall -Wcast-qual -Wno-error=deprecated-declarations -Wextra -Wwrite-strings -Wno-unused-parameter -Wstrict-prototypes -DREENTRANT_WORKS -fPIE   -o CMakeFiles/cmTC_7e979.dir/src.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_7e979
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7e979.dir/link.txt --verbose=1
+/usr/bin/cc  -ffunction-sections -fdata-sections -Werror -Wall -Wcast-qual -Wno-error=deprecated-declarations -Wextra -Wwrite-strings -Wno-unused-parameter -Wstrict-prototypes -DREENTRANT_WORKS    -rdynamic CMakeFiles/cmTC_7e979.dir/src.c.o  -o cmTC_7e979  -lm 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+
+	/* uClibc toolchains without threading barf when _REENTRANT is defined */
+	#define _REENTRANT 1
+	#include <sys/types.h>
+	int main (void)
+	{
+	  return 0;
+	}
+	
+Performing C SOURCE FILE Test BSYMBOLIC_WORKS succeeded with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1ce17/fast && /usr/bin/make -f CMakeFiles/cmTC_1ce17.dir/build.make CMakeFiles/cmTC_1ce17.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1ce17.dir/src.c.o
+/usr/bin/cc -D_GNU_SOURCE  -ffunction-sections -fdata-sections -Werror -Wall -Wcast-qual -Wno-error=deprecated-declarations -Wextra -Wwrite-strings -Wno-unused-parameter -Wstrict-prototypes -DBSYMBOLIC_WORKS -fPIE   -o CMakeFiles/cmTC_1ce17.dir/src.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_1ce17
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1ce17.dir/link.txt --verbose=1
+/usr/bin/cc  -ffunction-sections -fdata-sections -Werror -Wall -Wcast-qual -Wno-error=deprecated-declarations -Wextra -Wwrite-strings -Wno-unused-parameter -Wstrict-prototypes -DBSYMBOLIC_WORKS    -rdynamic CMakeFiles/cmTC_1ce17.dir/src.c.o  -o cmTC_1ce17  -lm -Wl,-Bsymbolic-functions 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+
+	int main (void)
+	{
+	  return 0;
+	}
+	
+Performing C SOURCE FILE Test VERSION_SCRIPT_WORKS succeeded with the following output:
+Change Dir: /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_45ad3/fast && /usr/bin/make -f CMakeFiles/cmTC_45ad3.dir/build.make CMakeFiles/cmTC_45ad3.dir/build
+make[1]: Entering directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_45ad3.dir/src.c.o
+/usr/bin/cc -D_GNU_SOURCE  -ffunction-sections -fdata-sections -Werror -Wall -Wcast-qual -Wno-error=deprecated-declarations -Wextra -Wwrite-strings -Wno-unused-parameter -Wstrict-prototypes -DVERSION_SCRIPT_WORKS -fPIE   -o CMakeFiles/cmTC_45ad3.dir/src.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_45ad3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_45ad3.dir/link.txt --verbose=1
+/usr/bin/cc  -ffunction-sections -fdata-sections -Werror -Wall -Wcast-qual -Wno-error=deprecated-declarations -Wextra -Wwrite-strings -Wno-unused-parameter -Wstrict-prototypes -DVERSION_SCRIPT_WORKS    -rdynamic CMakeFiles/cmTC_45ad3.dir/src.c.o  -o cmTC_45ad3  -lm -Wl,--version-script,/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/check-version-script.sym 
+make[1]: Leaving directory '/home/pi/Documents/Projet_Final_Domotique/backend/json-c-build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+
+	int main (void)
+	{
+	  return 0;
+	}
+	
