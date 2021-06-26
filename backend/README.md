@@ -1,5 +1,5 @@
-#Interface communication
-##json format
+# Interface communication
+## json format
 ```javascript
 {
   "get": [
@@ -28,7 +28,7 @@
   ]
 ```
 
-#Internal
+# Internal
 We will be using ptheard to be able to support multiple sensors.
 Tasks:
 * [ ]  Sensor task
@@ -43,6 +43,6 @@ Tasks:
   * [ ]  Create Control task for each control
 
 
-#Sensor communication
+# Sensor communication
 
 To determine
