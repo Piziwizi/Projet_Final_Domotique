@@ -1,5 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/backend.dir/main.c.o"
+  "CMakeFiles/backend.dir/src/control.c.o"
+  "CMakeFiles/backend.dir/src/interface.c.o"
+  "CMakeFiles/backend.dir/src/logging.c.o"
+  "CMakeFiles/backend.dir/src/main.c.o"
+  "CMakeFiles/backend.dir/src/sensor.c.o"
   "backend"
   "backend.pdb"
 )

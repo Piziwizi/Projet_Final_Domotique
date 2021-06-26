@@ -1,1 +1,1 @@
-/usr/bin/gcc-8 -g   CMakeFiles/backend.dir/main.c.o  -o backend  -lpthread 
+/usr/bin/gcc-8 -g   CMakeFiles/backend.dir/src/main.c.o CMakeFiles/backend.dir/src/sensor.c.o CMakeFiles/backend.dir/src/control.c.o CMakeFiles/backend.dir/src/logging.c.o CMakeFiles/backend.dir/src/interface.c.o  -o backend  -lpthread 

@@ -123,32 +123,140 @@ backend/fast:
 	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/build
 .PHONY : backend/fast
 
-main.o: main.c.o
+src/control.o: src/control.c.o
 
-.PHONY : main.o
+.PHONY : src/control.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/main.c.o
-.PHONY : main.c.o
+src/control.c.o:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/control.c.o
+.PHONY : src/control.c.o
 
-main.i: main.c.i
+src/control.i: src/control.c.i
 
-.PHONY : main.i
+.PHONY : src/control.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/main.c.i
-.PHONY : main.c.i
+src/control.c.i:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/control.c.i
+.PHONY : src/control.c.i
 
-main.s: main.c.s
+src/control.s: src/control.c.s
 
-.PHONY : main.s
+.PHONY : src/control.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/main.c.s
-.PHONY : main.c.s
+src/control.c.s:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/control.c.s
+.PHONY : src/control.c.s
+
+src/interface.o: src/interface.c.o
+
+.PHONY : src/interface.o
+
+# target to build an object file
+src/interface.c.o:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/interface.c.o
+.PHONY : src/interface.c.o
+
+src/interface.i: src/interface.c.i
+
+.PHONY : src/interface.i
+
+# target to preprocess a source file
+src/interface.c.i:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/interface.c.i
+.PHONY : src/interface.c.i
+
+src/interface.s: src/interface.c.s
+
+.PHONY : src/interface.s
+
+# target to generate assembly for a file
+src/interface.c.s:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/interface.c.s
+.PHONY : src/interface.c.s
+
+src/logging.o: src/logging.c.o
+
+.PHONY : src/logging.o
+
+# target to build an object file
+src/logging.c.o:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/logging.c.o
+.PHONY : src/logging.c.o
+
+src/logging.i: src/logging.c.i
+
+.PHONY : src/logging.i
+
+# target to preprocess a source file
+src/logging.c.i:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/logging.c.i
+.PHONY : src/logging.c.i
+
+src/logging.s: src/logging.c.s
+
+.PHONY : src/logging.s
+
+# target to generate assembly for a file
+src/logging.c.s:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/logging.c.s
+.PHONY : src/logging.c.s
+
+src/main.o: src/main.c.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.c.o:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/main.c.o
+.PHONY : src/main.c.o
+
+src/main.i: src/main.c.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.c.i:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/main.c.i
+.PHONY : src/main.c.i
+
+src/main.s: src/main.c.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.c.s:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/main.c.s
+.PHONY : src/main.c.s
+
+src/sensor.o: src/sensor.c.o
+
+.PHONY : src/sensor.o
+
+# target to build an object file
+src/sensor.c.o:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/sensor.c.o
+.PHONY : src/sensor.c.o
+
+src/sensor.i: src/sensor.c.i
+
+.PHONY : src/sensor.i
+
+# target to preprocess a source file
+src/sensor.c.i:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/sensor.c.i
+.PHONY : src/sensor.c.i
+
+src/sensor.s: src/sensor.c.s
+
+.PHONY : src/sensor.s
+
+# target to generate assembly for a file
+src/sensor.c.s:
+	$(MAKE) -f CMakeFiles/backend.dir/build.make CMakeFiles/backend.dir/src/sensor.c.s
+.PHONY : src/sensor.c.s
 
 # Help Target
 help:
@@ -159,9 +267,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... backend"
 	@echo "... edit_cache"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/control.o"
+	@echo "... src/control.i"
+	@echo "... src/control.s"
+	@echo "... src/interface.o"
+	@echo "... src/interface.i"
+	@echo "... src/interface.s"
+	@echo "... src/logging.o"
+	@echo "... src/logging.i"
+	@echo "... src/logging.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/sensor.o"
+	@echo "... src/sensor.i"
+	@echo "... src/sensor.s"
 .PHONY : help
 
 

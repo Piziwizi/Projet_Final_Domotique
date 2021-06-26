@@ -4,7 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/pi/Documents/Projet_Final_Domotique/backend/main.c" "/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/backend.dir/main.c.o"
+  "/home/pi/Documents/Projet_Final_Domotique/backend/src/control.c" "/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/backend.dir/src/control.c.o"
+  "/home/pi/Documents/Projet_Final_Domotique/backend/src/interface.c" "/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/backend.dir/src/interface.c.o"
+  "/home/pi/Documents/Projet_Final_Domotique/backend/src/logging.c" "/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/backend.dir/src/logging.c.o"
+  "/home/pi/Documents/Projet_Final_Domotique/backend/src/main.c" "/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/backend.dir/src/main.c.o"
+  "/home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.c" "/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/backend.dir/src/sensor.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
