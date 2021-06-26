@@ -1,7 +1,27 @@
 [
 {
   "directory": "/home/pi/Documents/Projet_Final_Domotique/backend/build",
-  "command": "/usr/bin/gcc-8   -g   -o CMakeFiles/backend.dir/main.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/main.c",
-  "file": "/home/pi/Documents/Projet_Final_Domotique/backend/main.c"
+  "command": "/usr/bin/gcc-8   -g   -o CMakeFiles/backend.dir/src/main.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/src/main.c",
+  "file": "/home/pi/Documents/Projet_Final_Domotique/backend/src/main.c"
+},
+{
+  "directory": "/home/pi/Documents/Projet_Final_Domotique/backend/build",
+  "command": "/usr/bin/gcc-8   -g   -o CMakeFiles/backend.dir/src/sensor.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.c",
+  "file": "/home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.c"
+},
+{
+  "directory": "/home/pi/Documents/Projet_Final_Domotique/backend/build",
+  "command": "/usr/bin/gcc-8   -g   -o CMakeFiles/backend.dir/src/control.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/src/control.c",
+  "file": "/home/pi/Documents/Projet_Final_Domotique/backend/src/control.c"
+},
+{
+  "directory": "/home/pi/Documents/Projet_Final_Domotique/backend/build",
+  "command": "/usr/bin/gcc-8   -g   -o CMakeFiles/backend.dir/src/logging.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/src/logging.c",
+  "file": "/home/pi/Documents/Projet_Final_Domotique/backend/src/logging.c"
+},
+{
+  "directory": "/home/pi/Documents/Projet_Final_Domotique/backend/build",
+  "command": "/usr/bin/gcc-8   -g   -o CMakeFiles/backend.dir/src/interface.c.o   -c /home/pi/Documents/Projet_Final_Domotique/backend/src/interface.c",
+  "file": "/home/pi/Documents/Projet_Final_Domotique/backend/src/interface.c"
 }
 ]
