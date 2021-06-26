@@ -12,3 +12,4 @@ add_executable(${TARGET}
                 src/interface.c)
 
 target_link_libraries (backend PUBLIC pthread)
+target_link_libraries (backend PUBLIC json-c)

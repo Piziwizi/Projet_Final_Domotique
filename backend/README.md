@@ -1,5 +1,6 @@
 # Interface communication
 ## json format
+sudo apt install libjson-c-dev
 ```javascript
 {
   "get": [
