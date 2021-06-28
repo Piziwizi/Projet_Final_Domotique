@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/pi/Documents/Projet_Final_Domotique/backend/src/control.c
-control.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/control.h
-
-/home/pi/Documents/Projet_Final_Domotique/backend/src/control.h
-define.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
-
 /home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
 stdio.h
 -
@@ -25,6 +17,8 @@ unistd.h
 -
 pthread.h
 -
+semaphore.h
+-
 json-c/json.h
 /home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/json.h
 json-c/json_object.h
@@ -35,34 +29,6 @@ json-c/arraylist.h
 /home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/arraylist.h
 json-c/json_util.h
 /home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/json_util.h
-
-/home/pi/Documents/Projet_Final_Domotique/backend/src/interface.c
-interface.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/interface.h
-
-/home/pi/Documents/Projet_Final_Domotique/backend/src/interface.h
-define.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
-
-/home/pi/Documents/Projet_Final_Domotique/backend/src/logging.c
-logging.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/logging.h
-
-/home/pi/Documents/Projet_Final_Domotique/backend/src/logging.h
-define.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
-
-/home/pi/Documents/Projet_Final_Domotique/backend/src/main.c
-define.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
-control.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/control.h
-interface.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/interface.h
-logging.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/logging.h
-sensor.h
-/home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.h
 
 /home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.c
 sensor.h
