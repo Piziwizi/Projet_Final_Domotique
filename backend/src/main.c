@@ -13,6 +13,9 @@ void stop_pthread(void);
 
 int main()
 {
+	for(uint32_t i=0;i<MAX_SENSORS;i++){
+		sensor_tab.available[i]=AVAILABLE;
+	}
 	init_pthread();
 	stop_pthread();
     printf("end\n");
