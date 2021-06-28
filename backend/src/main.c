@@ -33,7 +33,6 @@ void init_pthread(void){
         return;
     }
 
-	pthread_create(&thread_sensor, NULL, Sensor_task, NULL);
 	pthread_create(&thread_sensor_manager, NULL, SensorManager_task, NULL);
 	pthread_create(&thread_control, NULL, Control_task, NULL);
 	pthread_create(&thread_control_manager, NULL, ControlManager_task, NULL);
@@ -42,7 +41,6 @@ void init_pthread(void){
 }
 
 void stop_pthread(void){
-	pthread_join(thread_sensor, NULL);
 	pthread_join(thread_sensor_manager, NULL);
 	pthread_join(thread_control, NULL);
 	pthread_join(thread_control_manager, NULL);

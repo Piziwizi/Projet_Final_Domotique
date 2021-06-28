@@ -23,10 +23,11 @@ void *Interface_task(void *vargp)
 	pthread_mutex_lock(&mutex_sensor);
 	//get the values from the sensors
 	//will receive string
-	FILE *sptr=fopen(SENSOR_FILE,"w");
-	fprintf(sptr,"%s",sensor_string);
-	fclose(sptr);
-
+	if(sensor_string != NULL){
+		FILE *sptr=fopen(SENSOR_FILE,"w");
+		fprintf(sptr,"%s",sensor_string);
+		fclose(sptr);
+	}
 	pthread_mutex_unlock(&mutex_sensor);
 
 	return NULL;

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include "json-c/json.h"
 #include "json-c/json_object.h"
 #include "json-c/json_tokener.h"
@@ -19,6 +20,14 @@
 #define USED 0
 
 typedef enum {TEMP,LIGHT} sensor_type_t;
+typedef enum {REFRESH_SENSORS,
+            SEARCH_NEW_SENSORS,
+            ADD_SENSOR,
+            REMOVE_SENSOR,
+            REMOVE_ALL_SENSORS,
+            TO_INTERFACE,
+            IDLE,
+            EXIT} sensor_state_machine_t;
 static const char *SENSOR_TYPE_STRING[] = {"temperature", "light"};
 
 typedef struct{
@@ -30,6 +39,8 @@ typedef struct{
 typedef struct{
     sensor_t* tab[MAX_SENSORS];
     uint32_t available[MAX_SENSORS];
+    sem_t sensor_sem_tab[MAX_SENSORS];
+    pthread_t thread_sensor_tab[MAX_SENSORS];
 }sensor_tab_t;
 
 pthread_mutex_t mutex_sensor;
@@ -37,7 +48,6 @@ char* sensor_string;
 
 pthread_mutex_t mutex_control;
 
-pthread_t thread_sensor;
 pthread_t thread_sensor_manager;
 pthread_t thread_control;
 pthread_t thread_control_manager;
