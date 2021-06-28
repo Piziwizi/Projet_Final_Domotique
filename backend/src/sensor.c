@@ -15,20 +15,48 @@ void *Sensor_task(void *vargp)
 	sensor.id=0;
 	sensor.type=TEMP;
 	sensor.value=24.5; 
-
+	
 	json_object_array_add(test2,get_json_from_sensor(sensor));
     // test end
 	return NULL;
 }
 
-void *SensorManager_task(void *vargp)
-{
+void *SensorManager_task(void *vargp){
+	sensor_t* temp_sensor;
+	uint32_t i;
+	uint32_t match;
+	uint32_t sensor_id;
 	printf("sensor manager task\n");
 
-	pthread_mutex_lock(&mutex_sensor);
+	switch (current_state)
+	{
+	case ADD_SENSOR:
+		while(!match){
+			if(sensor_tab.available[i]==AVAILABLE){
+				sensor_tab.tab[i++]=malloc(sizeof(sensor_t));
+				match=1;
+				sensor_tab.available[i]=USED;
+			}
+		}
+		break;
+	case REMOVE_SENSOR:
+		temp_sensor=sensor_tab.tab[sensor_id];
+		free(temp_sensor);
+		sensor_tab.available[sensor_id]=AVAILABLE;
+		break;
+	case REFRESH_SENSOR:
+		//call sem of Sensor_task
+		break;
+	case TO_INTERFACE:
 	//set the values from the sensors
-	sensor_string = json_object_to_json_string(test2);
-	pthread_mutex_unlock(&mutex_sensor);
+		pthread_mutex_lock(&mutex_sensor);
+		sensor_string = json_object_to_json_string(test2);//todo change test2
+		pthread_mutex_unlock(&mutex_sensor);
+		break;
+	default:
+		break;
+	}
+
 	return NULL;
 }
 
