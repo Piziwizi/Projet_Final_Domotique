@@ -1,32 +1,20 @@
 # Interface communication
 ## json format
 sudo apt install libjson-c-dev
+2 files sensor.c and control.c
 ```javascript
-{
-  "get": [
-    {
-      "id": "0",
-      "type": "temperature",
-      "value": "25.0"
-    },
-    {
-      "id": "1",
-      "type": "light",
-      "value": "1"
-    }
-  ],
-  "set": [
-    {
-      "id": "0",
-      "type": "temperature",
-      "value": "25.0"
-    },
-    {
-      "id": "1",
-      "type": "light",
-      "value": "1"
-    }
-  ]
+[
+  {
+    "id": "0",
+    "type": "temperature",
+    "value": "25.0"
+  },
+  {
+    "id": "1",
+    "type": "light",
+    "value": "1"
+  }
+]
 ```
 
 # Internal

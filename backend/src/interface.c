@@ -4,14 +4,30 @@
  */
 
 #include "interface.h"
-#include "json-c/json_object.h"
-#include "json-c/json_tokener.h"
-#define BASE_STRING "{\"get\":[{\"id\":\"0\",\"type\":\"temperature\",\"value\":\"25\"},{\"id\":\"1\",\"type\":\"light\",\"value\":\"1\"}],\"set\":[{\"id\":\"0\",\"type\":\"temperature\",\"value\":\"25\"},{\"id\":\"1\",\"type\":\"light\",\"value\":\"1\"}]}"
 
 void *Interface_task(void *vargp)
 {
-	json_object* test = json_object_new_object();	
-	test = json_tokener_parse(BASE_STRING);
 	printf("interface task\n");
+	pthread_mutex_lock(&mutex_control);
+	//set the controls
+	//will send string
+
+	FILE *cptr=fopen(CONTROL_FILE,"r");
+	if(cptr == NULL){
+		cptr=fopen(CONTROL_FILE,"w");
+	}
+	fclose(cptr);
+
+	pthread_mutex_unlock(&mutex_control);
+
+	pthread_mutex_lock(&mutex_sensor);
+	//get the values from the sensors
+	//will receive string
+	FILE *sptr=fopen(SENSOR_FILE,"w");
+	fprintf(sptr,"%s",sensor_string);
+	fclose(sptr);
+
+	pthread_mutex_unlock(&mutex_sensor);
+
 	return NULL;
 }
