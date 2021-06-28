@@ -14,5 +14,10 @@ void *Control_task(void *vargp)
 void *ControlManager_task(void *vargp)
 {
 	printf("control manager task\n");
+
+	pthread_mutex_lock(&mutex_control);
+	//get the controls
+	pthread_mutex_unlock(&mutex_control);
+
 	return NULL;
 }

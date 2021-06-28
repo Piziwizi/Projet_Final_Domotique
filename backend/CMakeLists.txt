@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
+enable_language(C)
+enable_language(CXX)
 
 set(TARGET backend)
 
