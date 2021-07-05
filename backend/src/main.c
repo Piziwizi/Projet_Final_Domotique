@@ -7,6 +7,7 @@
 #include "interface.h"
 #include "logging.h"
 #include "sensor.h"
+#include "test.c"
 
 void init_pthread(void);
 void stop_pthread(void);
@@ -38,6 +39,8 @@ void init_pthread(void){
 	pthread_create(&thread_control_manager, NULL, ControlManager_task, NULL);
 	pthread_create(&thread_interface, NULL, Interface_task, NULL);
 	pthread_create(&thread_logging, NULL, Logging_task, NULL);
+
+	pthread_create(&thread_test, NULL, Test_task, NULL);
 }
 
 void stop_pthread(void){

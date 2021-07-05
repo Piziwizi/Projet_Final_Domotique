@@ -21,20 +21,25 @@ void *SensorManager_task(void *vargp){
 		switch (current_state)
 		{
 		case REFRESH_SENSORS:
+			printf("test4\n");
 			//call sem of Sensor_task
 			for (uint32_t i = 0; i < MAX_SENSORS; i++){
 				if(sensor_tab.available[i]==USED){
+					printf("test3\n");
 					sem_post(&(sensor_tab.sensor_sem_tab[i]));
-					sleep(0);
 				}
 			}
 			current_state=IDLE;
 			break;
 		case SEARCH_NEW_SENSORS:
+			printf("test5\n");
 			//routine to find new sensors
-			current_state=ADD_SENSOR;
+			//if(newsensor){
+				current_state=ADD_SENSOR;
+			//}
 			break;
 		case ADD_SENSOR:
+			printf("test6\n");
 			while(!match){
 				if(sensor_tab.available[i]==AVAILABLE){
 					add_sensor(i);
@@ -45,11 +50,13 @@ void *SensorManager_task(void *vargp){
 			current_state=IDLE;
 			break;
 		case REMOVE_SENSOR:
+			printf("test7\n");
 			remove_sensor(sensor_id);
 			break;
 		case EXIT:
 			exit=1;
 		case REMOVE_ALL_SENSORS:
+			printf("test7\n");
 			for (uint32_t i = 0; i < MAX_SENSORS; i++){
 				if(sensor_tab.available[i]==USED){
 					remove_sensor(i);
@@ -59,6 +66,7 @@ void *SensorManager_task(void *vargp){
 			break;
 		case TO_INTERFACE:
 		//set the values from the sensors
+			printf("test8\n");
 			pthread_mutex_lock(&mutex_sensor);
 			sensor_string = json_object_to_json_string(sensor_json);//todo change test2
 			pthread_mutex_unlock(&mutex_sensor);
@@ -91,6 +99,7 @@ void *Sensor_task(void *id)
 {
 	printf("sensor task\n");
 	uint32_t task_id=*((uint32_t*)id);
+	free(id);
 	sensor_t sensor;
 	
     // test end
@@ -98,6 +107,7 @@ void *Sensor_task(void *id)
 		return NULL;
   	}
 
+	printf("test1\n");
 	while(sensor_tab.available[task_id] == USED){
 
 		//get sensor value todo connect communication
@@ -107,20 +117,23 @@ void *Sensor_task(void *id)
 
 		json_object_array_add(sensor_json,get_json_from_sensor(sensor));
 		sem_wait(&(sensor_tab.sensor_sem_tab[task_id]));
+		printf("test2\n");
 	}
 	sem_destroy(&(sensor_tab.sensor_sem_tab[task_id]));
 	pthread_exit(NULL);
 }
 
 void add_sensor(uint32_t id){
-		sensor_tab.tab[id]=malloc(sizeof(sensor_t));
-		sensor_tab.available[id]=USED;
-		pthread_create(&(sensor_tab.thread_sensor_tab[id]), NULL, Sensor_task,(uint32_t*) &id);
+	sensor_tab.tab[id]=malloc(sizeof(sensor_t));
+	sensor_tab.available[id]=USED;
+	uint32_t *task_id= malloc(sizeof(uint32_t));
+	*task_id=id;
+	pthread_create(&(sensor_tab.thread_sensor_tab[id]), NULL, Sensor_task, task_id);
 }
 
 void remove_sensor(uint32_t id){
-		free(sensor_tab.tab[id]);
-		sensor_tab.available[id]=AVAILABLE;
-		sem_post(&(sensor_tab.sensor_sem_tab[id]));
-		pthread_join(sensor_tab.thread_sensor_tab[id],NULL);
+	free(sensor_tab.tab[id]);
+	sensor_tab.available[id]=AVAILABLE;
+	sem_post(&(sensor_tab.sensor_sem_tab[id]));
+	pthread_join(sensor_tab.thread_sensor_tab[id],NULL);
 }

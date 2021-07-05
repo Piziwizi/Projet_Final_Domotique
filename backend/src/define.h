@@ -20,15 +20,55 @@
 #define USED 0
 
 typedef enum {TEMP,LIGHT} sensor_type_t;
-typedef enum {REFRESH_SENSORS,
-            SEARCH_NEW_SENSORS,
-            ADD_SENSOR,
-            REMOVE_SENSOR,
-            REMOVE_ALL_SENSORS,
-            TO_INTERFACE,
-            IDLE,
-            EXIT} sensor_state_machine_t;
 static const char *SENSOR_TYPE_STRING[] = {"temperature", "light"};
+
+typedef enum {REFRESH_SENSORS,
+              SEARCH_NEW_SENSORS,
+              ADD_SENSOR,
+              REMOVE_SENSOR,
+              REMOVE_ALL_SENSORS,
+              TO_INTERFACE,
+              IDLE,
+              EXIT} sensor_state_machine_t;
+
+typedef enum {SENSOR,
+              CONTROL,
+              REFRESH,
+              SYSTEM} wifi_main_t;
+static const char *WIFI_MAIN_TYPE_STRING[] = {"SENSOR", 
+                                              "CONTROL",
+                                              "REFRESH",
+                                              "SYSTEM"};
+
+typedef enum {SET,
+              GET,} wifi_operator_t;
+static const char *WIFI_OPERATOR_TYPE_STRING[] = {"SET", 
+                                                  "GET"};
+
+typedef enum {TEMP_DEVICE,
+              LIGHT_DEVICE,} wifi_type_t;
+static const char *WIFI_TYPE_TYPE_STRING[] = {"TEMP", 
+                                              "LIGHT"};
+
+typedef enum {PASSWORD,
+              SSID,
+              APPLY} wifi_auth_t;
+static const char *WIFI_AUTH_TYPE_STRING[] = {"PASSWORD", 
+                                              "SSID",
+                                              "APPLY"};
+
+typedef enum {RESET,
+              START,
+              RESTART,
+              STOP,
+              WIFI,
+              STATUS} wifi_system_t;
+static const char *WIFI_SYSTEM_TYPE_STRING[] = {"RESET", 
+                                                "START",
+                                                "RESTART",
+                                                "STOP",
+                                                "WIFI",
+                                                "STATUS"};
 
 typedef struct{
     uint32_t id;
@@ -53,6 +93,8 @@ pthread_t thread_control;
 pthread_t thread_control_manager;
 pthread_t thread_interface;
 pthread_t thread_logging;
+
+pthread_t thread_test;
 
 sensor_tab_t sensor_tab;
 
