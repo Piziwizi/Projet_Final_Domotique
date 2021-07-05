@@ -16,6 +16,7 @@
 #define SENSOR_FILE "../../Interface/sensor.json"
 #define CONTROL_FILE "../../Interface/control.json"
 #define MAX_SENSORS 32
+#define MAX_CHAR_FILE 2048
 #define AVAILABLE 1
 #define USED 0
 
@@ -28,6 +29,7 @@ typedef enum {REFRESH_SENSORS,
               REMOVE_SENSOR,
               REMOVE_ALL_SENSORS,
               TO_INTERFACE,
+              FROM_INTERFACE,
               IDLE,
               EXIT} sensor_state_machine_t;
 
@@ -87,6 +89,7 @@ pthread_mutex_t mutex_sensor;
 char* sensor_string;
 
 pthread_mutex_t mutex_control;
+char control_string[MAX_CHAR_FILE];
 
 pthread_t thread_sensor_manager;
 pthread_t thread_control;
