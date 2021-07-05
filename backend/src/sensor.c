@@ -5,6 +5,7 @@
 #include "sensor.h"
 
 json_object* sensor_json;
+json_object* control_json;
 
 void *SensorManager_task(void *vargp){
 	sensor_t* temp_sensor;
@@ -12,8 +13,9 @@ void *SensorManager_task(void *vargp){
 	uint32_t match=0;
 	uint32_t sensor_id;
 	uint32_t exit=0;
-	sensor_state_machine_t current_state=ADD_SENSOR;
+	sensor_state_machine_t current_state=FROM_INTERFACE;//todo change that to idle
 	sensor_json = json_object_new_array();
+	control_json = json_object_new_array();
 
 	printf("sensor manager task\n");
 	while(!exit){
@@ -71,6 +73,15 @@ void *SensorManager_task(void *vargp){
 			sensor_string = json_object_to_json_string(sensor_json);//todo change test2
 			pthread_mutex_unlock(&mutex_sensor);
 			current_state=IDLE;
+			break;
+		case FROM_INTERFACE://todo move to control
+		//put the values to sensors
+			printf("test9\n");
+			pthread_mutex_lock(&mutex_control);
+			control_json = json_tokener_parse(control_string);//todo change test2
+			pthread_mutex_unlock(&mutex_control); //potiential memory leak
+			json_object *temp = control_json;
+			current_state=FROM_INTERFACE;//todo change to idle
 			break;
 		case IDLE:
 			//todo add task management.
