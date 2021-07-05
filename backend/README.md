@@ -33,21 +33,21 @@ Tasks:
 
 
 # Sensor communication
-| Command              | Usage                           |
-| -------------------- | ------------------------------- |
-| SENSOR:TYPE:GET      | Get the sensor value            |
-| CONTROL:TYPE:SET     | Set the control value           |
-| CONTROL:TYPE:GET     | Get the control value           |
-| REFRESH:SET          | Set the refresh period          |
-| REFRESH:GET          | Get the refresh period          |
-| SYSTEM:RESET         | Reset to the defaults values    |
-| SYSTEM:START         | Start the aquisition            |
-| SYSTEM:RESTART       | Restart the ESP32               |
-| SYSTEM:STOP          | Stop the device                 |
-| SYSTEM:WIFI:PASSWORD | New password                    |
-| SYSTEM:WIFI:SSID     | New SSID                        |
-| SYSTEM:WIFI:APPLY    | Apply the new password and SSID |
-| SYSTEM:STATUS        | Get the status of the device    |
+| Command                       | Usage                           |
+| ----------------------------- | ------------------------------- |
+| SENSOR:TYPE:GET:id            | Get the sensor value            |
+| CONTROL:TYPE:SET:value        | Set the control value           |
+| CONTROL:TYPE:GET:id           | Get the control value           |
+| REFRESH:SET:value             | Set the refresh period          |
+| REFRESH:GET:id                | Get the refresh period          |
+| SYSTEM:RESET                  | Reset to the defaults values    |
+| SYSTEM:START                  | Start the aquisition            |
+| SYSTEM:RESTART                | Restart the ESP32               |
+| SYSTEM:STOP                   | Stop the device                 |
+| SYSTEM:WIFI:PASSWORD:password | New password                    |
+| SYSTEM:WIFI:SSID:name         | New SSID                        |
+| SYSTEM:WIFI:APPLY             | Apply the new password and SSID |
+| SYSTEM:STATUS                 | Get the status of the device    |
 
 Telnet
 
