@@ -7,7 +7,7 @@
 
 void *Interface_task(void *vargp)
 {
-	printf("interface task\n");
+	printf("STARTING : interface task\n");
 	//set the controls
 	//will send string
 
