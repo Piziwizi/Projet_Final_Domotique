@@ -1,0 +1,14 @@
+{
+      "get": [
+            {
+                  "id": "0", 
+                  "type": "temperature", 
+                  "value": "8"
+            }, 
+            {
+                  "id": "1", 
+                  "type": "light", 
+                  "value": "on"
+            }
+      ]
+}
