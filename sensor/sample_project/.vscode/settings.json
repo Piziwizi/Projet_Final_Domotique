@@ -1,3 +1,14 @@
 {
-  "C_Cpp.intelliSenseEngine": "Tag Parser"
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "idf.flashType": "UART",
+  "idf.portWin": "COM5",
+  "files.associations": {
+    "esp_wifi.h": "c",
+    "esp_event.h": "c",
+    "event_groups.h": "c",
+    "stdio.h": "c",
+    "sstream": "c",
+    "strstream": "c",
+    "random": "c"
+  }
 }
