@@ -14,25 +14,29 @@ void stop_pthread(void);
 
 int main()
 {
-	for(uint32_t i=0;i<MAX_SENSORS;i++){
-		sensor_tab.available[i]=AVAILABLE;
+	for (uint32_t i = 0; i < MAX_SENSORS; i++)
+	{
+		sensor_tab.available[i] = AVAILABLE;
 	}
 	init_pthread();
 	stop_pthread();
-    printf("end\n");
+	printf("end\n");
 	exit(0);
 }
 
-void init_pthread(void){
+void init_pthread(void)
+{
 
-	if (pthread_mutex_init(&mutex_sensor, NULL) != 0){
-        printf("mutex init failed\n");
-        return;
-    }
-	if (pthread_mutex_init(&mutex_control, NULL) != 0){
-        printf("mutex init failed\n");
-        return;
-    }
+	if (pthread_mutex_init(&mutex_sensor, NULL) != 0)
+	{
+		printf("mutex init failed\n");
+		return;
+	}
+	if (pthread_mutex_init(&mutex_control, NULL) != 0)
+	{
+		printf("mutex init failed\n");
+		return;
+	}
 
 	pthread_create(&thread_sensor_manager, NULL, SensorManager_task, NULL);
 	pthread_create(&thread_control, NULL, Control_task, NULL);
@@ -43,7 +47,8 @@ void init_pthread(void){
 	pthread_create(&thread_test, NULL, Test_task, NULL);
 }
 
-void stop_pthread(void){
+void stop_pthread(void)
+{
 	pthread_join(thread_sensor_manager, NULL);
 	pthread_join(thread_control, NULL);
 	pthread_join(thread_control_manager, NULL);
