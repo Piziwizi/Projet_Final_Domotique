@@ -7,6 +7,6 @@
 
 void *Logging_task(void *vargp)
 {
-	printf("logging task\n");
+	printf("STARTING : logging task\n");
 	return NULL;
 }
