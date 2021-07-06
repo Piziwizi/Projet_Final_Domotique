@@ -12,6 +12,7 @@
 #include "json-c/json_tokener.h"
 #include "json-c/arraylist.h"
 #include "json-c/json_util.h"
+#include "logging.h"
 
 #define SENSOR_FILE "../../Interface/sensor.json"
 #define CONTROL_FILE "../../Interface/control.json"
@@ -114,6 +115,8 @@ char *sensor_string;
 
 pthread_mutex_t mutex_control;
 char control_string[MAX_CHAR_FILE];
+
+pthread_mutex_t mutex_log;
 
 pthread_t thread_sensor_manager;
 pthread_t thread_control;

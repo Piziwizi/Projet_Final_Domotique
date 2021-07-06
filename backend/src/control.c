@@ -7,13 +7,13 @@
 
 void *Control_task(void *vargp)
 {
-	printf("STARTING : control task\n");
+	logging("STARTING : control task\n");
 	return NULL;
 }
 
 void *ControlManager_task(void *vargp)
 {
-	printf("STARTING : control manager task\n");
+	logging("STARTING : control manager task\n");
 
 	pthread_mutex_lock(&mutex_control);
 	//get the controls
