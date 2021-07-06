@@ -14,38 +14,37 @@ void *SensorManager_task(void *vargp)
 	uint32_t match = 0;
 	uint32_t sensor_id;
 	uint32_t exit = 0;
-	sensor_state_machine_t current_state = FROM_INTERFACE; //todo change that to idle
+	sensor_state_machine_t current_state = TO_INTERFACE; //todo change that to idle
 	sensor_json = json_object_new_array();
 	control_json = json_object_new_array();
 
-	printf("STARTING : sensor manager task\n");
+	logging("STARTING : sensor manager task\n");
 	while (!exit)
 	{
 		match = 0;
 		switch (current_state)
 		{
 		case REFRESH_SENSORS:
-			printf("STATE SENSOR : refresh\n");
+			logging("STATE SENSOR : refresh\n");
 			//call sem of Sensor_task
 			for (uint32_t i = 0; i < MAX_SENSORS; i++)
 			{
 				if (sensor_tab.available[i] == USED)
 				{
-					printf("test3\n");
 					sem_post(&(sensor_tab.sensor_sem_tab[i]));
 				}
 			}
 			current_state = IDLE;
 			break;
 		case SEARCH_NEW_SENSORS:
-			printf("STATE SENSOR : search\n");
+			logging("STATE SENSOR : search\n");
 			//routine to find new sensors
 			//if(newsensor){
 			current_state = ADD_SENSOR;
 			//}
 			break;
 		case ADD_SENSOR:
-			printf("STATE SENSOR : add sensor\n");
+			logging("STATE SENSOR : add sensor\n");
 			while (!match)
 			{
 				if (sensor_tab.available[i] == AVAILABLE)
@@ -58,13 +57,13 @@ void *SensorManager_task(void *vargp)
 			current_state = IDLE;
 			break;
 		case REMOVE_SENSOR:
-			printf("STATE SENSOR : remove sensor\n");
+			logging("STATE SENSOR : remove sensor\n");
 			remove_sensor(sensor_id);
 			break;
 		case EXIT:
 			exit = 1;
 		case REMOVE_ALL_SENSORS:
-			printf("STATE SENSOR : remove all sensor\n");
+			logging("STATE SENSOR : remove all sensor\n");
 			for (uint32_t i = 0; i < MAX_SENSORS; i++)
 			{
 				if (sensor_tab.available[i] == USED)
@@ -76,7 +75,7 @@ void *SensorManager_task(void *vargp)
 			break;
 		case TO_INTERFACE:
 			//set the values from the sensors
-			printf("STATE SENSOR : to interface\n");
+			logging("STATE SENSOR : to interface\n");
 			pthread_mutex_lock(&mutex_sensor);
 			sensor_string = json_object_to_json_string(sensor_json); //todo change test2
 			pthread_mutex_unlock(&mutex_sensor);
@@ -84,7 +83,7 @@ void *SensorManager_task(void *vargp)
 			break;
 		case FROM_INTERFACE: //todo move to control
 							 //put the values to sensors
-			printf("STATE SENSOR : from interface\n");
+			logging("STATE SENSOR : from interface\n");
 			pthread_mutex_lock(&mutex_control);
 			control_json = json_tokener_parse(control_string); //todo change test2
 			pthread_mutex_unlock(&mutex_control);			   //potiential memory leak
@@ -93,7 +92,7 @@ void *SensorManager_task(void *vargp)
 			break;
 		case IDLE:
 			//todo add task management.
-			printf("STATE SENSOR : idle\n");
+			logging("STATE SENSOR : idle\n");
 			sleep(3);
 			current_state = REFRESH_SENSORS;
 			break;
@@ -116,7 +115,7 @@ json_object *get_json_from_sensor(sensor_t sensor)
 
 void *Sensor_task(void *id)
 {
-	printf("STARTING : sensor task\n");
+	logging("STARTING : sensor task\n");
 	uint32_t task_id = *((uint32_t *)id);
 	free(id);
 	sensor_t sensor;

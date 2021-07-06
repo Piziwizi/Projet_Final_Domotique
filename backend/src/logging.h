@@ -4,5 +4,6 @@
 #include "define.h"
 
 void *Logging_task(void *vargp);
+void logging(char *message);
 
 #endif

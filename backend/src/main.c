@@ -37,6 +37,11 @@ void init_pthread(void)
 		printf("mutex init failed\n");
 		return;
 	}
+	if (pthread_mutex_init(&mutex_log, NULL) != 0)
+	{
+		printf("mutex init failed\n");
+		return;
+	}
 
 	pthread_create(&thread_sensor_manager, NULL, SensorManager_task, NULL);
 	pthread_create(&thread_control, NULL, Control_task, NULL);

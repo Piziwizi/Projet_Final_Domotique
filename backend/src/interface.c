@@ -7,7 +7,7 @@
 
 void *Interface_task(void *vargp)
 {
-	printf("STARTING : interface task\n");
+	logging("STARTING : interface task\n");
 	//set the controls
 	//will send string
 
@@ -24,7 +24,7 @@ void *Interface_task(void *vargp)
 	{
 		if (fgets(control_string, MAX_CHAR_FILE, cptr) == NULL)
 		{
-			printf("ERROR: Control file too large\n");
+			logging("ERROR: Control file too large\n");
 		}
 		fclose(cptr);
 	}
