@@ -14,24 +14,40 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .box-minmax{
   margin-top: 30px;
-  width: 608px;
+  width: 600px;
   display: flex;
   justify-content: space-between;
   font-size: 20px;
   color: #FFFFFF;
 }
+
+@media screen and (max-width: 600px) {
+    .box-minmax {
+        width: 300px;
+    }
+  }
+
 .range-slider {
     margin-top: 5vh;
     
 }
+
 .rs-range {
     margin-top: 29px;
     width: 600px;
     -webkit-appearance: none;
 
 }
+
+@media screen and (max-width: 600px) {
+    .rs-range {
+        width: 300px;
+    }
+  }
+
 .rs-label {
     
     position: relative;
@@ -54,7 +70,11 @@ body {
     font-style: normal;
     font-weight: normal;
     line-height: normal;
-    font-size: 36px;
-
-    
+    font-size: 36px;   
 }
+
+@media screen and (max-width: 600px) {
+    .rs-label {
+        position: sticky;
+    }
+  }
