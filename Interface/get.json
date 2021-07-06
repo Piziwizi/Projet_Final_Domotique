@@ -3,12 +3,12 @@
             {
                   "id": "0", 
                   "type": "temperature", 
-                  "value": "8"
+                  "value": "0"
             }, 
             {
                   "id": "1", 
                   "type": "light", 
-                  "value": "on"
+                  "value": "off"
             }
       ]
 }
