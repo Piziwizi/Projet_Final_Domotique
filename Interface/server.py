@@ -33,7 +33,10 @@ def moduleChambre():
                         ]
                         }
             with open("get.json", "w") as write_file:
-                jsonFormattedData = json.dump(tempJson, write_file, indent=6, separators=(", ", ": "), sort_keys=True)
+                jsonFormattedData = json.dumps(tempJson)
+                print(jsonFormattedData)
+                jsonUnformattedData = json.dump(jsonFormattedData, write_file)
+                print(jsonUnformattedData)
             return json.dumps({'volume': temperature})
     return render_template('moduleChambre.html')
 

@@ -1,14 +1,1 @@
-{
-      "get": [
-            {
-                  "id": "0", 
-                  "type": "temperature", 
-                  "value": "0"
-            }, 
-            {
-                  "id": "1", 
-                  "type": "light", 
-                  "value": "off"
-            }
-      ]
-}
+"{\"get\": [{\"id\": \"0\", \"type\": \"temperature\", \"value\": \"11\"}, {\"id\": \"1\", \"type\": \"light\", \"value\": \"on\"}]}"
