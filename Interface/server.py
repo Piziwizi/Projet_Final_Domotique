@@ -7,6 +7,14 @@ app = Flask(__name__)
 def accueil():
     return render_template('accueil.html')
 
+@app.route('/moduleCuisine')
+def moduleCuisine():
+    return render_template('moduleCuisine.html')
+
+@app.route('/moduleSalon')
+def moudleCuisine():
+    return render_template('moduleCuisine.html')
+
 @app.route('/', methods=['GET', 'POST'])
 def moduleChambre():
 
@@ -19,7 +27,7 @@ def moduleChambre():
                 light = "off";
 
             tempJson = {
-                        "get": [
+                        "control": [
                             {
                             "id": "0",
                             "type": "temperature",
@@ -32,7 +40,7 @@ def moduleChambre():
                             }
                         ]
                         }
-            with open("get.json", "w") as write_file:
+            with open("control.json", "w") as write_file:
                 jsonFormattedData = json.dumps(tempJson)
                 jsonUnformattedData = json.dump(jsonFormattedData, write_file)
             return json.dumps({'volume': temperature})
