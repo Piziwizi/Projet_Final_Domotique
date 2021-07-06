@@ -1,1 +1,1 @@
-"{\"sensor\": [{\"id\": \"0\", \"type\": \"temperature\", \"value\": \"19\"}, {\"id\": \"1\", \"type\": \"light\", \"value\": \"off\"}]}"
+[{"id": "0","type": "temperature","value": "25.0"},{"id": "1","type": "light","value": "1"}]

@@ -51,6 +51,7 @@
         <div class="h2" id="lumiere">Appuyer pour allumer les lumières</div>
         <input id="lightToggle" class="l" onclick="onClickHandler()" type="checkbox" name="lightToggle">
         <div id="lightStatus"></div>
+        <div><u>État de la lumière</u><div id="light"></div></div>
       </form>
 
       <!-- Temperature range slider -->
@@ -61,6 +62,7 @@
             <span id="rs-bullet" class="rs-label">0</span>
             <input id="rs-range-line" class="rs-range" type="range" value="0" min="0" max="30" name="rs-range-line">
           </div>
+          <div><u>Température actuelle</u><div id="sensor"></div></div>
           <div class="box-minmax">
             <span>0</span><span>30</span>
           </div>
@@ -119,21 +121,14 @@
       }
       </script>
 
-    <script>
-    fetch("../static/sensor.json")
-    .then(function (response) {
-    return response.json();
-    })
-    .then(function (data) {
-      appendData(data);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-      // .then(response => response.json())
-      // .then(json => console.log(json));
-      // print(response.json())
-    </script>
+      <script>
+      fetch("../static/sensor.json")
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#sensor").innerText = data[0].value
+          document.querySelector("#light").innerText = data[1].value
+        })
+      </script>
 
     </footer>
 
