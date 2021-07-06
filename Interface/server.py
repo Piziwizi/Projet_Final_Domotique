@@ -12,8 +12,8 @@ def moduleCuisine():
     return render_template('moduleCuisine.html')
 
 @app.route('/moduleSalon')
-def moudleCuisine():
-    return render_template('moduleCuisine.html')
+def moduleSalon():
+    return render_template('moduleSalon.html')
 
 @app.route('/', methods=['GET', 'POST'])
 def moduleChambre():
