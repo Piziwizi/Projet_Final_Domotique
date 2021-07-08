@@ -122,7 +122,7 @@
       </script>
 
       <script>
-      fetch("../static/sensor.json")
+      fetch("/static/sensorChambre.json")
         .then(response => response.json())
         .then(data => {
           document.querySelector("#sensor").innerText = data[0].value
