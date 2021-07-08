@@ -1,3 +1,4 @@
+from typing_extensions import Literal
 from flask import Flask, request, redirect, url_for, render_template, json, render_template_string, jsonify
 
 app = Flask(__name__)
@@ -6,19 +7,31 @@ app = Flask(__name__)
 def accueil():
     return render_template('accueil.html')
 
+@app.route('/moduleCuisine')
+def moduleCuisine():
+    return render_template('moduleCuisine.html')
+
+@app.route('/moduleSalon')
+def moduleSalon():
+    return render_template('moduleSalon.html')
+
 @app.route('/', methods=['GET', 'POST'])
 def moduleChambre():
 
     if request.method == 'POST':
         if request.form.get('rs-range-line'):
-            volume = request.form.get('rs-range-line')
+            temperature = request.form.get('rs-range-line')
             light = request.form.get('lightToggle')
+
+            if light is None:
+                light = "off";
+
             tempJson = {
-                        "get": [
+                        "control": [
                             {
                             "id": "0",
                             "type": "temperature",
-                            "value": volume
+                            "value": temperature
                             },
                             {
                             "id": "1",
@@ -27,10 +40,11 @@ def moduleChambre():
                             }
                         ]
                         }
-            with open("get.json", "w") as write_file:
-                jsonFormattedData = json.dump(tempJson, write_file, indent=6, separators=(", ", ": "), sort_keys=True)
-            return json.dumps({'volume': volume})
+            with open("control.json", "w") as write_file:
+                jsonFormattedData = json.dumps(tempJson)
+                jsonUnformattedData = json.dump(jsonFormattedData, write_file)
+            return json.dumps({'volume': temperature})
     return render_template('moduleChambre.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0' , port=5000)
