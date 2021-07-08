@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pi/Documents/Projet_Final_Domotique/backend/src/main.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+pthread.h
+-
+define.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
+

@@ -1,0 +1,3 @@
+/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/rebuild_cache.dir
+/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/backend.dir
+/home/pi/Documents/Projet_Final_Domotique/backend/build/CMakeFiles/edit_cache.dir
