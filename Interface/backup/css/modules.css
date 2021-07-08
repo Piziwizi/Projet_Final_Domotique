@@ -1,0 +1,41 @@
+#chambre {
+margin-top: 225px;
+position: absolute; left: 75px;
+}
+
+#chambre {
+    border-radius: 25px;
+    background: hsl(98, 72%, 46%);
+    border: 2px solid #8ad422;
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+  }
+
+#cuisine {
+margin-top: 225px;
+position: absolute; left: 75px;
+}
+
+#cuisine {
+    border-radius: 25px;
+    background: hsl(98, 72%, 46%);
+    border: 2px solid #8ad422;
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+    }
+  
+#salon {
+margin-top: 225px;
+position: absolute; left: 75px;
+}
+
+#salon {
+    border-radius: 25px;
+    background: hsl(98, 72%, 46%);
+    border: 2px solid #8ad422;
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+    }

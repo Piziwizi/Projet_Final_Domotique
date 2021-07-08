@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- .css include -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='accueil.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='modules.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='temperatureSlider.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='toggleSwitch.css') }}">
+
+    <!-- Generic include -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.css" integrity="sha256-ppzFVggmnh0AJD5hxvYFeTnhZ8e6ow4Xc9gzx1QsutI=" crossorigin="anonymous" />
+
+    <title>Interface for HomEtS</title>
+    
+  </head>
+  <body>
+
+    <header>
+      <!-- Navigation tabs -->
+      <ul>
+        <ul>
+          <li><a class="active" href={{ url_for('accueil') }}>Accueil</a></li>
+          <li>
+            <div class="subnav">
+              <button class="subnavbtn">Modules <i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
+                <a href={{ url_for('moduleChambre') }}>Chambre</a>
+                <a href={{ url_for('moduleCuisine') }}>Cuisine</a>
+                <a href={{ url_for('moduleSalon') }}>Salon</a>
+            </div>
+          </li>
+        </ul>
+      </ul>
+    </header>
+    <main>
+
+      <!-- Main page text -->
+      <div class="Page-accueil">
+        <h1>HomETS</h1>
+        <p>Bienvenue sur la page web de notre projet : Conception du système de contrôle domotique</p>
+        <p>Un peu plus de text</p>
+      </div>
+      
+      <h2 style="text-align:center">Notre équipe</h2>
+      <div class="row">
+        <!-- Cards layout and content -->
+        <div class="column">
+          <div class="card">
+            <img src="{{url_for('static', filename='nic.png')}}" alt="Nicolas" style="width:100%">
+              <h2>Nicolas Gauvin-Gingras</h2>
+              <p class="title">Concepteur interface</p>
+              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+              <p>nicolas.gauvin-gingras.1@ens.etsmtl.ca</p>
+              <a href="mailto:nicolas.gauvin-gingras.1@ens.etsmtl.ca"<button>Contact</a>
+          </div>
+        </div>
+      
+        <div class="column">
+          <div class="card">
+            <img src="{{url_for('static', filename='max.png')}}" alt="Maxime" style="width:100%">
+              <h2>Maxime Vallée-Chéné</h2>
+              <p class="title">Concepteur interface</p>
+              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+              <p>maxime.vallee-chene.1@ens.etsmtl.ca</p>
+              <a href="mailto:maxime.vallee-chene.1@ens.etsmtl.ca"<button>Contact</a>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card">
+            <img src="{{url_for('static', filename='toma.png')}}" alt="Toma" style="width:100%">
+              <h2>Toma Gosselin-Stpierre</h2>
+              <p class="title">Art Director</p>
+              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+              <p>toma.gosselin-st-pierre.1@ens.etsmtl.ca</p>
+              <a href="mailto:toma.gosselin-st-pierre.1@ens.etsmtl.ca"<button>Contact</a>
+          </div>
+        </div>
+    
+        <div class="column">
+          <div class="card">
+            <img src="{{url_for('static', filename='marco.png')}}" alt="Marc-Olivier" style="width:100%">
+              <h2>Marc-Olivier Lanthier</h2>
+              <p class="title">Designer</p>
+              <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+              <p>marc-olivier.lanthier.1@ens.etsmtl.ca</p>
+              <a href="mailto:marc-olivier.lanthier.1@ens.etsmtl.ca"<button>Contact</a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer>
+
+    </footer>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  </body>
+</html>

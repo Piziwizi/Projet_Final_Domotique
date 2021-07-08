@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- .css include -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='accueil.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='modules.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='temperatureSlider.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='toggleSwitch.css') }}">
+
+    <!-- Generic include -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.css" integrity="sha256-ppzFVggmnh0AJD5hxvYFeTnhZ8e6ow4Xc9gzx1QsutI=" crossorigin="anonymous" />
+
+
+    <title>Interface for HomEtS</title>
+
+  </head>
+  <body>
+
+    <header>
+      <!-- Navigation tabs -->
+      <ul>
+        <ul>
+          <li><a href={{ url_for('accueil') }}>Accueil</a></li>
+          <li>
+          <div class="subnav">
+            <button class="subnavbtn">Modules <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href={{ url_for('moduleChambre') }}>Chambre</a>
+              <a href={{ url_for('moduleCuisine') }}>Cuisine</a>
+              <a class="active" href={{ url_for('moduleSalon') }}>Salon</a>
+          </div>
+        </li>
+    
+        </ul>
+      </ul>
+
+    </header>
+    <main>
+      <h1 style="text-align:center">Module du salon</h1>
+
+      <!-- Light toggle switch -->
+      <form action="/" method ="post" enctype="multipart/form-data" id="form">
+        <div class="h2" id="lumiere">Appuyer pour allumer les lumières</div>
+        <input id="lightToggle" class="l" onclick="onClickHandler()" type="checkbox" name="lightToggle">
+        <div id="lightStatus"></div>
+      </form>
+
+      <!-- Temperature range slider -->
+      <form action="/" method ="post" enctype="multipart/form-data" id="form">
+        <div class="h2" id="lumiere">Ajuster le curseur pour faire varier la température</div>
+        <div class="container">
+          <div class="range-slider">
+            <span id="rs-bullet" class="rs-label">0</span>
+            <input id="rs-range-line" class="rs-range" type="range" value="0" min="0" max="30" name="rs-range-line">
+          </div>
+          <div class="box-minmax">
+            <span>0</span><span>30</span>
+          </div>
+        </div>
+      </form>
+    </main>
+
+      <script>
+        /* Temperature event handler */
+        var rangeSlider = document.getElementById('rs-range-line');
+        rangeSlider.onchange = function() 
+        {
+
+          $.post({
+                  url: '/',
+                  data: $('form').serialize(),
+                  success: function(response)
+                  {
+                    //Add success event if needed
+                  },
+                  error: function(error)
+                  {
+                    //Add error event if needed
+                  }
+              });
+        }
+        var rangeBullet = document.getElementById("rs-bullet");
+
+        rangeSlider.addEventListener("input", showSliderValue, false);
+
+        function showSliderValue() {
+          rangeBullet.innerHTML = rangeSlider.value;
+          var bulletPosition = (rangeSlider.value /rangeSlider.max);
+          rangeBullet.style.left = (bulletPosition * 578) + "px";
+        }
+
+        /* Light event handler */
+        var lightToggle = document.getElementById('lightToggle')
+        lightDiv  = document.getElementById("lightStatus");
+
+        function onClickHandler()
+        {
+        
+          $.post({
+                  url: '/',
+                  data: $('form').serialize(),
+                  success: function(response)
+                  {
+                    //Add success event if needed
+                  },
+                  error: function(error)
+                  {
+                    //Add error event if needed
+                  }
+              });
+      }
+      </script>
+
+    <script>
+    fetch("../static/sensor.json")
+    .then(function (response) {
+    return response.json();
+    })
+    .then(function (data) {
+      appendData(data);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+      // .then(response => response.json())
+      // .then(json => console.log(json));
+      // print(response.json())
+    </script>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+  </body>
+</html>
