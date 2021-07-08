@@ -26,8 +26,7 @@ def moduleChambre():
             if light is None:
                 light = "off";
 
-            tempJson = {
-                        "control": [
+            tempJson = [
                             {
                             "id": "0",
                             "type": "temperature",
@@ -39,10 +38,8 @@ def moduleChambre():
                             "value": light
                             }
                         ]
-                        }
             with open("control.json", "w") as write_file:
-                jsonFormattedData = json.dumps(tempJson)
-                jsonUnformattedData = json.dump(jsonFormattedData, write_file)
+                jsonUnformattedData = json.dump(tempJson, write_file)
             return json.dumps({'volume': temperature})
     return render_template('moduleChambre.html')
 
