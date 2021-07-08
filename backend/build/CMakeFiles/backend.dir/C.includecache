@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
+stdio.h
+-
+stdint.h
+-
+stdlib.h
+-
+unistd.h
+-
+pthread.h
+-
+semaphore.h
+-
+json-c/json.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/json.h
+json-c/json_object.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/json_object.h
+json-c/json_tokener.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/json_tokener.h
+json-c/arraylist.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/arraylist.h
+json-c/json_util.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/json-c/json_util.h
+
+/home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.c
+sensor.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.h
+
+/home/pi/Documents/Projet_Final_Domotique/backend/src/sensor.h
+define.h
+/home/pi/Documents/Projet_Final_Domotique/backend/src/define.h
+
