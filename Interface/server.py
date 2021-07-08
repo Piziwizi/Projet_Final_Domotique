@@ -32,7 +32,7 @@ def moduleCuisine():
                             "value": light
                             }
                         ]
-            with open("backend/controlCuisine.json", "w") as write_file:
+            with open("static/controlCuisine.json", "w") as write_file:
                 jsonUnformattedData = json.dump(tempJson, write_file)
             return json.dumps({'volume': temperature})
     return render_template('moduleCuisine.html')
@@ -66,7 +66,7 @@ def moduleChambre():
                             "value": light
                             }
                         ]
-            with open("backend/controlChambre.json", "w") as write_file:
+            with open("static/controlChambre.json", "w") as write_file:
                 jsonUnformattedData = json.dump(tempJson, write_file)
             return json.dumps({'volume': temperature})
     return render_template('moduleChambre.html')

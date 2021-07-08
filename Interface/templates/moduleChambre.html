@@ -63,6 +63,7 @@
             <input id="rs-range-line" class="rs-range" type="range" value="0" min="0" max="30" name="rs-range-line">
           </div>
           <div><u>Température actuelle</u><div id="sensor"></div></div>
+          <div><u>Température sélectionnée</u><div id="setTemp"></div></div>
           <div class="box-minmax">
             <span>0</span><span>30</span>
           </div>
@@ -75,7 +76,6 @@
         var rangeSlider = document.getElementById('rs-range-line');
         rangeSlider.onchange = function() 
         {
-
           $.post({
                   url: '/',
                   data: $('form').serialize(),
@@ -129,6 +129,14 @@
           document.querySelector("#defaultTempValue").innerText = data[0].value
           document.querySelector("#light").innerText = data[1].value
         })
+      </script>
+
+      <script>
+      fetch("/static/controlChambre.json")
+        .then(response => response.json())
+        .then(data => {
+        document.querySelector("#setTemp").innerText = data[0].value
+      })
       </script>
 
     </footer>
