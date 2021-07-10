@@ -21,6 +21,14 @@
 #define AVAILABLE 1
 #define USED 0
 
+//times
+#define REFRESH_PERIOD_INTERFACE 20
+#define REFRESH_PERIOD_SENSOR 20
+#define REFRESH_PERIOD_SEARCH_SENSOR 60
+#define REFRESH_PERIOD_CONTROL 20
+#define REFRESH_PERIOD_SEARCH_CONTROL 60
+#define TIMEOUT_CYCLE_REMOVE_SENSOR 10
+
 typedef enum
 {
     TEMP,
@@ -110,6 +118,21 @@ typedef struct
     pthread_t thread_sensor_tab[MAX_SENSORS];
 } sensor_tab_t;
 
+typedef struct
+{
+    uint32_t id;
+    sensor_type_t type;
+    double value;
+} control_t;
+
+typedef struct
+{
+    control_t *tab[MAX_SENSORS];
+    uint32_t available[MAX_SENSORS];
+    sem_t control_sem_tab[MAX_SENSORS];
+    pthread_t thread_control_tab[MAX_SENSORS];
+} control_tab_t;
+
 pthread_mutex_t mutex_sensor;
 char *sensor_string;
 
@@ -118,14 +141,23 @@ char control_string[MAX_CHAR_FILE];
 
 pthread_mutex_t mutex_log;
 
-pthread_t thread_sensor_manager;
+pthread_t thread_refresh_sensor;
+pthread_t thread_search_sensor;
+pthread_t thread_save_sensor;
+
+pthread_t thread_refresh_control;
+pthread_t thread_search_control;
+pthread_t thread_read_control;
+
 pthread_t thread_control;
 pthread_t thread_control_manager;
 pthread_t thread_interface;
 pthread_t thread_logging;
+pthread_t thread_timming;
 
 pthread_t thread_test;
 
 sensor_tab_t sensor_tab;
+control_tab_t control_tab;
 
 #endif

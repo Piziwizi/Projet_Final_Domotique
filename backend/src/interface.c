@@ -11,35 +11,34 @@ void *Interface_task(void *vargp)
 	//set the controls
 	//will send string
 
-	FILE *cptr = fopen(CONTROL_FILE, "r");
-	if (cptr == NULL)
+	while (1)
 	{
-		cptr = fopen(CONTROL_FILE, "w");
-		fclose(cptr);
-		cptr = fopen(CONTROL_FILE, "r");
-	}
+		FILE *cptr = fopen(CONTROL_FILE, "r");
 
-	pthread_mutex_lock(&mutex_control);
-	if (cptr != NULL)
-	{
-		if (fgets(control_string, MAX_CHAR_FILE, cptr) == NULL)
+		pthread_mutex_lock(&mutex_control);
+		if (cptr != NULL)
 		{
-			logging("ERROR: Control file too large\n");
+			if (fgets(control_string, MAX_CHAR_FILE, cptr) == NULL)
+			{
+				logging("ERROR: Control file too large\n");
+			}
+			fclose(cptr);
 		}
-		fclose(cptr);
-	}
-	pthread_mutex_unlock(&mutex_control);
+		pthread_mutex_unlock(&mutex_control);
 
-	pthread_mutex_lock(&mutex_sensor);
-	//get the values from the sensors
-	//will receive string
-	if (sensor_string != NULL)
-	{
-		FILE *sptr = fopen(SENSOR_FILE, "w");
-		fprintf(sptr, "%s", sensor_string);
-		fclose(sptr);
+		pthread_mutex_lock(&mutex_sensor);
+		//get the values from the sensors
+		//will receive string
+		if (sensor_string != NULL)
+		{
+			FILE *sptr = fopen(SENSOR_FILE, "w");
+			fprintf(sptr, "%s", sensor_string);
+			fclose(sptr);
+		}
+		pthread_mutex_unlock(&mutex_sensor);
+
+		sleep(REFRESH_PERIOD_INTERFACE);
 	}
-	pthread_mutex_unlock(&mutex_sensor);
 
 	return NULL;
 }
