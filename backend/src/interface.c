@@ -15,7 +15,7 @@ void *Interface_task(void *vargp)
 	{
 		FILE *cptr = fopen(CONTROL_FILE, "r");
 
-		pthread_mutex_lock(&mutex_control);
+		pthread_mutex_lock(&mutex_control_interface);
 		if (cptr != NULL)
 		{
 			if (fgets(control_string, MAX_CHAR_FILE, cptr) == NULL)
@@ -24,9 +24,9 @@ void *Interface_task(void *vargp)
 			}
 			fclose(cptr);
 		}
-		pthread_mutex_unlock(&mutex_control);
+		pthread_mutex_unlock(&mutex_control_interface);
 
-		pthread_mutex_lock(&mutex_sensor);
+		pthread_mutex_lock(&mutex_sensor_interface);
 		//get the values from the sensors
 		//will receive string
 		if (sensor_string != NULL)
@@ -35,7 +35,7 @@ void *Interface_task(void *vargp)
 			fprintf(sptr, "%s", sensor_string);
 			fclose(sptr);
 		}
-		pthread_mutex_unlock(&mutex_sensor);
+		pthread_mutex_unlock(&mutex_sensor_interface);
 
 		sleep(REFRESH_PERIOD_INTERFACE);
 	}

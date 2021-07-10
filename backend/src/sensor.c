@@ -4,7 +4,6 @@
  */
 #include "sensor.h"
 
-json_object *sensor_json;
 /*
 void *SensorManager_task(void *vargp)
 {
@@ -29,7 +28,7 @@ json_object *get_json_from_sensor(sensor_t sensor)
 {
 	json_object *json = json_object_new_object();
 	json_object_object_add(json, "id", json_object_new_int(sensor.id));
-	json_object_object_add(json, "type", json_object_new_string(SENSOR_TYPE_STRING[sensor.type]));
+	json_object_object_add(json, "type", json_object_new_string(MODULE_TYPE_STRING[sensor.type]));
 	json_object_object_add(json, "value", json_object_new_double(sensor.value));
 	return json;
 }
@@ -51,12 +50,26 @@ void *Sensor_task(void *id)
 	{
 		sem_wait(&(sensor_tab.sensor_sem_tab[task_id]));
 		//get sensor value todo connect communication
-		sensor.id = 0;
-		sensor.type = TEMP;
-		sensor.value = 24.5;
+		if (task_id == 0)
+		{ // todo remove test sensors
+			sensor.id = 0;
+			sensor.type = TEMP;
+			sensor.value = 18.0;
 
-		//add array
-		//json_object_array_add(sensor_json, get_json_from_sensor(sensor));
+			pthread_mutex_lock(&mutex_sensor_tab);
+			*(sensor_tab.tab[task_id]) = sensor;
+			pthread_mutex_unlock(&mutex_sensor_tab);
+		}
+		if (task_id == 1)
+		{ // todo remove test sensors
+			sensor.id = 1;
+			sensor.type = LIGHT;
+			sensor.value = 24.5;
+
+			pthread_mutex_lock(&mutex_sensor_tab);
+			*(sensor_tab.tab[task_id]) = sensor;
+			pthread_mutex_unlock(&mutex_sensor_tab);
+		}
 	}
 	sem_destroy(&(sensor_tab.sensor_sem_tab[task_id]));
 	pthread_exit(NULL);
@@ -92,6 +105,11 @@ void *SearchSensor_task(void *id)
 	uint32_t match = 0;
 	logging("STARTING : search sensor task\n");
 
+	//todo remove test variables
+	add_sensor(0);
+
+	add_sensor(1);
+
 	while (1)
 	{
 
@@ -101,6 +119,8 @@ void *SearchSensor_task(void *id)
 		//}
 
 		//add sensor
+
+		/*
 		while (!match)
 		{
 			if (sensor_tab.available[i] == AVAILABLE)
@@ -110,7 +130,7 @@ void *SearchSensor_task(void *id)
 				i++;
 			}
 		}
-
+		*/
 		sleep(REFRESH_PERIOD_SEARCH_SENSOR);
 	}
 	pthread_exit(NULL);
@@ -119,14 +139,26 @@ void *SearchSensor_task(void *id)
 void *SaveSensor_task(void *id)
 {
 	logging("STARTING : save sensor task\n");
-	sensor_json = json_object_new_array();
+	json_object *sensor_json;
 
 	while (1)
 	{
+		sensor_json = json_object_new_array();
+		pthread_mutex_lock(&mutex_sensor_tab);
+		for (uint32_t i = 0; i < MAX_SENSORS; i++)
+		{
+			if (sensor_tab.available[i] == USED)
+			{
+				json_object_array_add(sensor_json, get_json_from_sensor(*(sensor_tab.tab[i])));
+			}
+		}
+		pthread_mutex_unlock(&mutex_sensor_tab);
+
 		//set the values from the sensors
-		pthread_mutex_lock(&mutex_sensor);
+
+		pthread_mutex_lock(&mutex_sensor_interface);
 		sensor_string = json_object_to_json_string(sensor_json); //todo change test2
-		pthread_mutex_unlock(&mutex_sensor);
+		pthread_mutex_unlock(&mutex_sensor_interface);
 		sleep(REFRESH_PERIOD_INTERFACE);
 	}
 	pthread_exit(NULL);

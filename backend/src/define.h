@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -17,24 +18,26 @@
 #define SENSOR_FILE "../../Interface/sensor.json"
 #define CONTROL_FILE "../../Interface/control.json"
 #define MAX_SENSORS 32
+#define MAX_CONTROLS 32
 #define MAX_CHAR_FILE 2048
 #define AVAILABLE 1
 #define USED 0
 
 //times
-#define REFRESH_PERIOD_INTERFACE 20
+#define REFRESH_PERIOD_INTERFACE 5
 #define REFRESH_PERIOD_SENSOR 20
 #define REFRESH_PERIOD_SEARCH_SENSOR 60
 #define REFRESH_PERIOD_CONTROL 20
 #define REFRESH_PERIOD_SEARCH_CONTROL 60
 #define TIMEOUT_CYCLE_REMOVE_SENSOR 10
 
+#define NUMBER_OF_MODULE_TYPES 2
 typedef enum
 {
     TEMP,
     LIGHT
-} sensor_type_t;
-static const char *SENSOR_TYPE_STRING[] = {"temperature", "light"};
+} module_type_t;
+static const char *MODULE_TYPE_STRING[] = {"temperature", "light"};
 
 typedef enum
 {
@@ -106,7 +109,7 @@ static const char *WIFI_SYSTEM_TYPE_STRING[] = {"RESET",
 typedef struct
 {
     uint32_t id;
-    sensor_type_t type;
+    module_type_t type;
     double value;
 } sensor_t;
 
@@ -121,7 +124,7 @@ typedef struct
 typedef struct
 {
     uint32_t id;
-    sensor_type_t type;
+    module_type_t type;
     double value;
 } control_t;
 
@@ -133,10 +136,12 @@ typedef struct
     pthread_t thread_control_tab[MAX_SENSORS];
 } control_tab_t;
 
-pthread_mutex_t mutex_sensor;
+pthread_mutex_t mutex_sensor_interface;
+pthread_mutex_t mutex_sensor_tab;
 char *sensor_string;
 
-pthread_mutex_t mutex_control;
+pthread_mutex_t mutex_control_interface;
+pthread_mutex_t mutex_control_tab;
 char control_string[MAX_CHAR_FILE];
 
 pthread_mutex_t mutex_log;

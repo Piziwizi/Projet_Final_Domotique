@@ -31,12 +31,22 @@ int main()
 void init_pthread(void)
 {
 
-	if (pthread_mutex_init(&mutex_sensor, NULL) != 0)
+	if (pthread_mutex_init(&mutex_sensor_interface, NULL) != 0)
 	{
 		printf("mutex init failed\n");
 		return;
 	}
-	if (pthread_mutex_init(&mutex_control, NULL) != 0)
+	if (pthread_mutex_init(&mutex_control_interface, NULL) != 0)
+	{
+		printf("mutex init failed\n");
+		return;
+	}
+	if (pthread_mutex_init(&mutex_sensor_tab, NULL) != 0)
+	{
+		printf("mutex init failed\n");
+		return;
+	}
+	if (pthread_mutex_init(&mutex_control_tab, NULL) != 0)
 	{
 		printf("mutex init failed\n");
 		return;
@@ -50,9 +60,9 @@ void init_pthread(void)
 	pthread_create(&thread_refresh_sensor, NULL, RefreshSensor_task, NULL);
 	pthread_create(&thread_search_sensor, NULL, SearchSensor_task, NULL);
 	pthread_create(&thread_save_sensor, NULL, SaveSensor_task, NULL);
-	pthread_create(&thread_refresh_control, NULL, RefreshSensor_task, NULL);
-	pthread_create(&thread_search_control, NULL, SearchSensor_task, NULL);
-	pthread_create(&thread_read_control, NULL, SaveSensor_task, NULL);
+	pthread_create(&thread_refresh_control, NULL, RefreshControl_task, NULL);
+	pthread_create(&thread_search_control, NULL, SearchControl_task, NULL);
+	pthread_create(&thread_read_control, NULL, ReadControl_task, NULL);
 	pthread_create(&thread_interface, NULL, Interface_task, NULL);
 	pthread_create(&thread_logging, NULL, Logging_task, NULL);
 

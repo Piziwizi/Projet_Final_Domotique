@@ -11,6 +11,60 @@ void set_control_from_json(json_object *json)
 {
 	//todo analyse the json object todo
 	//and put ti in //control_tab[];
+	struct json_object *json_array_obj, *json_id, *json_type, *json_value;
+	uint32_t length, i;
+	control_t control;
+
+	length = json_object_array_length(json);
+
+	for (i = 0; i < length; i++)
+	{
+		json_array_obj = json_object_array_get_idx(json, i);
+		control = extract_a_control_from_json(json_array_obj);
+
+		//compare if te control is present
+		for (uint32_t j = 0; j < MAX_CONTROLS; j++)
+		{
+			if (control_tab.available[j] == USED)
+			{
+				if (compare_control(control, *(control_tab.tab[j])))
+				{
+					*(control_tab.tab[j]) = control;
+				}
+			}
+		}
+	}
+}
+
+control_t extract_a_control_from_json(json_object *json)
+{
+	struct json_object *json_id, *json_type, *json_value;
+	control_t control;
+	module_type_t type;
+
+	json_id = json_object_object_get(json, "id");
+	control.id = atoi(json_object_get_string(json_id));
+	json_type = json_object_object_get(json, "type");
+	for (uint32_t i = 0; i < NUMBER_OF_MODULE_TYPES; i++)
+	{
+		if (strcmp(MODULE_TYPE_STRING[i], json_object_get_string(json_type)) == 0)
+		{
+			type = i;
+		}
+	}
+	control.type = type;
+	json_value = json_object_object_get(json, "value");
+	control.value = atof(json_object_get_string(json_value));
+	return control;
+}
+
+uint32_t compare_control(control_t a, control_t b)
+{
+	if ((a.id == b.id) && (a.type == b.type))
+	{
+		return 1;
+	}
+	return 0;
 }
 
 void *Control_task(void *id)
@@ -41,9 +95,9 @@ void *ControlManager_task(void *vargp)
 {
 	logging("STARTING : control manager task\n");
 
-	pthread_mutex_lock(&mutex_control);
+	pthread_mutex_lock(&mutex_control_interface);
 	//get the controls
-	pthread_mutex_unlock(&mutex_control);
+	pthread_mutex_unlock(&mutex_control_interface);
 
 	return NULL;
 }
@@ -54,7 +108,7 @@ void *RefreshControl_task(void *id)
 
 	while (1)
 	{
-		for (uint32_t i = 0; i < MAX_SENSORS; i++)
+		for (uint32_t i = 0; i < MAX_CONTROLS; i++)
 		{
 			if (control_tab.available[i] == USED)
 			{
@@ -76,6 +130,13 @@ void *SearchControl_task(void *id)
 	uint32_t i;
 	uint32_t match = 0;
 	logging("STARTING : search control task\n");
+	//todo remove test variables
+	add_control(0);
+	control_tab.tab[0]->id = 0;
+	control_tab.tab[0]->type = TEMP;
+	add_control(1);
+	control_tab.tab[1]->id = 1;
+	control_tab.tab[1]->type = LIGHT;
 
 	while (1)
 	{
@@ -86,6 +147,7 @@ void *SearchControl_task(void *id)
 		//}
 
 		//add control
+		/*
 		while (!match)
 		{
 			if (control_tab.available[i] == AVAILABLE)
@@ -95,7 +157,7 @@ void *SearchControl_task(void *id)
 				i++;
 			}
 		}
-
+		*/
 		sleep(REFRESH_PERIOD_SEARCH_CONTROL);
 	}
 	pthread_exit(NULL);
@@ -106,12 +168,14 @@ void *ReadControl_task(void *id)
 	logging("STARTING : read control task\n");
 	while (1)
 	{
-		control_t control;
-		logging("STATE SENSOR : from interface\n");
-		pthread_mutex_lock(&mutex_control);
+		pthread_mutex_lock(&mutex_control_interface);
 		control_json = json_tokener_parse(control_string); //todo change test2
-		pthread_mutex_unlock(&mutex_control);			   //potiential memory leak
-		set_control_from_json(control_json);
+		pthread_mutex_unlock(&mutex_control_interface);	   //potiential memory leak
+		if (control_json != NULL)
+		{
+			set_control_from_json(control_json);
+		}
+		printf("%f\n", control_tab.tab[0]->value); // todo remove that
 		sleep(REFRESH_PERIOD_INTERFACE);
 	}
 	pthread_exit(NULL);
