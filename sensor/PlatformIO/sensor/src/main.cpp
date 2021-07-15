@@ -1,30 +1,67 @@
-
+#include "define.h"
 #include "DHT.h"
-#include "wifi_com.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <WiFi.h>
+#include <WiFiMulti.h>
 
 #define DHTPIN 4
-#define relay_heat 23
-#define relay_light 22
-#define bouton 19
+#define RELAY_HEAT 23
+#define RELAY_LIGHT 22
+#define BUTTON 19
 
 #define DHTTYPE DHT11 // DHT 11
 
 DHT dht(DHTPIN, DHTTYPE);
 
-//************  déclaration variable   ************
-float read_temp = 0;
-bool heat, light = 0;
+WiFiClient client;
 
 //************  déclaration fonction   ************
+#if ENABLE_HEAT_SENSOR
 float read_temperature(float *Temperature);
+#endif
 void wifi_client(void *parameter);
+void init_wifi(void);
+void wifi_client(void *parameter);
+uint32_t decode_message(String msg);
 
 void setup()
 {
+#if ENABLE_HEAT_SENSOR
+  mutex_read_temp = xSemaphoreCreateMutex();
+  if (mutex_read_temp == NULL)
+  {
+    ESP.restart();
+  }
+#endif
+#if ENABLE_LIGHT_SENSOR
+  mutex_read_light = xSemaphoreCreateMutex();
+  if (mutex_read_light == NULL)
+  {
+    ESP.restart();
+  }
+#endif
 
-  pinMode(relay_heat, OUTPUT);
-  pinMode(relay_light, OUTPUT);
-  pinMode(bouton, INPUT); // pour tester
+#if ENABLE_HEAT_CONTROL
+  mutex_heat = xSemaphoreCreateMutex();
+  if (mutex_heat == NULL)
+  {
+    ESP.restart();
+  }
+  pinMode(RELAY_HEAT, OUTPUT);
+#endif
+#if ENABLE_LIGHT_CONTROL
+  mutex_light = xSemaphoreCreateMutex();
+  if (mutex_light == NULL)
+  {
+    ESP.restart();
+  }
+  pinMode(RELAY_LIGHT, OUTPUT);
+#endif
+  pinMode(BUTTON, INPUT); // pour tester
 
   Serial.begin(115200);
   dht.begin();
@@ -34,31 +71,31 @@ void setup()
 
 void loop()
 {
-
+#if ENABLE_HEAT_SENSOR
+  Serial.println("avant");//todo remove
+  xSemaphoreTake( mutex_read_temp, portMAX_DELAY);
+  Serial.println("dedant");//todo remove
   read_temperature(&read_temp);
+  xSemaphoreGive( mutex_read_temp);
+  Serial.println("apres");//todo remove
+ // heat = digitalRead(BUTTON); // pour tester
+#endif
 
-  heat = digitalRead(bouton); // pour tester
+#if ENABLE_HEAT_CONTROL
+  xSemaphoreTake( mutex_heat, portMAX_DELAY);
+  digitalWrite(RELAY_HEAT, heat);
+  xSemaphoreGive( mutex_heat);
+#endif
 
-  if (heat == HIGH)
-  {
-    digitalWrite(relay_heat, HIGH);
-  }
-  else
-  {
-    digitalWrite(relay_heat, LOW);
-  }
-
-  if (light == HIGH)
-  {
-    digitalWrite(relay_light, HIGH);
-  }
-  else
-  {
-    digitalWrite(relay_light, LOW);
-  }
+#if ENABLE_LIGHT_CONTROL
+  xSemaphoreTake( mutex_light, portMAX_DELAY);
+  digitalWrite(RELAY_LIGHT, light);
+  xSemaphoreGive( mutex_light);
+#endif
 }
 //*************   FONCTION   ***************//
 
+#if ENABLE_HEAT_SENSOR
 float read_temperature(float *Temperature) //
 {
   *Temperature = dht.readTemperature(); // put value in the global variable
@@ -68,13 +105,401 @@ float read_temperature(float *Temperature) //
   {
     Serial.println(F("Failed to read from DHT sensor!"));
   }
-  else{
+  else
+  {
     Serial.print(F("Temperature: "));
     Serial.print(temperature);
     Serial.println(F("°C "));
   }
-  vTaskDelay(20000 / portTICK_PERIOD_MS);
+  vTaskDelay(1000 / portTICK_PERIOD_MS);
 
   return temperature;
 }
+#endif
 
+void init_wifi(void)
+{
+    xTaskCreate(
+        wifi_client,   // Function that should be called
+        "Wifi Client", // Name of the task (for debugging)
+        10000,         // Stack size (bytes)
+        NULL,          // Parameter to pass
+        1,             // Task priority
+        NULL           // Task handle
+    );
+}
+
+void wifi_client(void *parameter)
+{
+    //WiFiMulti WiFiMulti;
+
+    WiFi.begin("HOMETS", "VerySecurePassword3!");
+
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        Serial.print(".");
+        vTaskDelay(20 / portTICK_PERIOD_MS);
+    }
+
+    for (;;)
+    {
+        const uint16_t port = 3333;
+        const char *host = "10.10.10.10"; // ip or dns
+
+        Serial.print("Connecting to ");
+        Serial.println(host);
+
+        if (!client.connect(host, port))
+        {
+            Serial.println("Connection failed.");
+            Serial.println("Waiting 5 seconds before retrying...");
+            vTaskDelay(500 / portTICK_PERIOD_MS);
+        }
+
+        // This will send a request to the server
+        //uncomment this line to send an arbitrary string to the server
+        //client.print("Send this data to the server");
+        //uncomment this line to send a basic document request to the server
+
+        int maxloops = 0;
+
+        //wait for the server's reply to become available
+        while (!client.available() && maxloops < 1000)
+        {
+            maxloops++;
+            vTaskDelay(20 / portTICK_PERIOD_MS);
+        }
+        if (client.available() > 0)
+        {
+            //read back one line from the server
+            String line = client.readStringUntil('\r');
+            Serial.println(line);
+            decode_message(line);
+        }
+        else
+        {
+            Serial.println("client.available() timed out ");
+        }
+        Serial.println("Closing connection.");
+        client.stop();
+
+        Serial.println("Waiting 5 seconds before restarting...");
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
+    }
+}
+
+uint32_t decode_message(String msg)
+{
+    String sub_msg = msg;
+
+    int current_index = sub_msg.indexOf(STRING_DELIMITER);
+    String token = sub_msg.substring(0, current_index);
+    sub_msg = sub_msg.substring(current_index + 1);
+
+    wifi_main_t main_command = UNKNOWN_MAIN;
+    wifi_type_t type_command = UNKNOWN_TYPE;
+    wifi_operator_t op_command = UNKNOWN_OPERATOR;
+    wifi_system_t system_command = UNKNOWN_SYSTEM;
+    wifi_auth_t auth_command = UNKNOWN_AUTH;
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while (token.compareTo(WIFI_MAIN_TYPE_STRING[i]) != 0)
+    {
+        i++;
+        if (i > WIFI_MAIN_LENGHT)
+        {
+            return 0;
+        }
+        main_command = (wifi_main_t)i;
+    }
+
+    switch (main_command)
+    {
+    case SENSOR:
+        Serial.println("Test");//todo remove
+        current_index = sub_msg.indexOf(STRING_DELIMITER);
+        token = sub_msg.substring(0, current_index);
+        sub_msg = sub_msg.substring(current_index + 1);
+
+        while (token.compareTo(WIFI_TYPE_TYPE_STRING[j]) != 0)
+        {
+            j++;
+            if (j > WIFI_TYPE_LENGHT)
+            {
+                return 0;
+            }
+            type_command = (wifi_type_t)j;
+        }
+        switch (type_command)
+        {
+        case TEMP:
+#if ENABLE_HEAT_SENSOR
+            current_index = sub_msg.indexOf(STRING_DELIMITER);
+            Serial.println("Test");//todo remove
+            if (current_index <= 0)
+            {
+                current_index = sub_msg.length();
+            }
+            token = sub_msg.substring(0, current_index);
+            sub_msg = sub_msg.substring(current_index + 1);
+
+            while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
+            {
+                k++;
+                if (k > WIFI_OPERATOR_LENGHT)
+                {
+                    return 0;
+                }
+                op_command = (wifi_operator_t)k;
+            }
+            switch (op_command)
+            {
+            case SET:
+                //unused
+                break;
+            case GET:
+                Serial.println("Test");
+                xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
+                client.printf("%f", read_temp);
+                xSemaphoreGive(mutex_read_temp);
+                break;
+            default:
+                return 0;
+            }
+#endif
+            break;
+        case LIGHT:
+#if ENABLE_LIGHT_SENSOR
+            current_index = sub_msg.indexOf(STRING_DELIMITER);
+            if (current_index <= 0)
+            {
+                current_index = sub_msg.length();
+            }
+            token = sub_msg.substring(0, current_index);
+            sub_msg = sub_msg.substring(current_index + 1);
+            while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
+            {
+                k++;
+                if (k > WIFI_OPERATOR_LENGHT)
+                {
+                    return 0;
+                }
+                op_command = (wifi_operator_t)k;
+            }
+            switch (op_command)
+            {
+            case SET:
+                //unused
+                break;
+            case GET:
+                //unused
+                break;
+            default:
+                return 0;
+            }
+#endif
+            break;
+        default:
+            return 0;
+        }
+        break;
+    case CONTROL:
+        current_index = sub_msg.indexOf(STRING_DELIMITER);
+        token = sub_msg.substring(0, current_index);
+        sub_msg = sub_msg.substring(current_index + 1);
+        while (token.compareTo(WIFI_TYPE_TYPE_STRING[j]) != 0)
+        {
+            j++;
+            if (j > WIFI_TYPE_LENGHT)
+            {
+                return 0;
+            }
+            type_command = (wifi_type_t)j;
+        }
+        switch (type_command)
+        {
+        case TEMP:
+#if ENABLE_HEAT_CONTROL
+            current_index = sub_msg.indexOf(STRING_DELIMITER);
+            if (current_index <= 0)
+            {
+                current_index = sub_msg.length();
+            }
+            token = sub_msg.substring(0, current_index);
+            sub_msg = sub_msg.substring(current_index + 1);
+            while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
+            {
+                k++;
+                if (k > WIFI_OPERATOR_LENGHT)
+                {
+                    return 0;
+                }
+                op_command = (wifi_operator_t)k;
+            }
+            switch (op_command)
+            {
+            case SET:
+                xSemaphoreTake(mutex_heat, portMAX_DELAY);
+                heat = token.toInt();
+                xSemaphoreGive(mutex_heat);
+                break;
+            case GET:
+                xSemaphoreTake(mutex_heat, portMAX_DELAY);
+                client.printf("%d", heat);
+                xSemaphoreGive(mutex_heat);
+                break;
+            default:
+                return 0;
+            }
+#endif
+            break;
+        case LIGHT:
+#if ENABLE_LIGHT_CONTROL
+            current_index = sub_msg.indexOf(STRING_DELIMITER);
+            if (current_index <= 0)
+            {
+                current_index = sub_msg.length();
+            }
+            token = sub_msg.substring(0, current_index);
+            sub_msg = sub_msg.substring(current_index + 1);
+            while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
+            {
+                k++;
+                if (k > WIFI_OPERATOR_LENGHT)
+                {
+                    return 0;
+                }
+                op_command = (wifi_operator_t)k;
+            }
+            switch (op_command)
+            {
+            case SET:
+                xSemaphoreTake(mutex_light, portMAX_DELAY);
+                light = token.toInt();
+                xSemaphoreGive(mutex_light);
+                break;
+            case GET:
+                xSemaphoreTake(mutex_light, portMAX_DELAY);
+                client.printf("%d", light);
+                xSemaphoreGive(mutex_light);
+                break;
+            default:
+                return 0;
+            }
+            break;
+#endif
+        default:
+            return 0;
+        }
+        break;
+    case REFRESH:
+        current_index = sub_msg.indexOf(STRING_DELIMITER);
+        if (current_index <= 0)
+        {
+            current_index = sub_msg.length();
+        }
+        token = sub_msg.substring(0, current_index);
+        sub_msg = sub_msg.substring(current_index + 1);
+        while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[j]) != 0)
+        {
+            j++;
+            if (j > WIFI_OPERATOR_LENGHT)
+            {
+                return 0;
+            }
+            op_command = (wifi_operator_t)j;
+        }
+        switch (op_command)
+        {
+        case SET:
+            //todo ajouter le refesh
+            break;
+        case GET:
+            //todo ajouter le refesh
+            break;
+        default:
+            return 0;
+        }
+        break;
+
+    case SYSTEM:
+        current_index = sub_msg.indexOf(STRING_DELIMITER);
+        if (current_index <= 0)
+        {
+            current_index = sub_msg.length();
+        }
+        token = sub_msg.substring(0, current_index);
+        sub_msg = sub_msg.substring(current_index + 1);
+        while (token.compareTo(WIFI_SYSTEM_TYPE_STRING[j]) != 0)
+        {
+            j++;
+            if (j > WIFI_SYSTEM_LENGHT)
+            {
+                return 0;
+            }
+            system_command = (wifi_system_t)j;
+        }
+        switch (system_command)
+        {
+        case RESET:
+            //todo add reset
+            break;
+        case START:
+            //todo add start
+            break;
+        case RESTART:
+            //todo add restart
+            ESP.restart();
+
+            break;
+        case STOP:
+            //todo add stop
+            break;
+        case WIFI:
+            current_index = sub_msg.indexOf(STRING_DELIMITER);
+            if (current_index <= 0)
+            {
+                current_index = sub_msg.length();
+            }
+            token = sub_msg.substring(0, current_index);
+            sub_msg = sub_msg.substring(current_index + 1);
+            while (token.compareTo(WIFI_AUTH_TYPE_STRING[k]) != 0)
+            {
+                k++;
+                if (k > WIFI_AUTH_LENGHT)
+                {
+                    return 0;
+                }
+                auth_command = (wifi_auth_t)k;
+            }
+            switch (auth_command)
+            {
+            case PASSWORD:
+                //todo ajouter la modification password
+                break;
+            case SSID:
+                //todo ajouter le modification du nom
+                break;
+            case APPLY:
+                //todo ajouter le apply
+                break;
+            default:
+                return 0;
+            }
+            break;
+        case STATUS_DEVICE:
+            break;
+        case GET_ID:
+            client.printf("%d", DEVICE_ID);
+            break;
+        default:
+            return 0;
+        }
+        break;
+    default:
+        return 0;
+    }
+    return 0;
+}
