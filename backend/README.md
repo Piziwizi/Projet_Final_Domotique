@@ -17,7 +17,7 @@ sudo apt install libjson-c-dev
 ]
 ```
 
-# Internal
+# Internal  TODO UPDATE THE TASKS
 We will be using ptheard to be able to support multiple sensors.
 Tasks:
 * [ ] Sensor task
@@ -35,11 +35,11 @@ Tasks:
 # Sensor communication
 | Command                       | Usage                           |
 | ----------------------------- | ------------------------------- |
-| SENSOR:TYPE:GET:id            | Get the sensor value            |
+| SENSOR:TYPE:GET               | Get the sensor value            |
 | CONTROL:TYPE:SET:value        | Set the control value           |
-| CONTROL:TYPE:GET:id           | Get the control value           |
+| CONTROL:TYPE:GET              | Get the control value           |
 | REFRESH:SET:value             | Set the refresh period          |
-| REFRESH:GET:id                | Get the refresh period          |
+| REFRESH:GET                   | Get the refresh period          |
 | SYSTEM:RESET                  | Reset to the defaults values    |
 | SYSTEM:START                  | Start the aquisition            |
 | SYSTEM:RESTART                | Restart the ESP32               |
@@ -48,6 +48,10 @@ Tasks:
 | SYSTEM:WIFI:SSID:name         | New SSID                        |
 | SYSTEM:WIFI:APPLY             | Apply the new password and SSID |
 | SYSTEM:STATUS                 | Get the status of the device    |
+
+ssid=HOMETS
+wpa_passphrase=VerySecurePassword3!
+https://thepi.io/how-to-use-your-raspberry-pi-as-a-wireless-access-point/
 
 Telnet
 
