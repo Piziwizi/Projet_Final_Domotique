@@ -18,6 +18,7 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 WiFiClient client;
+WiFiServer server_device(3334);
 
 //************  déclaration fonction   ************
 #if ENABLE_HEAT_SENSOR
@@ -26,71 +27,69 @@ float read_temperature(float *Temperature);
 void wifi_client(void *parameter);
 void init_wifi(void);
 void wifi_client(void *parameter);
-uint32_t decode_message(String msg);
+void wifi_server(void *parameter);
+uint32_t decode_message(String msg, WiFiClient *local);
 
 void setup()
 {
 #if ENABLE_HEAT_SENSOR
-  mutex_read_temp = xSemaphoreCreateMutex();
-  if (mutex_read_temp == NULL)
-  {
-    ESP.restart();
-  }
+    mutex_read_temp = xSemaphoreCreateMutex();
+    if (mutex_read_temp == NULL)
+    {
+        ESP.restart();
+    }
 #endif
 #if ENABLE_LIGHT_SENSOR
-  mutex_read_light = xSemaphoreCreateMutex();
-  if (mutex_read_light == NULL)
-  {
-    ESP.restart();
-  }
+    mutex_read_light = xSemaphoreCreateMutex();
+    if (mutex_read_light == NULL)
+    {
+        ESP.restart();
+    }
 #endif
 
 #if ENABLE_HEAT_CONTROL
-  mutex_heat = xSemaphoreCreateMutex();
-  if (mutex_heat == NULL)
-  {
-    ESP.restart();
-  }
-  pinMode(RELAY_HEAT, OUTPUT);
+    mutex_heat = xSemaphoreCreateMutex();
+    if (mutex_heat == NULL)
+    {
+        ESP.restart();
+    }
+    pinMode(RELAY_HEAT, OUTPUT);
 #endif
 #if ENABLE_LIGHT_CONTROL
-  mutex_light = xSemaphoreCreateMutex();
-  if (mutex_light == NULL)
-  {
-    ESP.restart();
-  }
-  pinMode(RELAY_LIGHT, OUTPUT);
+    mutex_light = xSemaphoreCreateMutex();
+    if (mutex_light == NULL)
+    {
+        ESP.restart();
+    }
+    pinMode(RELAY_LIGHT, OUTPUT);
 #endif
-  pinMode(BUTTON, INPUT); // pour tester
+    pinMode(BUTTON, INPUT); // pour tester
 
-  Serial.begin(115200);
-  dht.begin();
+    Serial.begin(115200);
+    dht.begin();
 
-  init_wifi();
+    init_wifi();
 }
 
 void loop()
 {
 #if ENABLE_HEAT_SENSOR
-  Serial.println("avant");//todo remove
-  xSemaphoreTake( mutex_read_temp, portMAX_DELAY);
-  Serial.println("dedant");//todo remove
-  read_temperature(&read_temp);
-  xSemaphoreGive( mutex_read_temp);
-  Serial.println("apres");//todo remove
- // heat = digitalRead(BUTTON); // pour tester
+    xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
+    read_temperature(&read_temp);
+    xSemaphoreGive(mutex_read_temp);
+    // heat = digitalRead(BUTTON); // pour tester
 #endif
 
 #if ENABLE_HEAT_CONTROL
-  xSemaphoreTake( mutex_heat, portMAX_DELAY);
-  digitalWrite(RELAY_HEAT, heat);
-  xSemaphoreGive( mutex_heat);
+    xSemaphoreTake(mutex_heat, portMAX_DELAY);
+    digitalWrite(RELAY_HEAT, heat);
+    xSemaphoreGive(mutex_heat);
 #endif
 
 #if ENABLE_LIGHT_CONTROL
-  xSemaphoreTake( mutex_light, portMAX_DELAY);
-  digitalWrite(RELAY_LIGHT, light);
-  xSemaphoreGive( mutex_light);
+    xSemaphoreTake(mutex_light, portMAX_DELAY);
+    digitalWrite(RELAY_LIGHT, light);
+    xSemaphoreGive(mutex_light);
 #endif
 }
 //*************   FONCTION   ***************//
@@ -98,30 +97,49 @@ void loop()
 #if ENABLE_HEAT_SENSOR
 float read_temperature(float *Temperature) //
 {
-  *Temperature = dht.readTemperature(); // put value in the global variable
-  float temperature = *Temperature;     // to stop accessing the global variable for no reason
+    *Temperature = dht.readTemperature(); // put value in the global variable
+    float temperature = *Temperature;     // to stop accessing the global variable for no reason
 
-  if (isnan(temperature)) // Check if any reads failed and exit early (to try again)
-  {
-    Serial.println(F("Failed to read from DHT sensor!"));
-  }
-  else
-  {
-    Serial.print(F("Temperature: "));
-    Serial.print(temperature);
-    Serial.println(F("°C "));
-  }
-  vTaskDelay(1000 / portTICK_PERIOD_MS);
+    if (isnan(temperature)) // Check if any reads failed and exit early (to try again)
+    {
+        Serial.println(F("Failed to read from DHT sensor!"));
+    }
+    else
+    {
+        Serial.print(F("Temperature: "));
+        Serial.print(temperature);
+        Serial.println(F("°C "));
+    }
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
 
-  return temperature;
+    return temperature;
 }
 #endif
 
 void init_wifi(void)
 {
+    //WiFiMulti WiFiMulti;
+    WiFi.begin("HOMETS", "VerySecurePassword3!");
+
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        Serial.print(".");
+        vTaskDelay(1 / portTICK_PERIOD_MS);
+    }
+    server_device.begin();
+
     xTaskCreate(
         wifi_client,   // Function that should be called
         "Wifi Client", // Name of the task (for debugging)
+        10000,         // Stack size (bytes)
+        NULL,          // Parameter to pass
+        1,             // Task priority
+        NULL           // Task handle
+    );
+
+    xTaskCreate(
+        wifi_server,   // Function that should be called
+        "Wifi Server", // Name of the task (for debugging)
         10000,         // Stack size (bytes)
         NULL,          // Parameter to pass
         1,             // Task priority
@@ -131,21 +149,11 @@ void init_wifi(void)
 
 void wifi_client(void *parameter)
 {
-    //WiFiMulti WiFiMulti;
-
-    WiFi.begin("HOMETS", "VerySecurePassword3!");
-
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        Serial.print(".");
-        vTaskDelay(20 / portTICK_PERIOD_MS);
-    }
+    const uint16_t port = 3333;
+    const char *host = "10.10.10.10"; // ip or dns
 
     for (;;)
     {
-        const uint16_t port = 3333;
-        const char *host = "10.10.10.10"; // ip or dns
-
         Serial.print("Connecting to ");
         Serial.println(host);
 
@@ -169,12 +177,12 @@ void wifi_client(void *parameter)
             maxloops++;
             vTaskDelay(20 / portTICK_PERIOD_MS);
         }
-        if (client.available() > 0)
+        if (client.available())
         {
             //read back one line from the server
             String line = client.readStringUntil('\r');
             Serial.println(line);
-            decode_message(line);
+            decode_message(line,&client);
         }
         else
         {
@@ -188,7 +196,31 @@ void wifi_client(void *parameter)
     }
 }
 
-uint32_t decode_message(String msg)
+void wifi_server(void *parameter)
+{
+    for (;;)
+    {
+        WiFiClient pi = server_device.accept();
+        if (pi)
+        {
+            Serial.println("Incomming message");
+            while (pi.connected())
+            {
+                if (pi.available())
+                {
+                    String line = pi.readStringUntil('\r');
+                    Serial.println(line);
+                    decode_message(line,&pi);
+                }
+                vTaskDelay(1/ portTICK_PERIOD_MS);
+            }
+            pi.stop();
+        }
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
+    }
+}
+
+uint32_t decode_message(String msg , WiFiClient * local)
 {
     String sub_msg = msg;
 
@@ -201,14 +233,15 @@ uint32_t decode_message(String msg)
     wifi_operator_t op_command = UNKNOWN_OPERATOR;
     wifi_system_t system_command = UNKNOWN_SYSTEM;
     wifi_auth_t auth_command = UNKNOWN_AUTH;
-    int i = 0;
-    int j = 0;
-    int k = 0;
+    int32_t i = 0;
+    int32_t j = 0;
+    int32_t k = 0;
 
     while (token.compareTo(WIFI_MAIN_TYPE_STRING[i]) != 0)
     {
         i++;
-        if (i > WIFI_MAIN_LENGHT)
+        vTaskDelay(1 / portTICK_PERIOD_MS);
+        if (i == WIFI_MAIN_LENGHT)
         {
             return 0;
         }
@@ -218,7 +251,6 @@ uint32_t decode_message(String msg)
     switch (main_command)
     {
     case SENSOR:
-        Serial.println("Test");//todo remove
         current_index = sub_msg.indexOf(STRING_DELIMITER);
         token = sub_msg.substring(0, current_index);
         sub_msg = sub_msg.substring(current_index + 1);
@@ -226,7 +258,8 @@ uint32_t decode_message(String msg)
         while (token.compareTo(WIFI_TYPE_TYPE_STRING[j]) != 0)
         {
             j++;
-            if (j > WIFI_TYPE_LENGHT)
+            vTaskDelay(1 / portTICK_PERIOD_MS);
+            if (j == WIFI_TYPE_LENGHT)
             {
                 return 0;
             }
@@ -237,7 +270,6 @@ uint32_t decode_message(String msg)
         case TEMP:
 #if ENABLE_HEAT_SENSOR
             current_index = sub_msg.indexOf(STRING_DELIMITER);
-            Serial.println("Test");//todo remove
             if (current_index <= 0)
             {
                 current_index = sub_msg.length();
@@ -248,7 +280,8 @@ uint32_t decode_message(String msg)
             while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
             {
                 k++;
-                if (k > WIFI_OPERATOR_LENGHT)
+                vTaskDelay(1 / portTICK_PERIOD_MS);
+                if (k == WIFI_OPERATOR_LENGHT)
                 {
                     return 0;
                 }
@@ -262,7 +295,8 @@ uint32_t decode_message(String msg)
             case GET:
                 Serial.println("Test");
                 xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
-                client.printf("%f", read_temp);
+                local->printf("%f", 20.5);
+                //local->printf("%f", read_temp);
                 xSemaphoreGive(mutex_read_temp);
                 break;
             default:
@@ -282,7 +316,8 @@ uint32_t decode_message(String msg)
             while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
             {
                 k++;
-                if (k > WIFI_OPERATOR_LENGHT)
+                vTaskDelay(1 / portTICK_PERIOD_MS);
+                if (k == WIFI_OPERATOR_LENGHT)
                 {
                     return 0;
                 }
@@ -312,7 +347,8 @@ uint32_t decode_message(String msg)
         while (token.compareTo(WIFI_TYPE_TYPE_STRING[j]) != 0)
         {
             j++;
-            if (j > WIFI_TYPE_LENGHT)
+            vTaskDelay(1 / portTICK_PERIOD_MS);
+            if (j == WIFI_TYPE_LENGHT)
             {
                 return 0;
             }
@@ -332,7 +368,8 @@ uint32_t decode_message(String msg)
             while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
             {
                 k++;
-                if (k > WIFI_OPERATOR_LENGHT)
+                vTaskDelay(1 / portTICK_PERIOD_MS);
+                if (k == WIFI_OPERATOR_LENGHT)
                 {
                     return 0;
                 }
@@ -347,7 +384,7 @@ uint32_t decode_message(String msg)
                 break;
             case GET:
                 xSemaphoreTake(mutex_heat, portMAX_DELAY);
-                client.printf("%d", heat);
+                local->printf("%d", heat);
                 xSemaphoreGive(mutex_heat);
                 break;
             default:
@@ -367,7 +404,8 @@ uint32_t decode_message(String msg)
             while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
             {
                 k++;
-                if (k > WIFI_OPERATOR_LENGHT)
+                vTaskDelay(1 / portTICK_PERIOD_MS);
+                if (k == WIFI_OPERATOR_LENGHT)
                 {
                     return 0;
                 }
@@ -382,7 +420,7 @@ uint32_t decode_message(String msg)
                 break;
             case GET:
                 xSemaphoreTake(mutex_light, portMAX_DELAY);
-                client.printf("%d", light);
+                local->printf("%d", light);
                 xSemaphoreGive(mutex_light);
                 break;
             default:
@@ -405,7 +443,8 @@ uint32_t decode_message(String msg)
         while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[j]) != 0)
         {
             j++;
-            if (j > WIFI_OPERATOR_LENGHT)
+            vTaskDelay(1 / portTICK_PERIOD_MS);
+            if (j == WIFI_OPERATOR_LENGHT)
             {
                 return 0;
             }
@@ -435,7 +474,8 @@ uint32_t decode_message(String msg)
         while (token.compareTo(WIFI_SYSTEM_TYPE_STRING[j]) != 0)
         {
             j++;
-            if (j > WIFI_SYSTEM_LENGHT)
+            vTaskDelay(1 / portTICK_PERIOD_MS);
+            if (j == WIFI_SYSTEM_LENGHT)
             {
                 return 0;
             }
@@ -447,7 +487,7 @@ uint32_t decode_message(String msg)
             //todo add reset
             break;
         case START:
-            //todo add start
+            local->printf("1");
             break;
         case RESTART:
             //todo add restart
@@ -468,7 +508,8 @@ uint32_t decode_message(String msg)
             while (token.compareTo(WIFI_AUTH_TYPE_STRING[k]) != 0)
             {
                 k++;
-                if (k > WIFI_AUTH_LENGHT)
+                vTaskDelay(1 / portTICK_PERIOD_MS);
+                if (k == WIFI_AUTH_LENGHT)
                 {
                     return 0;
                 }
@@ -492,7 +533,7 @@ uint32_t decode_message(String msg)
         case STATUS_DEVICE:
             break;
         case GET_ID:
-            client.printf("%d", DEVICE_ID);
+            local->printf("%d", DEVICE_ID);
             break;
         default:
             return 0;
