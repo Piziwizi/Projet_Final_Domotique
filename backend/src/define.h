@@ -14,6 +14,10 @@
 #include "json-c/arraylist.h"
 #include "json-c/json_util.h"
 #include "logging.h"
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
 
 #define SENSOR_FILE "../../Interface/sensor.json"
 #define CONTROL_FILE "../../Interface/control.json"
@@ -26,7 +30,7 @@
 //times
 #define REFRESH_PERIOD_INTERFACE 5
 #define REFRESH_PERIOD_SENSOR 20
-#define REFRESH_PERIOD_SEARCH_SENSOR 60
+#define REFRESH_PERIOD_SEARCH_SENSOR 10
 #define REFRESH_PERIOD_CONTROL 20
 #define REFRESH_PERIOD_SEARCH_CONTROL 60
 #define TIMEOUT_CYCLE_REMOVE_SENSOR 10
@@ -54,6 +58,7 @@ typedef enum
 
 typedef enum
 {
+    UNKNOWN_MAIN,
     SENSOR,
     CONTROL,
     REFRESH,
@@ -66,6 +71,7 @@ static const char *WIFI_MAIN_TYPE_STRING[] = {"SENSOR",
 
 typedef enum
 {
+    UNKNOWN_OPERATOR,
     SET,
     GET,
 } wifi_operator_t;
@@ -74,6 +80,7 @@ static const char *WIFI_OPERATOR_TYPE_STRING[] = {"SET",
 
 typedef enum
 {
+    UNKNOWN_TYPE,
     TEMP_DEVICE,
     LIGHT_DEVICE,
 } wifi_type_t;
@@ -82,6 +89,7 @@ static const char *WIFI_TYPE_TYPE_STRING[] = {"TEMP",
 
 typedef enum
 {
+    UNKNOWN_AUTH,
     PASSWORD,
     SSID,
     APPLY
@@ -92,12 +100,14 @@ static const char *WIFI_AUTH_TYPE_STRING[] = {"PASSWORD",
 
 typedef enum
 {
+    UNKNOWN_SYSTEM,
     RESET,
     START,
     RESTART,
     STOP,
     WIFI,
-    STATUS
+    STATUS_DEVICE,
+    GET_ID
 } wifi_system_t;
 static const char *WIFI_SYSTEM_TYPE_STRING[] = {"RESET",
                                                 "START",
@@ -119,6 +129,7 @@ typedef struct
     uint32_t available[MAX_SENSORS];
     sem_t sensor_sem_tab[MAX_SENSORS];
     pthread_t thread_sensor_tab[MAX_SENSORS];
+    in_addr_t ip[MAX_SENSORS];
 } sensor_tab_t;
 
 typedef struct
@@ -134,6 +145,7 @@ typedef struct
     uint32_t available[MAX_SENSORS];
     sem_t control_sem_tab[MAX_SENSORS];
     pthread_t thread_control_tab[MAX_SENSORS];
+    in_addr_t ip[MAX_SENSORS];
 } control_tab_t;
 
 pthread_mutex_t mutex_sensor_interface;
