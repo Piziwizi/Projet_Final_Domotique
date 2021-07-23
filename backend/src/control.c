@@ -175,7 +175,7 @@ void *ReadControl_task(void *id)
 		{
 			set_control_from_json(control_json);
 		}
-		printf("%f\n", control_tab.tab[0]->value); // todo remove that
+		//printf("%f\n", control_tab.tab[0]->value); // todo remove that
 		sleep(REFRESH_PERIOD_INTERFACE);
 	}
 	pthread_exit(NULL);

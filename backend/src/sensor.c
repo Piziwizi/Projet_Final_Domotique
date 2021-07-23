@@ -41,7 +41,11 @@ void *Sensor_task(void *id)
 	free(id);
 	sensor_t sensor;
 
-	char *msg = "SENSOR:TEMP:GET";
+	char *msg = "SENSOR:TEMP:GET\r";
+	char *msg2 = "CONTROL:TEMP:SET:0\r";
+	char *msg3 = "CONTROL:TEMP:SET:1\r";
+	char *msg4 = "CONTROL:LIGHT:SET:0\r";
+	char *msg5 = "CONTROL:LIGHT:SET:1\r";
 	char buf[BUFFER_LENGHT];
 
 	//wifi config
@@ -73,8 +77,29 @@ void *Sensor_task(void *id)
 		{
 			send(mysocket, msg, strlen(msg), 0);
 			read(mysocket, buf, BUFFER_LENGHT);
+			sensor.id = 0;
+			sensor.type = TEMP;
 			sensor.value = atof(buf);
-			printf("refresh sensor %f", sensor.value);
+			printf("refresh sensor %f\n", sensor.value);
+			*(sensor_tab.tab[task_id]) = sensor;
+
+			if ((sensor.value > (control_tab.tab[0]->value)) || isnan(sensor.value))
+			{ //todo change the 0
+				send(mysocket, msg2, strlen(msg2), 0);
+			}
+			else if (sensor.value < (control_tab.tab[0]->value - 0.3))
+			{
+				send(mysocket, msg3, strlen(msg3), 0);
+			}
+
+			if ((control_tab.tab[1]->value) == 1)
+			{ //todo change the 0
+				send(mysocket, msg5, strlen(msg5), 0);
+			}
+			else
+			{
+				send(mysocket, msg4, strlen(msg4), 0);
+			}
 		}
 		else
 		{
