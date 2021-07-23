@@ -11,6 +11,7 @@
 #define DHTPIN 4
 #define RELAY_HEAT 23
 #define RELAY_LIGHT 22
+#define RELAY_FAN 21
 #define BUTTON 19
 
 #define DHTTYPE DHT11 // DHT 11
@@ -19,6 +20,9 @@ DHT dht(DHTPIN, DHTTYPE);
 
 WiFiClient client;
 WiFiServer server_device(3334);
+double old_temp=NAN;
+uint32_t fail=0;
+
 
 //************  déclaration fonction   ************
 #if ENABLE_HEAT_SENSOR
@@ -26,6 +30,7 @@ float read_temperature(float *Temperature);
 #endif
 void wifi_client(void *parameter);
 void init_wifi(void);
+void apply_gpio(void *parameter);
 void wifi_client(void *parameter);
 void wifi_server(void *parameter);
 uint32_t decode_message(String msg, WiFiClient *local);
@@ -54,6 +59,7 @@ void setup()
         ESP.restart();
     }
     pinMode(RELAY_HEAT, OUTPUT);
+    pinMode(RELAY_FAN, OUTPUT);
 #endif
 #if ENABLE_LIGHT_CONTROL
     mutex_light = xSemaphoreCreateMutex();
@@ -67,30 +73,25 @@ void setup()
 
     Serial.begin(115200);
     dht.begin();
-
+    digitalWrite(RELAY_HEAT, 1);
+    digitalWrite(RELAY_FAN, 1);
+    digitalWrite(RELAY_LIGHT, 1);
+/*
+    xTaskCreate(
+        apply_gpio,   // Function that should be called
+        "Apply GPIO", // Name of the task (for debugging)
+        10000,        // Stack size (bytes)
+        NULL,         // Parameter to pass
+        1,            // Task priority
+        NULL          // Task handle
+    );
+*/
     init_wifi();
 }
 
 void loop()
 {
-#if ENABLE_HEAT_SENSOR
-    xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
-    read_temperature(&read_temp);
-    xSemaphoreGive(mutex_read_temp);
-    // heat = digitalRead(BUTTON); // pour tester
-#endif
-
-#if ENABLE_HEAT_CONTROL
-    xSemaphoreTake(mutex_heat, portMAX_DELAY);
-    digitalWrite(RELAY_HEAT, heat);
-    xSemaphoreGive(mutex_heat);
-#endif
-
-#if ENABLE_LIGHT_CONTROL
-    xSemaphoreTake(mutex_light, portMAX_DELAY);
-    digitalWrite(RELAY_LIGHT, light);
-    xSemaphoreGive(mutex_light);
-#endif
+    apply_gpio(NULL);
 }
 //*************   FONCTION   ***************//
 
@@ -103,18 +104,62 @@ float read_temperature(float *Temperature) //
     if (isnan(temperature)) // Check if any reads failed and exit early (to try again)
     {
         Serial.println(F("Failed to read from DHT sensor!"));
+        fail++;
     }
     else
     {
+        xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
+        old_temp = temperature;
+        xSemaphoreGive(mutex_read_temp);
         Serial.print(F("Temperature: "));
         Serial.print(temperature);
         Serial.println(F("°C "));
     }
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
+
+    if(fail == 50){ //todo check why it fails when the resistance is running
+        fail = 0;
+        xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
+        old_temp = temperature;
+        xSemaphoreGive(mutex_read_temp);
+    }
+
+    vTaskDelay(500 / portTICK_PERIOD_MS);
 
     return temperature;
 }
 #endif
+
+void apply_gpio(void *parameter)
+{
+    for(;;)
+    {
+#if ENABLE_HEAT_SENSOR
+        read_temperature(&read_temp);
+        // heat = digitalRead(BUTTON); // pour tester
+#endif
+#if ENABLE_HEAT_CONTROL
+        xSemaphoreTake(mutex_heat, portMAX_DELAY);
+        if(heat != 1){
+            digitalWrite(RELAY_HEAT, HIGH);
+            digitalWrite(RELAY_FAN, LOW);
+        } else {
+            digitalWrite(RELAY_HEAT, LOW);
+            digitalWrite(RELAY_FAN, HIGH);
+        }
+        xSemaphoreGive(mutex_heat);
+#endif
+#if ENABLE_LIGHT_CONTROL
+        xSemaphoreTake(mutex_light, portMAX_DELAY);
+        if(light != 1){
+            digitalWrite(RELAY_LIGHT, HIGH);
+        } else {
+            digitalWrite(RELAY_LIGHT, LOW);
+        }
+        xSemaphoreGive(mutex_light);
+#endif
+        vTaskDelay(100 / portTICK_PERIOD_MS);
+    }
+}
 
 void init_wifi(void)
 {
@@ -182,7 +227,7 @@ void wifi_client(void *parameter)
             //read back one line from the server
             String line = client.readStringUntil('\r');
             Serial.println(line);
-            decode_message(line,&client);
+            decode_message(line, &client);
         }
         else
         {
@@ -210,9 +255,9 @@ void wifi_server(void *parameter)
                 {
                     String line = pi.readStringUntil('\r');
                     Serial.println(line);
-                    decode_message(line,&pi);
+                    decode_message(line, &pi);
                 }
-                vTaskDelay(1/ portTICK_PERIOD_MS);
+                vTaskDelay(1 / portTICK_PERIOD_MS);
             }
             pi.stop();
         }
@@ -220,7 +265,7 @@ void wifi_server(void *parameter)
     }
 }
 
-uint32_t decode_message(String msg , WiFiClient * local)
+uint32_t decode_message(String msg, WiFiClient *local)
 {
     String sub_msg = msg;
 
@@ -295,8 +340,7 @@ uint32_t decode_message(String msg , WiFiClient * local)
             case GET:
                 Serial.println("Test");
                 xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
-                local->printf("%f", 20.5);
-                //local->printf("%f", read_temp);
+                local->printf("%f", old_temp);
                 xSemaphoreGive(mutex_read_temp);
                 break;
             default:
@@ -379,7 +423,7 @@ uint32_t decode_message(String msg , WiFiClient * local)
             {
             case SET:
                 xSemaphoreTake(mutex_heat, portMAX_DELAY);
-                heat = token.toInt();
+                heat =(bool) sub_msg.toInt();
                 xSemaphoreGive(mutex_heat);
                 break;
             case GET:
@@ -415,7 +459,7 @@ uint32_t decode_message(String msg , WiFiClient * local)
             {
             case SET:
                 xSemaphoreTake(mutex_light, portMAX_DELAY);
-                light = token.toInt();
+                light =(bool) sub_msg.toInt();
                 xSemaphoreGive(mutex_light);
                 break;
             case GET:
