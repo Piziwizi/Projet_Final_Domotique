@@ -50,7 +50,6 @@
       <form action="/" method ="post" enctype="multipart/form-data" id="form">
         <div class="h2" id="lumiere">Appuyer pour allumer les lumières</div>
         <input id="lightToggle" class="l" onclick="onClickHandler()" type="checkbox" name="lightToggle">
-        <div id="lightStatus"></div>
         <div><u>État de la lumière</u><div id="light"></div></div>
       </form>
 
@@ -128,6 +127,9 @@
           document.querySelector("#sensor").innerText = data[0].value
           document.querySelector("#defaultTempValue").innerText = data[0].value
           document.querySelector("#light").innerText = data[1].value
+          if (data[1].value == 1) {
+            document.getElementById("lightToggle").checked = true
+          } 
         })
       </script>
 
@@ -139,13 +141,6 @@
       })
       </script>
 
-      <script>
-      fetch("/")
-      .then(response => response.json())
-        .then(data => {
-        document.querySelector("#test").innerText = data[0].value
-      })
-      </script>
 
     </footer>
 
