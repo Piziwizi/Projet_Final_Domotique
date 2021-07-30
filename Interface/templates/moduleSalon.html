@@ -50,7 +50,7 @@
       <form action="/" method ="post" enctype="multipart/form-data" id="form">
         <div class="h2" id="lumiere">Appuyer pour allumer les lumières</div>
         <input id="lightToggle" class="l" onclick="onClickHandler()" type="checkbox" name="lightToggle">
-        <div id="lightStatus"></div>
+        <div><u>État de la lumière</u><div id="light"></div></div>
       </form>
 
       <!-- Temperature range slider -->
@@ -58,9 +58,11 @@
         <div class="h2" id="lumiere">Ajuster le curseur pour faire varier la température</div>
         <div class="container">
           <div class="range-slider">
-            <span id="rs-bullet" class="rs-label">0</span>
+            <span id="rs-bullet" class="rs-label"><div id="defaultTempValue"></div></span>
             <input id="rs-range-line" class="rs-range" type="range" value="0" min="0" max="30" name="rs-range-line">
           </div>
+          <div><u>Température actuelle</u><div id="sensor"></div></div>
+          <div><u>Température sélectionnée</u><div id="setTemp"></div></div>
           <div class="box-minmax">
             <span>0</span><span>30</span>
           </div>
@@ -75,7 +77,7 @@
         {
 
           $.post({
-                  url: '/',
+                  url: '/moduleSalon',
                   data: $('form').serialize(),
                   success: function(response)
                   {
@@ -105,7 +107,7 @@
         {
         
           $.post({
-                  url: '/',
+                  url: '/moduleSalon',
                   data: $('form').serialize(),
                   success: function(response)
                   {
@@ -119,21 +121,27 @@
       }
       </script>
 
-    <script>
-    fetch("../static/sensor.json")
-    .then(function (response) {
-    return response.json();
-    })
-    .then(function (data) {
-      appendData(data);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-      // .then(response => response.json())
-      // .then(json => console.log(json));
-      // print(response.json())
-    </script>
+      <script>
+      fetch("/static/sensorSalon.json")
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#sensor").innerText = data[0].value
+          document.querySelector("#defaultTempValue").innerText = data[0].value
+          document.querySelector("#light").innerText = data[1].value
+          if (data[1].value == 1) {
+            document.getElementById("lightToggle").checked = true
+          } 
+        })
+      </script>
+
+      <script>
+      fetch("/static/controlSalon.json")
+        .then(response => response.json())
+        .then(data => {
+        document.querySelector("#setTemp").innerText = data[0].value
+      })
+      </script>
+
 
     </footer>
 
