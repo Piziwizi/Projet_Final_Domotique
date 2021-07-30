@@ -3,7 +3,7 @@
 #include "freertos.h"
 
 #define ENABLE_HEAT_SENSOR 1
-#define ENABLE_LIGHT_SENSOR 0
+#define ENABLE_LIGHT_SENSOR 1
 #define ENABLE_HEAT_CONTROL 1
 #define ENABLE_LIGHT_CONTROL 1
 #define DEVICE_ID 0 // max 32

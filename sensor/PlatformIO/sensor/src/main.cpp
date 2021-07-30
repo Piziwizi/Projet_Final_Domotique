@@ -12,7 +12,9 @@
 #define RELAY_HEAT 23
 #define RELAY_LIGHT 22
 #define RELAY_FAN 21
-#define BUTTON 19
+#define BUTTON_LIGHT 19
+#define BUTTON_UP 18
+#define BUTTON_DOWN 5
 
 #define DHTTYPE DHT11 // DHT 11
 
@@ -22,6 +24,11 @@ WiFiClient client;
 WiFiServer server_device(3334);
 double old_temp=NAN;
 uint32_t fail=0;
+uint32_t light_switch=0;
+int32_t temp_switch=0;
+uint32_t previous_light=0;
+uint32_t previous_temp1=0;
+uint32_t previous_temp2=0;
 
 
 //************  déclaration fonction   ************
@@ -69,7 +76,9 @@ void setup()
     }
     pinMode(RELAY_LIGHT, OUTPUT);
 #endif
-    pinMode(BUTTON, INPUT); // pour tester
+    pinMode(BUTTON_LIGHT, INPUT);
+    pinMode(BUTTON_UP, INPUT);
+    pinMode(BUTTON_DOWN, INPUT);
 
     Serial.begin(115200);
     dht.begin();
@@ -158,6 +167,21 @@ void apply_gpio(void *parameter)
         xSemaphoreGive(mutex_light);
 #endif
         vTaskDelay(100 / portTICK_PERIOD_MS);
+        
+        if(previous_temp1 != digitalRead(BUTTON_UP)){
+            previous_temp1 = digitalRead(BUTTON_UP);
+            Serial.println(previous_temp1);
+        }
+        
+        if(previous_temp2 != digitalRead(BUTTON_DOWN)){
+            previous_temp2 = digitalRead(BUTTON_DOWN);
+            Serial.println(previous_temp2);
+        }      
+
+        if(previous_light != digitalRead(BUTTON_LIGHT)){
+            previous_light = digitalRead(BUTTON_LIGHT);
+            Serial.println(previous_light);
+        }
     }
 }
 
@@ -261,7 +285,7 @@ void wifi_server(void *parameter)
             }
             pi.stop();
         }
-        vTaskDelay(5000 / portTICK_PERIOD_MS);
+        vTaskDelay(500 / portTICK_PERIOD_MS);
     }
 }
 
