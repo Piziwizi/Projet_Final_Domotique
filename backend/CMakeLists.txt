@@ -8,8 +8,7 @@ project(${TARGET})
 
 add_executable(${TARGET} 
                 src/main.c 
-                src/sensor.c 
-                src/control.c 
+                src/sensor.c
                 src/logging.c 
                 src/interface.c)
 

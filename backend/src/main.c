@@ -3,7 +3,6 @@
  * @brief main application of the backend
  */
 #include "define.h"
-#include "control.h"
 #include "interface.h"
 #include "logging.h"
 #include "sensor.h"
@@ -60,8 +59,8 @@ void init_pthread(void)
 	pthread_create(&thread_refresh_sensor, NULL, RefreshSensor_task, NULL);
 	pthread_create(&thread_search_sensor, NULL, SearchSensor_task, NULL);
 	pthread_create(&thread_save_sensor, NULL, SaveSensor_task, NULL);
-	pthread_create(&thread_refresh_control, NULL, RefreshControl_task, NULL);
-	pthread_create(&thread_search_control, NULL, SearchControl_task, NULL);
+	//pthread_create(&thread_refresh_control, NULL, RefreshControl_task, NULL);
+	//pthread_create(&thread_search_control, NULL, SearchControl_task, NULL);
 	pthread_create(&thread_read_control, NULL, ReadControl_task, NULL);
 	pthread_create(&thread_interface, NULL, Interface_task, NULL);
 	pthread_create(&thread_logging, NULL, Logging_task, NULL);
@@ -74,11 +73,11 @@ void stop_pthread(void)
 	pthread_join(thread_refresh_sensor, NULL);
 	pthread_join(thread_search_sensor, NULL);
 	pthread_join(thread_save_sensor, NULL);
-	pthread_join(thread_refresh_control, NULL);
-	pthread_join(thread_search_control, NULL);
+	//pthread_join(thread_refresh_control, NULL);
+	//pthread_join(thread_search_control, NULL);
 	pthread_join(thread_read_control, NULL);
-	pthread_join(thread_control, NULL);
-	pthread_join(thread_control_manager, NULL);
+	//pthread_join(thread_control, NULL);
+	//pthread_join(thread_control_manager, NULL);
 	pthread_join(thread_interface, NULL);
 	pthread_join(thread_logging, NULL);
 }

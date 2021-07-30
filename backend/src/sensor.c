@@ -5,6 +5,8 @@
 #include "sensor.h"
 
 #define BUFFER_LENGHT 1024
+json_object *control_json;
+
 /*
 void *SensorManager_task(void *vargp)
 {
@@ -38,9 +40,18 @@ void *Sensor_task(void *id)
 {
 	logging("STARTING : sensor task\n");
 	uint32_t task_id = *((uint32_t *)id);
+	uint32_t control_id = task_id * 2;
 	free(id);
 	sensor_t sensor;
+	control_t control_temp;
+	control_t control_light;
 
+	sensor.type = TEMP;
+
+	control_temp.type = TEMP;
+	control_light.type = LIGHT;
+
+	char *msg6 = "SYSTEM:ID\r";
 	char *msg = "SENSOR:TEMP:GET\r";
 	char *msg2 = "CONTROL:TEMP:SET:0\r";
 	char *msg3 = "CONTROL:TEMP:SET:1\r";
@@ -75,24 +86,39 @@ void *Sensor_task(void *id)
 		sleep(5);
 		if (consocket == 0)
 		{
+			memset(buf, 0, BUFFER_LENGHT);
+
+			send(mysocket, msg6, strlen(msg6), 0);
+			read(mysocket, buf, BUFFER_LENGHT);
+			sensor.id = atoi(buf);
+
+			control_temp.id = sensor.id;
+			control_light.id = sensor.id;
+
+			control_tab.tab[control_id]->id = control_temp.id;
+			control_tab.tab[control_id]->type = control_temp.type;
+			control_tab.tab[control_id + 1]->id = control_light.id;
+			control_tab.tab[control_id + 1]->type = control_light.type;
+
+			memset(buf, 0, BUFFER_LENGHT);
+
 			send(mysocket, msg, strlen(msg), 0);
 			read(mysocket, buf, BUFFER_LENGHT);
-			sensor.id = 0;
-			sensor.type = TEMP;
 			sensor.value = atof(buf);
-			printf("refresh sensor %f\n", sensor.value);
+
+			printf("refresh sensor %d:%f\n", sensor.id, sensor.value);
 			*(sensor_tab.tab[task_id]) = sensor;
 
-			if ((sensor.value > (control_tab.tab[0]->value)) || isnan(sensor.value))
+			if ((sensor.value > (control_tab.tab[control_id]->value)) || isnan(sensor.value))
 			{ //todo change the 0
 				send(mysocket, msg2, strlen(msg2), 0);
 			}
-			else if (sensor.value < (control_tab.tab[0]->value - 0.3))
+			else if (sensor.value < (control_tab.tab[control_id]->value - HYSTERESIS_VALUE))
 			{
 				send(mysocket, msg3, strlen(msg3), 0);
 			}
 
-			if ((control_tab.tab[1]->value) == 1)
+			if ((control_tab.tab[control_id + 1]->value) == 1)
 			{ //todo change the 0
 				send(mysocket, msg5, strlen(msg5), 0);
 			}
@@ -158,6 +184,7 @@ void *RefreshSensor_task(void *id)
 void *SearchSensor_task(void *id)
 {
 	uint32_t already_registered = 0;
+	uint32_t i = 0;
 	char *msg = "SYSTEM:START";
 	char buf[BUFFER_LENGHT];
 	//wifi
@@ -207,7 +234,6 @@ void *SearchSensor_task(void *id)
 				{
 					printf("Sensor available at %s\n", inet_ntoa(dest.sin_addr));
 
-					uint32_t i = 0;
 					uint32_t match = 0;
 					while (!match)
 					{
@@ -221,6 +247,8 @@ void *SearchSensor_task(void *id)
 							{
 								printf("Sensor Added\n");
 								add_sensor(i, dest.sin_addr.s_addr);
+								add_control(i * 2);
+								add_control((i * 2) + 1);
 								i++;
 							}
 						}
@@ -303,4 +331,97 @@ void remove_sensor(uint32_t id)
 	sensor_tab.available[id] = AVAILABLE;
 	sem_post(&(sensor_tab.sensor_sem_tab[id]));
 	pthread_join(sensor_tab.thread_sensor_tab[id], NULL);
+}
+
+void set_control_from_json(json_object *json)
+{
+	//todo analyse the json object todo
+	//and put ti in //control_tab[];
+	struct json_object *json_array_obj, *json_id, *json_type, *json_value;
+	uint32_t length, i;
+	control_t control;
+
+	length = json_object_array_length(json);
+
+	for (i = 0; i < length; i++)
+	{
+		json_array_obj = json_object_array_get_idx(json, i);
+		control = extract_a_control_from_json(json_array_obj);
+
+		//compare if te control is present
+		for (uint32_t j = 0; j < MAX_CONTROLS; j++)
+		{
+			if (control_tab.available[j] == USED)
+			{
+				if (compare_control(control, *(control_tab.tab[j])))
+				{
+					*(control_tab.tab[j]) = control;
+				}
+			}
+		}
+	}
+}
+
+control_t extract_a_control_from_json(json_object *json)
+{
+	struct json_object *json_id, *json_type, *json_value;
+	control_t control;
+	module_type_t type;
+
+	json_id = json_object_object_get(json, "id");
+	control.id = atoi(json_object_get_string(json_id));
+	json_type = json_object_object_get(json, "type");
+	for (uint32_t i = 0; i < NUMBER_OF_MODULE_TYPES; i++)
+	{
+		if (strcmp(MODULE_TYPE_STRING[i], json_object_get_string(json_type)) == 0)
+		{
+			type = i;
+		}
+	}
+	control.type = type;
+	json_value = json_object_object_get(json, "value");
+	control.value = atof(json_object_get_string(json_value));
+	return control;
+}
+
+uint32_t compare_control(control_t a, control_t b)
+{
+	if ((a.id == b.id) && (a.type == b.type))
+	{
+		return 1;
+	}
+	return 0;
+}
+
+void *ReadControl_task(void *id)
+{
+	logging("STARTING : read control task\n");
+	while (1)
+	{
+		pthread_mutex_lock(&mutex_control_interface);
+		control_json = json_tokener_parse(control_string); //todo change test2
+		pthread_mutex_unlock(&mutex_control_interface);	   //potiential memory leak
+		if (control_json != NULL)
+		{
+			set_control_from_json(control_json);
+		}
+		//printf("%f\n", control_tab.tab[0]->value); // todo remove that
+		sleep(REFRESH_PERIOD_INTERFACE);
+	}
+	pthread_exit(NULL);
+}
+
+void add_control(uint32_t id)
+{
+	control_tab.tab[id] = malloc(sizeof(control_t));
+	control_tab.available[id] = USED;
+	uint32_t *task_id = malloc(sizeof(uint32_t));
+	*task_id = id;
+}
+
+void remove_control(uint32_t id)
+{
+	free(control_tab.tab[id]);
+	control_tab.available[id] = AVAILABLE;
+	sem_post(&(control_tab.control_sem_tab[id]));
 }
