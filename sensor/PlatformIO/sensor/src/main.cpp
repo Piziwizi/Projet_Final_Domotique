@@ -338,9 +338,8 @@ uint32_t decode_message(String msg, WiFiClient *local)
                 //unused
                 break;
             case GET:
-                Serial.println("Test");
                 xSemaphoreTake(mutex_read_temp, portMAX_DELAY);
-                local->printf("%f", old_temp);
+                local->printf("%f\r", old_temp);
                 xSemaphoreGive(mutex_read_temp);
                 break;
             default:
@@ -428,7 +427,7 @@ uint32_t decode_message(String msg, WiFiClient *local)
                 break;
             case GET:
                 xSemaphoreTake(mutex_heat, portMAX_DELAY);
-                local->printf("%d", heat);
+                local->printf("%d\r", heat);
                 xSemaphoreGive(mutex_heat);
                 break;
             default:
@@ -464,7 +463,7 @@ uint32_t decode_message(String msg, WiFiClient *local)
                 break;
             case GET:
                 xSemaphoreTake(mutex_light, portMAX_DELAY);
-                local->printf("%d", light);
+                local->printf("%d\r", light);
                 xSemaphoreGive(mutex_light);
                 break;
             default:
@@ -577,7 +576,7 @@ uint32_t decode_message(String msg, WiFiClient *local)
         case STATUS_DEVICE:
             break;
         case GET_ID:
-            local->printf("%d", DEVICE_ID);
+            local->printf("%d\r", (uint32_t) DEVICE_ID);
             break;
         default:
             return 0;
