@@ -4,6 +4,7 @@
         "interface.h": "c",
         "control.h": "c",
         "json_object.h": "c",
-        "json_tokener.h": "c"
+        "json_tokener.h": "c",
+        "define.h": "c"
     }
 }
