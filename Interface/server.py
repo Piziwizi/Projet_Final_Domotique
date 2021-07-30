@@ -15,14 +15,28 @@ def moduleCuisine():
             temperature = request.form.get('rs-range-line')
             light = request.form.get('lightToggle')
 
+            json_file = open("static/control.json")
+            json_data = json.load(json_file)
+            temperature2 = ""
+            light2 = ""
+            counter = 0
+            for data in json_data:
+                if(counter == 0):
+                    temperature1 = data
+                if(counter == 1):
+                    light1 = data
+                counter += 1
+
             if light is None:
                 light = "0"
             else:
                 light = "1"
 
-            tempJson = [
+            tempJson = [    
+                            temperature1,
+                            light1,
                             {
-                            "id": "0",
+                            "id": "1",
                             "type": "temperature",
                             "value": temperature
                             },
@@ -32,7 +46,7 @@ def moduleCuisine():
                             "value": light
                             }
                         ]
-            with open("static/controlCuisine.json", "w") as write_file:
+            with open("static/control.json", "w") as write_file:
                 jsonUnformattedData = json.dump(tempJson, write_file)
             return json.dumps({'volume': temperature})
     return render_template('moduleCuisine.html')
@@ -49,6 +63,18 @@ def moduleChambre():
             temperature = request.form.get('rs-range-line')
             light = request.form.get('lightToggle')
 
+            json_file = open("static/control.json")
+            json_data = json.load(json_file)
+            temperature2 = ""
+            light2 = ""
+            counter = 0
+            for data in json_data:
+                if(counter == 2):
+                    temperature2 = data
+                if(counter == 3):
+                    light2 = data
+                counter += 1
+
             if light is None:
                 light = "0"
             else:
@@ -61,12 +87,14 @@ def moduleChambre():
                             "value": temperature
                             },
                             {
-                            "id": "1",
+                            "id": "0",
                             "type": "light",
                             "value": light
-                            }
+                            },
+                            temperature2,
+                            light2
                         ]
-            with open("static/controlChambre.json", "w") as write_file:
+            with open("static/control.json", "w") as write_file:
                 jsonUnformattedData = json.dump(tempJson, write_file)
             return json.dumps({'volume': temperature})
     return render_template('moduleChambre.html')

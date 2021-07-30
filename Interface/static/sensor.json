@@ -1,0 +1,22 @@
+[
+    {
+        "id": "0",
+        "type": "temperature",
+        "value": "5"
+    },
+    {
+        "id": "0",
+        "type": "light",
+        "value": "1"
+    },
+    {
+        "id": "1",
+        "type": "temperature",
+        "value": "19"
+    },
+    {
+        "id": "1",
+        "type": "light",
+        "value": "1"
+    }
+]

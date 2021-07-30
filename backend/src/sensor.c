@@ -82,8 +82,8 @@ void *Sensor_task(void *id)
 	int consocket = -1;
 	while (sensor_tab.available[task_id] == USED)
 	{
-		sem_wait(&(sensor_tab.sensor_sem_tab[task_id]));
-		sleep(5);
+		//sem_wait(&(sensor_tab.sensor_sem_tab[task_id]));
+		//usleep(500);
 		if (consocket == 0)
 		{
 			memset(buf, 0, BUFFER_LENGHT);
@@ -131,8 +131,8 @@ void *Sensor_task(void *id)
 		{
 			consocket = connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr));
 		}
-		sem_post(&(sensor_tab.sensor_sem_tab[task_id])); //todo remove after test
-														 /*
+		//sem_post(&(sensor_tab.sensor_sem_tab[task_id])); //todo remove after test
+		/*
 		if (task_id == 0)
 		{ // todo remove test sensors
 			sensor.id = 0;

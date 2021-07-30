@@ -20,8 +20,8 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 
-#define SENSOR_FILE "../../Interface/sensor.json"
-#define CONTROL_FILE "../../Interface/control.json"
+#define SENSOR_FILE "../../Interface/static/sensor.json"
+#define CONTROL_FILE "../../Interface/static/control.json"
 #define MAX_SENSORS 32
 #define MAX_CONTROLS 32
 #define MAX_CHAR_FILE 2048
@@ -29,7 +29,7 @@
 #define USED 0
 
 //times
-#define REFRESH_PERIOD_INTERFACE 5
+#define REFRESH_PERIOD_INTERFACE 0
 #define REFRESH_PERIOD_SENSOR 20
 #define REFRESH_PERIOD_SEARCH_SENSOR 10
 #define REFRESH_PERIOD_CONTROL 20
