@@ -35,6 +35,14 @@ json_object *get_json_from_sensor(sensor_t sensor)
 	json_object_object_add(json, "value", json_object_new_double(sensor.value));
 	return json;
 }
+json_object *get_json_from_control(control_t control)
+{
+	json_object *json = json_object_new_object();
+	json_object_object_add(json, "id", json_object_new_int(control.id));
+	json_object_object_add(json, "type", json_object_new_string(MODULE_TYPE_STRING[control.type]));
+	json_object_object_add(json, "value", json_object_new_double(control.value));
+	return json;
+}
 
 void *Sensor_task(void *id)
 {
@@ -45,6 +53,9 @@ void *Sensor_task(void *id)
 	sensor_t sensor;
 	control_t control_temp;
 	control_t control_light;
+
+	int32_t offset_temp = 0;
+	uint32_t offset_light = 0;
 
 	sensor.type = TEMP;
 
@@ -57,6 +68,9 @@ void *Sensor_task(void *id)
 	char *msg3 = "CONTROL:TEMP:SET:1\r";
 	char *msg4 = "CONTROL:LIGHT:SET:0\r";
 	char *msg5 = "CONTROL:LIGHT:SET:1\r";
+
+	char *msg7 = "BUTTON:LIGHT:GET\r";
+	char *msg8 = "BUTTON:TEMP:GET\r";
 	char buf[BUFFER_LENGHT];
 
 	//wifi config
@@ -83,9 +97,36 @@ void *Sensor_task(void *id)
 	while (sensor_tab.available[task_id] == USED)
 	{
 		//sem_wait(&(sensor_tab.sensor_sem_tab[task_id]));
-		//usleep(500);
+		usleep(1);
 		if (consocket == 0)
 		{
+			memset(buf, 0, BUFFER_LENGHT);
+
+			send(mysocket, msg7, strlen(msg7), 0);
+			read(mysocket, buf, BUFFER_LENGHT);
+			offset_light = atoi(buf);
+
+			memset(buf, 0, BUFFER_LENGHT);
+
+			send(mysocket, msg8, strlen(msg8), 0);
+			read(mysocket, buf, BUFFER_LENGHT);
+			offset_temp = atoi(buf);
+
+			if (offset_light != 0 || offset_temp != 0)
+			{
+
+				control_tab.tab[control_id]->value += offset_temp;
+				control_tab.tab[control_id + 1]->value = ((uint32_t)(control_tab.tab[control_id + 1]->value) + offset_light) % 2;
+
+				offset_temp = 0;
+				offset_light = 0;
+
+				writing_control = 1;
+
+				sem_post(&control_sem_save);
+				sleep(0);
+			}
+
 			memset(buf, 0, BUFFER_LENGHT);
 
 			send(mysocket, msg6, strlen(msg6), 0);
@@ -295,6 +336,7 @@ void *SaveSensor_task(void *id)
 	while (1)
 	{
 		sensor_json = json_object_new_array();
+
 		pthread_mutex_lock(&mutex_sensor_tab);
 		for (uint32_t i = 0; i < MAX_SENSORS; i++)
 		{
@@ -307,9 +349,47 @@ void *SaveSensor_task(void *id)
 
 		//set the values from the sensors
 
-		pthread_mutex_lock(&mutex_sensor_interface);
-		sensor_string = json_object_to_json_string(sensor_json); //todo change test2
-		pthread_mutex_unlock(&mutex_sensor_interface);
+		if (json_object_to_json_string(sensor_json) != NULL)
+		{
+			pthread_mutex_lock(&mutex_sensor_interface);
+			strcpy(sensor_string, json_object_to_json_string(sensor_json)); //todo change test2
+			pthread_mutex_unlock(&mutex_sensor_interface);
+			json_object_put(sensor_json);
+		}
+		sleep(REFRESH_PERIOD_INTERFACE);
+	}
+	pthread_exit(NULL);
+}
+
+void *SaveControl_task(void *id)
+{
+	logging("STARTING : save control task\n");
+	json_object *control_json;
+
+	while (1)
+	{
+		sem_wait(&control_sem_save);
+		control_json = json_object_new_array();
+
+		pthread_mutex_lock(&mutex_control_tab);
+		for (uint32_t i = 0; i < MAX_SENSORS; i++)
+		{
+			if (control_tab.available[i] == USED)
+			{
+				json_object_array_add(control_json, get_json_from_control(*(control_tab.tab[i])));
+			}
+		}
+		pthread_mutex_unlock(&mutex_control_tab);
+
+		//set the values from the control
+
+		if (json_object_to_json_string(control_json) != NULL)
+		{
+			pthread_mutex_lock(&mutex_control_interface);
+			strcpy(control_string_write, json_object_to_json_string(control_json)); //todo change test2
+			pthread_mutex_unlock(&mutex_control_interface);
+			json_object_put(control_json);
+		}
 		sleep(REFRESH_PERIOD_INTERFACE);
 	}
 	pthread_exit(NULL);
@@ -337,7 +417,7 @@ void set_control_from_json(json_object *json)
 {
 	//todo analyse the json object todo
 	//and put ti in //control_tab[];
-	struct json_object *json_array_obj, *json_id, *json_type, *json_value;
+	struct json_object *json_array_obj;
 	uint32_t length, i;
 	control_t control;
 
@@ -404,6 +484,7 @@ void *ReadControl_task(void *id)
 		if (control_json != NULL)
 		{
 			set_control_from_json(control_json);
+			json_object_put(control_json);
 		}
 		//printf("%f\n", control_tab.tab[0]->value); // todo remove that
 		sleep(REFRESH_PERIOD_INTERFACE);

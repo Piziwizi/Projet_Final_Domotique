@@ -128,24 +128,49 @@
   </script>
 
   <script>
-    fetch("../static/sensor.json")
-      .then(response => response.json())
-      .then(data => {
-        document.querySelector("#sensor").innerText = data[2].value
-        document.querySelector("#defaultTempValue").innerText = data[2].value
-        document.querySelector("#light").innerText = data[3].value
-        if (data[3].value == 1) {
-          document.getElementById("lightToggle").checked = true
-        }
-      })
+    async function refresh_sensor_cuisine() {
+      fetch("/static/sensor.json", { cache: 'reload' })
+        .then(response => response.json())
+        .then(data => {
+          for (var i = 0; i < data.length; i++) {
+            var sensor = data[i];
+            if (sensor.id == 1) {
+              document.querySelector("#sensor").innerText = sensor.value;
+            }
+          }
+        })
+    }
+
+    setInterval(refresh_sensor_cuisine, 1000);
   </script>
 
   <script>
-    fetch("/static/control.json")
-      .then(response => response.json())
-      .then(data => {
-        document.querySelector("#setTemp").innerText = data[2].value
-      })
+    async function refresh_control_cuisine() {
+      fetch("/static/control.json", { cache: 'reload' })
+        .then(response => response.json())
+        .then(data => {
+          for (var i = 0; i < data.length; i++) {
+            var control = data[i];
+            if (control.id == 1) {
+              if (control.type == "temperature") {
+                document.querySelector("#setTemp").innerText = control.value
+                document.getElementById("rs-range-line").value = control.value
+                document.querySelector("#defaultTempValue").innerText = control.value
+              }
+              if (control.type == "light") {
+                document.querySelector("#light").innerText = control.value
+                if (control.value == 1) {
+                  document.getElementById("lightToggle").checked = true
+                }
+                else if (control.value == 0) {
+                  document.getElementById("lightToggle").checked = false
+                }
+              }
+            }
+          }
+        })
+    }
+    setInterval(refresh_control_cuisine, 1000);
   </script>
 
   </footer>

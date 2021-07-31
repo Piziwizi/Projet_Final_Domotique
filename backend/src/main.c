@@ -13,6 +13,7 @@ void stop_pthread(void);
 
 int main()
 {
+	int stop = 0;
 	for (uint32_t i = 0; i < MAX_SENSORS; i++)
 	{
 		sensor_tab.available[i] = AVAILABLE;
@@ -22,6 +23,8 @@ int main()
 		control_tab.available[i] = AVAILABLE;
 	}
 	init_pthread();
+	while (!stop)
+		;
 	stop_pthread();
 	printf("end\n");
 	exit(0);
@@ -55,12 +58,15 @@ void init_pthread(void)
 		printf("mutex init failed\n");
 		return;
 	}
+	if (sem_init(&control_sem_save, 0, 0) != 0)
+	{
+		printf("sem save failed\n");
+		return;
+	}
 
-	pthread_create(&thread_refresh_sensor, NULL, RefreshSensor_task, NULL);
 	pthread_create(&thread_search_sensor, NULL, SearchSensor_task, NULL);
 	pthread_create(&thread_save_sensor, NULL, SaveSensor_task, NULL);
-	//pthread_create(&thread_refresh_control, NULL, RefreshControl_task, NULL);
-	//pthread_create(&thread_search_control, NULL, SearchControl_task, NULL);
+	pthread_create(&thread_save_control, NULL, SaveControl_task, NULL);
 	pthread_create(&thread_read_control, NULL, ReadControl_task, NULL);
 	pthread_create(&thread_interface, NULL, Interface_task, NULL);
 	pthread_create(&thread_logging, NULL, Logging_task, NULL);

@@ -1,1 +1,1 @@
-[{"id": "0", "type": "temperature", "value": "0"}, {"id": "0", "type": "light", "value": "0"}, {"id": "1", "type": "temperature", "value": "0"}, {"id": "1", "type": "light", "value": "0"}]
+[ { "id": 1, "type": "temperature", "value": 0 }, { "id": 1, "type": "light", "value": 0 }, { "id": 0, "type": "temperature", "value": 23 }, { "id": 0, "type": "light", "value": 0 } ]
