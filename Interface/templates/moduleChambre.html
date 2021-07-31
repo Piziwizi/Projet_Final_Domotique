@@ -131,7 +131,6 @@
         .then(response => response.json())
         .then(data => {
           document.querySelector("#sensor").innerText = data[0].value
-          document.querySelector("#defaultTempValue").innerText = data[0].value
         })
     }
 
