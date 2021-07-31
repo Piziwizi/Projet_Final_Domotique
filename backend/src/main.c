@@ -58,9 +58,15 @@ void init_pthread(void)
 		printf("mutex init failed\n");
 		return;
 	}
+	if (sem_init(&control_sem_save, 0, 0) != 0)
+	{
+		printf("sem save failed\n");
+		return;
+	}
 
 	pthread_create(&thread_search_sensor, NULL, SearchSensor_task, NULL);
 	pthread_create(&thread_save_sensor, NULL, SaveSensor_task, NULL);
+	pthread_create(&thread_save_control, NULL, SaveControl_task, NULL);
 	pthread_create(&thread_read_control, NULL, ReadControl_task, NULL);
 	pthread_create(&thread_interface, NULL, Interface_task, NULL);
 	pthread_create(&thread_logging, NULL, Logging_task, NULL);

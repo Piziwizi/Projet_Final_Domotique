@@ -12,28 +12,45 @@ void *Interface_task(void *vargp)
 	logging("STARTING : interface task\n");
 	//set the controls
 	//will send string
+	writing_control = 0;
 
 	while (1)
 	{
-		FILE *cptr = fopen(CONTROL_FILE, "r");
+		if (!writing_control)
+		{
 
-		if (cptr == NULL)
-		{
-			logging("ERROR: openning file\n");
-		}
-		else
-		{
-			if (fgets(buffer, MAX_CHAR_FILE, cptr) != NULL)
+			FILE *cptr = fopen(CONTROL_FILE, "r");
+
+			if (cptr == NULL)
 			{
-				pthread_mutex_lock(&mutex_control_interface);
-				strncpy(control_string, buffer, MAX_CHAR_FILE);
-				pthread_mutex_unlock(&mutex_control_interface);
+				logging("ERROR: openning file\n");
 			}
 			else
 			{
-				logging("ERROR: Control file too large\n");
+				if (fgets(buffer, MAX_CHAR_FILE, cptr) != NULL)
+				{
+					pthread_mutex_lock(&mutex_control_interface);
+					strncpy(control_string, buffer, MAX_CHAR_FILE);
+					pthread_mutex_unlock(&mutex_control_interface);
+				}
+				else
+				{
+					logging("ERROR: Control file too large\n");
+				}
+				fclose(cptr);
 			}
-			fclose(cptr);
+		}
+		else
+		{
+			if (control_string_write != NULL)
+			{
+				FILE *cptr = fopen(CONTROL_FILE, "w");
+				pthread_mutex_lock(&mutex_control_interface);
+				fprintf(cptr, "%s", control_string_write);
+				pthread_mutex_unlock(&mutex_control_interface);
+				fclose(cptr);
+				writing_control = 0;
+			}
 		}
 
 		pthread_mutex_lock(&mutex_sensor_interface);
