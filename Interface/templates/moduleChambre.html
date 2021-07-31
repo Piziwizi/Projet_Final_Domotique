@@ -112,7 +112,6 @@
     lightDiv = document.getElementById("lightStatus");
 
     function onClickHandler() {
-
       $.post({
         url: '/',
         data: $('form').serialize(),
@@ -127,24 +126,37 @@
   </script>
 
   <script>
-    fetch("../static/sensor.json")
-      .then(response => response.json())
-      .then(data => {
-        document.querySelector("#sensor").innerText = data[0].value
-        document.querySelector("#defaultTempValue").innerText = data[0].value
-        document.querySelector("#light").innerText = data[1].value
-        if (data[1].value == 1) {
-          document.getElementById("lightToggle").checked = true
-        }
-      })
+    async function refresh_sensor() {
+      fetch("/static/sensor.json", { cache: 'reload' })
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#sensor").innerText = data[0].value
+          document.querySelector("#defaultTempValue").innerText = data[0].value
+        })
+    }
+
+    setInterval(refresh_sensor, 1000);
   </script>
 
   <script>
-    fetch("/static/control.json")
-      .then(response => response.json())
-      .then(data => {
-        document.querySelector("#setTemp").innerText = data[0].value
-      })
+    async function refresh_control() {
+      fetch("/static/control.json", { cache: 'reload' })
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#setTemp").innerText = data[0].value
+          document.getElementById("rs-range-line").value = data[0].value
+          document.querySelector("#defaultTempValue").innerText = data[0].value
+
+          document.querySelector("#light").innerText = data[1].value
+          if (data[1].value == 1) {
+            document.getElementById("lightToggle").checked = true
+          }
+          else if (data[1].value == 0) {
+            document.getElementById("lightToggle").checked = false
+          }
+        })
+    }
+    setInterval(refresh_control, 1000);
   </script>
 
 

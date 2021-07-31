@@ -83,7 +83,7 @@ void *Sensor_task(void *id)
 	while (sensor_tab.available[task_id] == USED)
 	{
 		//sem_wait(&(sensor_tab.sensor_sem_tab[task_id]));
-		//usleep(500);
+		usleep(1);
 		if (consocket == 0)
 		{
 			memset(buf, 0, BUFFER_LENGHT);
@@ -295,6 +295,7 @@ void *SaveSensor_task(void *id)
 	while (1)
 	{
 		sensor_json = json_object_new_array();
+
 		pthread_mutex_lock(&mutex_sensor_tab);
 		for (uint32_t i = 0; i < MAX_SENSORS; i++)
 		{
@@ -307,9 +308,13 @@ void *SaveSensor_task(void *id)
 
 		//set the values from the sensors
 
-		pthread_mutex_lock(&mutex_sensor_interface);
-		sensor_string = json_object_to_json_string(sensor_json); //todo change test2
-		pthread_mutex_unlock(&mutex_sensor_interface);
+		if (json_object_to_json_string(sensor_json) != NULL)
+		{
+			pthread_mutex_lock(&mutex_sensor_interface);
+			strcpy(sensor_string, json_object_to_json_string(sensor_json)); //todo change test2
+			pthread_mutex_unlock(&mutex_sensor_interface);
+			json_object_put(sensor_json);
+		}
 		sleep(REFRESH_PERIOD_INTERFACE);
 	}
 	pthread_exit(NULL);
@@ -337,7 +342,7 @@ void set_control_from_json(json_object *json)
 {
 	//todo analyse the json object todo
 	//and put ti in //control_tab[];
-	struct json_object *json_array_obj, *json_id, *json_type, *json_value;
+	struct json_object *json_array_obj;
 	uint32_t length, i;
 	control_t control;
 
@@ -404,6 +409,7 @@ void *ReadControl_task(void *id)
 		if (control_json != NULL)
 		{
 			set_control_from_json(control_json);
+			json_object_put(control_json);
 		}
 		//printf("%f\n", control_tab.tab[0]->value); // todo remove that
 		sleep(REFRESH_PERIOD_INTERFACE);

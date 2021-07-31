@@ -4,6 +4,8 @@
  */
 
 #include "interface.h"
+#define BUFFER_LENGHT 1024
+char buffer[MAX_CHAR_FILE];
 
 void *Interface_task(void *vargp)
 {
@@ -15,16 +17,24 @@ void *Interface_task(void *vargp)
 	{
 		FILE *cptr = fopen(CONTROL_FILE, "r");
 
-		pthread_mutex_lock(&mutex_control_interface);
-		if (cptr != NULL)
+		if (cptr == NULL)
 		{
-			if (fgets(control_string, MAX_CHAR_FILE, cptr) == NULL)
+			logging("ERROR: openning file\n");
+		}
+		else
+		{
+			if (fgets(buffer, MAX_CHAR_FILE, cptr) != NULL)
+			{
+				pthread_mutex_lock(&mutex_control_interface);
+				strncpy(control_string, buffer, MAX_CHAR_FILE);
+				pthread_mutex_unlock(&mutex_control_interface);
+			}
+			else
 			{
 				logging("ERROR: Control file too large\n");
 			}
 			fclose(cptr);
 		}
-		pthread_mutex_unlock(&mutex_control_interface);
 
 		pthread_mutex_lock(&mutex_sensor_interface);
 		//get the values from the sensors

@@ -31,7 +31,7 @@
 //times
 #define REFRESH_PERIOD_INTERFACE 0
 #define REFRESH_PERIOD_SENSOR 20
-#define REFRESH_PERIOD_SEARCH_SENSOR 10
+#define REFRESH_PERIOD_SEARCH_SENSOR 3
 #define REFRESH_PERIOD_CONTROL 20
 #define REFRESH_PERIOD_SEARCH_CONTROL 60
 #define TIMEOUT_CYCLE_REMOVE_SENSOR 10
@@ -152,7 +152,7 @@ typedef struct
 
 pthread_mutex_t mutex_sensor_interface;
 pthread_mutex_t mutex_sensor_tab;
-char *sensor_string;
+char sensor_string[MAX_CHAR_FILE];
 
 pthread_mutex_t mutex_control_interface;
 pthread_mutex_t mutex_control_tab;

@@ -128,24 +128,36 @@
   </script>
 
   <script>
-    fetch("../static/sensor.json")
-      .then(response => response.json())
-      .then(data => {
-        document.querySelector("#sensor").innerText = data[2].value
-        document.querySelector("#defaultTempValue").innerText = data[2].value
-        document.querySelector("#light").innerText = data[3].value
-        if (data[3].value == 1) {
-          document.getElementById("lightToggle").checked = true
-        }
-      })
+    async function refresh_sensor_cuisine() {
+      fetch("/static/sensor.json", { cache: 'reload' })
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#sensor").innerText = data[1].value
+        })
+    }
+
+    setInterval(refresh_sensor_cuisine, 1000);
   </script>
 
   <script>
-    fetch("/static/control.json")
-      .then(response => response.json())
-      .then(data => {
-        document.querySelector("#setTemp").innerText = data[2].value
-      })
+    async function refresh_control_cuisine() {
+      fetch("/static/control.json", { cache: 'reload' })
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#setTemp").innerText = data[2].value
+          document.getElementById("rs-range-line").value = data[2].value
+          document.querySelector("#defaultTempValue").innerText = data[2].value
+
+          document.querySelector("#light").innerText = data[3].value
+          if (data[3].value == 1) {
+            document.getElementById("lightToggle").checked = true
+          }
+          else if (data[3].value == 0) {
+            document.getElementById("lightToggle").checked = false
+          }
+        })
+    }
+    setInterval(refresh_control_cuisine, 1000);
   </script>
 
   </footer>
