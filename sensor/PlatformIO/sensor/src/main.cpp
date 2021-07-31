@@ -76,6 +76,19 @@ void setup()
     }
     pinMode(RELAY_LIGHT, OUTPUT);
 #endif
+
+    mutex_button_heat = xSemaphoreCreateMutex();
+    if (mutex_button_heat == NULL)
+    {
+        ESP.restart();
+    }
+    
+    mutex_button_light = xSemaphoreCreateMutex();
+    if (mutex_button_light == NULL)
+    {
+        ESP.restart();
+    }
+
     pinMode(BUTTON_LIGHT, INPUT);
     pinMode(BUTTON_UP, INPUT);
     pinMode(BUTTON_DOWN, INPUT);
@@ -85,7 +98,7 @@ void setup()
     digitalWrite(RELAY_HEAT, 1);
     digitalWrite(RELAY_FAN, 1);
     digitalWrite(RELAY_LIGHT, 1);
-/*
+
     xTaskCreate(
         apply_gpio,   // Function that should be called
         "Apply GPIO", // Name of the task (for debugging)
@@ -94,13 +107,13 @@ void setup()
         1,            // Task priority
         NULL          // Task handle
     );
-*/
+
     init_wifi();
 }
 
 void loop()
 {
-    apply_gpio(NULL);
+    read_temperature(&read_temp);
 }
 //*************   FONCTION   ***************//
 
@@ -142,10 +155,6 @@ void apply_gpio(void *parameter)
 {
     for(;;)
     {
-#if ENABLE_HEAT_SENSOR
-        read_temperature(&read_temp);
-        // heat = digitalRead(BUTTON); // pour tester
-#endif
 #if ENABLE_HEAT_CONTROL
         xSemaphoreTake(mutex_heat, portMAX_DELAY);
         if(heat != 1){
@@ -166,21 +175,39 @@ void apply_gpio(void *parameter)
         }
         xSemaphoreGive(mutex_light);
 #endif
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(50 / portTICK_PERIOD_MS);
+        
         
         if(previous_temp1 != digitalRead(BUTTON_UP)){
             previous_temp1 = digitalRead(BUTTON_UP);
-            Serial.println(previous_temp1);
+
+            if(previous_temp1==0){
+                xSemaphoreTake(mutex_button_heat, portMAX_DELAY);
+                temp_switch++;
+                xSemaphoreGive(mutex_button_heat);
+            }
+            Serial.println(temp_switch);
         }
         
         if(previous_temp2 != digitalRead(BUTTON_DOWN)){
             previous_temp2 = digitalRead(BUTTON_DOWN);
-            Serial.println(previous_temp2);
+
+            if(previous_temp2==0){
+                xSemaphoreTake(mutex_button_heat, portMAX_DELAY);
+                temp_switch--;
+                xSemaphoreGive(mutex_button_heat);
+            }
+            Serial.println(temp_switch);
         }      
 
         if(previous_light != digitalRead(BUTTON_LIGHT)){
             previous_light = digitalRead(BUTTON_LIGHT);
-            Serial.println(previous_light);
+            if(previous_light==0){
+                xSemaphoreTake(mutex_button_light, portMAX_DELAY);
+                light_switch = 1;
+                xSemaphoreGive(mutex_button_light);
+            }
+            Serial.println(light_switch);
         }
     }
 }
@@ -495,6 +522,98 @@ uint32_t decode_message(String msg, WiFiClient *local)
             }
             break;
 #endif
+        default:
+            return 0;
+        }
+        break;
+        case BUTTON:
+        current_index = sub_msg.indexOf(STRING_DELIMITER);
+        token = sub_msg.substring(0, current_index);
+        sub_msg = sub_msg.substring(current_index + 1);
+
+        while (token.compareTo(WIFI_TYPE_TYPE_STRING[j]) != 0)
+        {
+            j++;
+            vTaskDelay(1 / portTICK_PERIOD_MS);
+            if (j == WIFI_TYPE_LENGHT)
+            {
+                return 0;
+            }
+            type_command = (wifi_type_t)j;
+        }
+        switch (type_command)
+        {
+        case TEMP:
+#if ENABLE_HEAT_SENSOR
+            current_index = sub_msg.indexOf(STRING_DELIMITER);
+            if (current_index <= 0)
+            {
+                current_index = sub_msg.length();
+            }
+            token = sub_msg.substring(0, current_index);
+            sub_msg = sub_msg.substring(current_index + 1);
+
+            while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
+            {
+                k++;
+                vTaskDelay(1 / portTICK_PERIOD_MS);
+                if (k == WIFI_OPERATOR_LENGHT)
+                {
+                    return 0;
+                }
+                op_command = (wifi_operator_t)k;
+            }
+            switch (op_command)
+            {
+            case SET:
+                //unused
+                break;
+            case GET:
+                xSemaphoreTake(mutex_button_heat, portMAX_DELAY);
+                local->printf("%d\r", temp_switch);
+                temp_switch = 0;
+                xSemaphoreGive(mutex_button_heat);
+                break;
+            default:
+                return 0;
+            }
+#endif
+            break;
+        case LIGHT:
+#if ENABLE_LIGHT_SENSOR
+            current_index = sub_msg.indexOf(STRING_DELIMITER);
+            if (current_index <= 0)
+            {
+                current_index = sub_msg.length();
+            }
+            token = sub_msg.substring(0, current_index);
+            sub_msg = sub_msg.substring(current_index + 1);
+            while (token.compareTo(WIFI_OPERATOR_TYPE_STRING[k]) != 0)
+            {
+                k++;
+                vTaskDelay(1 / portTICK_PERIOD_MS);
+                if (k == WIFI_OPERATOR_LENGHT)
+                {
+                    return 0;
+                }
+                op_command = (wifi_operator_t)k;
+            }
+            switch (op_command)
+            {
+            case SET:
+                //unused
+                break;
+            case GET:
+                xSemaphoreTake(mutex_button_light, portMAX_DELAY);
+                local->printf("%d\r", light_switch);
+                light_switch = 0;
+                xSemaphoreGive(mutex_button_light);
+                break;
+            default:
+                return 0;
+            }
+#endif
+            break;
         default:
             return 0;
         }

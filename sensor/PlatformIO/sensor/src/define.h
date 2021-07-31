@@ -18,14 +18,16 @@ typedef enum
     SENSOR,
     CONTROL,
     REFRESH,
+    BUTTON,
     SYSTEM,
 } wifi_main_t;
 static const char *WIFI_MAIN_TYPE_STRING[] = {"UNKNOWN",
                                               "SENSOR",
                                               "CONTROL",
                                               "REFRESH",
+                                              "BUTTON",
                                               "SYSTEM"};
-#define WIFI_MAIN_LENGHT 5
+#define WIFI_MAIN_LENGHT 6
 
 typedef enum
 {
@@ -83,7 +85,7 @@ static const char *WIFI_SYSTEM_TYPE_STRING[] = {"UNKNOWN",
                                                 "ID"};
 #define WIFI_SYSTEM_LENGHT 8
 
-SemaphoreHandle_t mutex_read_temp, mutex_read_light, mutex_heat, mutex_light;
+SemaphoreHandle_t mutex_read_temp, mutex_read_light, mutex_heat, mutex_light, mutex_button_heat, mutex_button_light;
 
 float read_temp, read_light = 0;
 bool heat, light = 0;
