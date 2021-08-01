@@ -62,12 +62,6 @@ build CMakeFiles/backend.dir/src/sensor.c.o: C_COMPILER__backend ../src/sensor.c
   OBJECT_DIR = CMakeFiles/backend.dir
   OBJECT_FILE_DIR = CMakeFiles/backend.dir/src
 
-build CMakeFiles/backend.dir/src/control.c.o: C_COMPILER__backend ../src/control.c || cmake_object_order_depends_target_backend
-  DEP_FILE = CMakeFiles/backend.dir/src/control.c.o.d
-  FLAGS = -g
-  OBJECT_DIR = CMakeFiles/backend.dir
-  OBJECT_FILE_DIR = CMakeFiles/backend.dir/src
-
 build CMakeFiles/backend.dir/src/logging.c.o: C_COMPILER__backend ../src/logging.c || cmake_object_order_depends_target_backend
   DEP_FILE = CMakeFiles/backend.dir/src/logging.c.o.d
   FLAGS = -g
@@ -88,7 +82,7 @@ build CMakeFiles/backend.dir/src/interface.c.o: C_COMPILER__backend ../src/inter
 #############################################
 # Link the executable backend
 
-build backend: C_EXECUTABLE_LINKER__backend CMakeFiles/backend.dir/src/main.c.o CMakeFiles/backend.dir/src/sensor.c.o CMakeFiles/backend.dir/src/control.c.o CMakeFiles/backend.dir/src/logging.c.o CMakeFiles/backend.dir/src/interface.c.o
+build backend: C_EXECUTABLE_LINKER__backend CMakeFiles/backend.dir/src/main.c.o CMakeFiles/backend.dir/src/sensor.c.o CMakeFiles/backend.dir/src/logging.c.o CMakeFiles/backend.dir/src/interface.c.o
   FLAGS = -g
   LINK_LIBRARIES = -lpthread  -ljson-c
   OBJECT_DIR = CMakeFiles/backend.dir
