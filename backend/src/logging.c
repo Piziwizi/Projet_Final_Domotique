@@ -34,12 +34,24 @@ void *Logging_task(void *vargp)
 
 void logging(char *message)
 {
+	char temp_message[LOG_BUFFER_SIZE];
+
 	pthread_mutex_lock(&mutex_log);
-	printf(message);
-	for (int i = 0; message[i] != '\0'; i++)
+	strcpy(temp_message, timestamp());
+	strcat(temp_message, message);
+	printf(temp_message);
+	for (int i = 0; temp_message[i] != '\0'; i++)
 	{
-		log_buffer[buffer_out] = message[i];
+		log_buffer[buffer_out] = temp_message[i];
 		buffer_out = (buffer_out + 1) % LOG_BUFFER_SIZE;
 	}
 	pthread_mutex_unlock(&mutex_log);
+}
+
+char *timestamp(void)
+{
+	time_t now = time(NULL);
+	char *time = asctime(gmtime(&now));
+	time[strlen(time) - 1] = '~';
+	return time;
 }

@@ -5,5 +5,6 @@
 
 void *Logging_task(void *vargp);
 void logging(char *message);
+char *timestamp(void);
 
 #endif
