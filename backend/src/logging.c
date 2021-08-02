@@ -10,6 +10,11 @@ char log_buffer[LOG_BUFFER_SIZE];
 uint32_t buffer_in = 0;
 uint32_t buffer_out = 0;
 
+/**
+ * @name Logging Task
+ * @brief Takes the new caracteres in log_buffer and put them in the log file
+ * @param vargp not used.
+ */
 void *Logging_task(void *vargp)
 {
 	logging("STARTING : logging task\n");
@@ -32,6 +37,11 @@ void *Logging_task(void *vargp)
 	return NULL;
 }
 
+/**
+ * @name logging
+ * @brief Takes the message add a time stamp in front of it and put it in log buffer
+ * @param message The message to add.
+ */
 void logging(char *message)
 {
 	char temp_message[LOG_BUFFER_SIZE];
@@ -48,6 +58,11 @@ void logging(char *message)
 	pthread_mutex_unlock(&mutex_log);
 }
 
+/**
+ * @name timestamp
+ * @brief Get the timestamp in UTC
+ * @return The current timestamp in char*
+ */
 char *timestamp(void)
 {
 	time_t now = time(NULL);
