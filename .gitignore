@@ -1,1 +1,4 @@
 backend/log
+Interface/static/control.json
+Interface/static/sensor.json
+backend/build

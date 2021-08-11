@@ -1,7 +1,6 @@
 # Interface communication
 ## json format
-sudo apt install libjson-c-dev
-2 files sensor.c and control.c
+2 files sensor.json and control.json
 ```javascript
 [
   {
@@ -20,39 +19,37 @@ sudo apt install libjson-c-dev
 # Internal  TODO UPDATE THE TASKS
 We will be using ptheard to be able to support multiple sensors.
 Tasks:
-* [ ] Sensor task
-  * [ ]  Send and get information from each sensor. 1 task by sensor
-* [ ]  Sensor_Manager task
-  * [ ]  Create sensor task for each sensors
-* [ ]  Interface task
-  * [ ]  Read and write the json interface file
-* [ ]  Control task
-  * [ ]  Send and get information from each control. 1 task by control
-* [ ]  Control_manager task
-  * [ ]  Create Control task for each control
+* [X] Sensor task
+  * [X]  Send and get information from each sensor. 1 task by sensor
+* [X] Search Sensor task
+  * [X]  Create sensor task for each sensors and search from them
+* [X] Save Sensor task
+  * [X]  Save the sensor in a json string
+* [X] Save Control task
+  * [X]  Save the control in a json string
+* [X] Read Control task
+  * [X]  Read the control in a json string
+* [X]  Interface task
+  * [X]  Read and write the json interface file
+* [X]  Logging task
+  * [X]  Write the logging file
 
 
 # Sensor communication
-| Command                       | Usage                           |
-| ----------------------------- | ------------------------------- |
-| SENSOR:TYPE:GET               | Get the sensor value            |
-| CONTROL:TYPE:SET:value        | Set the control value           |
-| CONTROL:TYPE:GET              | Get the control value           |
-| REFRESH:SET:value             | Set the refresh period          |
-| REFRESH:GET                   | Get the refresh period          |
-| SYSTEM:RESET                  | Reset to the defaults values    |
-| SYSTEM:START                  | Start the aquisition            |
-| SYSTEM:RESTART                | Restart the ESP32               |
-| SYSTEM:STOP                   | Stop the device                 |
-| SYSTEM:WIFI:PASSWORD:password | New password                    |
-| SYSTEM:WIFI:SSID:name         | New SSID                        |
-| SYSTEM:WIFI:APPLY             | Apply the new password and SSID |
-| SYSTEM:STATUS                 | Get the status of the device    |
+| Command                | Usage                        | Done |
+| ---------------------- | ---------------------------- | ---- |
+| SENSOR:TYPE:GET        | Get the sensor value         | X    |
+| CONTROL:TYPE:SET:value | Set the control value        | X    |
+| CONTROL:TYPE:GET       | Get the control value        | X    |
+| BUTTON:TYPE:GET        | Get the button value         | X    |
+| SYSTEM:RESET           | Reset to the defaults values |      |
+| SYSTEM:START           | Start the aquisition         | X    |
+| SYSTEM:RESTART         | Restart the ESP32            | X    |
+| SYSTEM:STOP            | Stop the device              |      |
+| SYSTEM:STATUS          | Get the status of the device |      |
+| SYSTEM:GET_ID          | Get the id of the device     | X    |
 
 ssid=HOMETS
 wpa_passphrase=VerySecurePassword3!
+
 https://thepi.io/how-to-use-your-raspberry-pi-as-a-wireless-access-point/
-
-Telnet
-
-If time ssh

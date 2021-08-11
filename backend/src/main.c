@@ -11,14 +11,23 @@
 void init_pthread(void);
 void stop_pthread(void);
 
+/**
+ * @name main
+ * @brief Main program, start everything.
+ */
 int main()
 {
 	int stop = 0;
 	for (uint32_t i = 0; i < MAX_SENSORS; i++)
 	{
-		sensor_tab.available[i] = AVAILABLE;
+		sensor_tab.available[i] = AVAILABLE; // test end
+		// test end
+		if (sem_init(&(sensor_tab.sensor_sem_tab[i]), 0, 0) != 0)
+		{
+			exit(1);
+		}
 	}
-	for (uint32_t i = 0; i < MAX_SENSORS; i++)
+	for (uint32_t i = 0; i < MAX_CONTROLS; i++)
 	{
 		control_tab.available[i] = AVAILABLE;
 	}
@@ -30,6 +39,10 @@ int main()
 	exit(0);
 }
 
+/**
+ * @name init_pthread
+ * @brief Init all pthread functions.
+ */
 void init_pthread(void)
 {
 
@@ -74,16 +87,18 @@ void init_pthread(void)
 	pthread_create(&thread_test, NULL, Test_task, NULL);
 }
 
+/**
+ * @name init_pthread
+ * @brief Close all pthread functions.
+ */
 void stop_pthread(void)
 {
-	pthread_join(thread_refresh_sensor, NULL);
 	pthread_join(thread_search_sensor, NULL);
 	pthread_join(thread_save_sensor, NULL);
-	//pthread_join(thread_refresh_control, NULL);
-	//pthread_join(thread_search_control, NULL);
+	pthread_join(thread_save_control, NULL);
 	pthread_join(thread_read_control, NULL);
-	//pthread_join(thread_control, NULL);
-	//pthread_join(thread_control_manager, NULL);
 	pthread_join(thread_interface, NULL);
 	pthread_join(thread_logging, NULL);
+
+	pthread_join(thread_test, NULL);
 }

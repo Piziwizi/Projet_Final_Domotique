@@ -7,11 +7,14 @@
 #define BUFFER_LENGHT 1024
 char buffer[MAX_CHAR_FILE];
 
+/**
+ * @name Interface Task
+ * @brief Write the files to communicate with the interface
+ * @param vargp not used.
+ */
 void *Interface_task(void *vargp)
 {
 	logging("STARTING : interface task\n");
-	//set the controls
-	//will send string
 	writing_control = 0;
 
 	while (1)
@@ -35,7 +38,7 @@ void *Interface_task(void *vargp)
 				}
 				else
 				{
-					logging("ERROR: Control file too large\n");
+					logging("ERROR: file empty\n");
 				}
 				fclose(cptr);
 			}
@@ -54,8 +57,6 @@ void *Interface_task(void *vargp)
 		}
 
 		pthread_mutex_lock(&mutex_sensor_interface);
-		//get the values from the sensors
-		//will receive string
 		if (sensor_string != NULL)
 		{
 			FILE *sptr = fopen(SENSOR_FILE, "w");

@@ -23,101 +23,33 @@
 #define SENSOR_FILE "../../Interface/static/sensor.json"
 #define CONTROL_FILE "../../Interface/static/control.json"
 #define MAX_SENSORS 32
-#define MAX_CONTROLS 32
+#define MAX_CONTROLS MAX_SENSORS * 2
 #define MAX_CHAR_FILE 2048
 #define AVAILABLE 1
 #define USED 0
 
 //times
 #define REFRESH_PERIOD_INTERFACE 0
-#define REFRESH_PERIOD_SENSOR 20
 #define REFRESH_PERIOD_SEARCH_SENSOR 3
-#define REFRESH_PERIOD_CONTROL 20
-#define REFRESH_PERIOD_SEARCH_CONTROL 60
 #define TIMEOUT_CYCLE_REMOVE_SENSOR 10
 #define HYSTERESIS_VALUE 0.3
 
-#define NUMBER_OF_MODULE_TYPES 2
+/**
+ * @name module_type_t
+ * @brief The type for all modules types.
+ */
 typedef enum
 {
     TEMP,
-    LIGHT
+    LIGHT,
+    NUMBER_OF_MODULE_TYPES
 } module_type_t;
 static const char *MODULE_TYPE_STRING[] = {"temperature", "light"};
 
-typedef enum
-{
-    REFRESH_SENSORS,
-    SEARCH_NEW_SENSORS,
-    ADD_SENSOR,
-    REMOVE_SENSOR,
-    REMOVE_ALL_SENSORS,
-    TO_INTERFACE,
-    FROM_INTERFACE,
-    IDLE,
-    EXIT
-} sensor_state_machine_t;
-
-typedef enum
-{
-    UNKNOWN_MAIN,
-    SENSOR,
-    CONTROL,
-    REFRESH,
-    SYSTEM
-} wifi_main_t;
-static const char *WIFI_MAIN_TYPE_STRING[] = {"SENSOR",
-                                              "CONTROL",
-                                              "REFRESH",
-                                              "SYSTEM"};
-
-typedef enum
-{
-    UNKNOWN_OPERATOR,
-    SET,
-    GET,
-} wifi_operator_t;
-static const char *WIFI_OPERATOR_TYPE_STRING[] = {"SET",
-                                                  "GET"};
-
-typedef enum
-{
-    UNKNOWN_TYPE,
-    TEMP_DEVICE,
-    LIGHT_DEVICE,
-} wifi_type_t;
-static const char *WIFI_TYPE_TYPE_STRING[] = {"TEMP",
-                                              "LIGHT"};
-
-typedef enum
-{
-    UNKNOWN_AUTH,
-    PASSWORD,
-    SSID,
-    APPLY
-} wifi_auth_t;
-static const char *WIFI_AUTH_TYPE_STRING[] = {"PASSWORD",
-                                              "SSID",
-                                              "APPLY"};
-
-typedef enum
-{
-    UNKNOWN_SYSTEM,
-    RESET,
-    START,
-    RESTART,
-    STOP,
-    WIFI,
-    STATUS_DEVICE,
-    GET_ID
-} wifi_system_t;
-static const char *WIFI_SYSTEM_TYPE_STRING[] = {"RESET",
-                                                "START",
-                                                "RESTART",
-                                                "STOP",
-                                                "WIFI",
-                                                "STATUS"};
-
+/**
+ * @name sensor_t
+ * @brief Single sensor.
+ */
 typedef struct
 {
     uint32_t id;
@@ -125,6 +57,10 @@ typedef struct
     double value;
 } sensor_t;
 
+/**
+ * @name sensor_tab_t
+ * @brief All sensor data structure.
+ */
 typedef struct
 {
     sensor_t *tab[MAX_SENSORS];
@@ -134,6 +70,10 @@ typedef struct
     in_addr_t ip[MAX_SENSORS];
 } sensor_tab_t;
 
+/**
+ * @name control_t
+ * @brief Single control.
+ */
 typedef struct
 {
     uint32_t id;
@@ -141,13 +81,14 @@ typedef struct
     double value;
 } control_t;
 
+/**
+ * @name control_tab_t
+ * @brief All control data structure.
+ */
 typedef struct
 {
-    control_t *tab[MAX_SENSORS];
-    uint32_t available[MAX_SENSORS];
-    sem_t control_sem_tab[MAX_SENSORS];
-    pthread_t thread_control_tab[MAX_SENSORS];
-    in_addr_t ip[MAX_SENSORS];
+    control_t *tab[MAX_CONTROLS];
+    uint32_t available[MAX_CONTROLS];
 } control_tab_t;
 
 pthread_mutex_t mutex_sensor_interface;
@@ -162,20 +103,12 @@ sem_t control_sem_save;
 
 pthread_mutex_t mutex_log;
 
-pthread_t thread_refresh_sensor;
 pthread_t thread_search_sensor;
 pthread_t thread_save_sensor;
 pthread_t thread_save_control;
-
-pthread_t thread_refresh_control;
-pthread_t thread_search_control;
 pthread_t thread_read_control;
-
-pthread_t thread_control;
-pthread_t thread_control_manager;
 pthread_t thread_interface;
 pthread_t thread_logging;
-pthread_t thread_timming;
 
 pthread_t thread_test;
 

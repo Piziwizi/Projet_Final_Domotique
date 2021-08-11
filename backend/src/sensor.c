@@ -7,43 +7,11 @@
 #define BUFFER_LENGHT 1024
 json_object *control_json;
 
-/*
-void *SensorManager_task(void *vargp)
-{
-	sensor_t *temp_sensor;
-	uint32_t i;
-	uint32_t match = 0;
-	uint32_t sensor_id;
-	uint32_t exit = 0;
-	sensor_state_machine_t current_state_sensor = TO_INTERFACE; //todo change that to idle
-	control_json = json_object_new_array();
-
-	logging("STARTING : sensor manager task\n");
-	while (!exit)
-	{
-		
-	}
-	pthread_exit(NULL);
-	return NULL;
-}
-*/
-json_object *get_json_from_sensor(sensor_t sensor)
-{
-	json_object *json = json_object_new_object();
-	json_object_object_add(json, "id", json_object_new_int(sensor.id));
-	json_object_object_add(json, "type", json_object_new_string(MODULE_TYPE_STRING[sensor.type]));
-	json_object_object_add(json, "value", json_object_new_double(sensor.value));
-	return json;
-}
-json_object *get_json_from_control(control_t control)
-{
-	json_object *json = json_object_new_object();
-	json_object_object_add(json, "id", json_object_new_int(control.id));
-	json_object_object_add(json, "type", json_object_new_string(MODULE_TYPE_STRING[control.type]));
-	json_object_object_add(json, "value", json_object_new_double(control.value));
-	return json;
-}
-
+/**
+ * @name Sensor Task
+ * @brief Communicate with sensors and update everything
+ * @param id the task id in the structure
+ */
 void *Sensor_task(void *id)
 {
 	logging("STARTING : sensor task\n");
@@ -88,11 +56,6 @@ void *Sensor_task(void *id)
 	bind(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr));
 	//---
 
-	// test end
-	if (sem_init(&(sensor_tab.sensor_sem_tab[task_id]), 0, 1) != 0)
-	{
-		return NULL;
-	}
 	int consocket = -1;
 	while (sensor_tab.available[task_id] == USED)
 	{
@@ -149,6 +112,7 @@ void *Sensor_task(void *id)
 
 			printf("refresh sensor %d:%f\n", sensor.id, sensor.value);
 			*(sensor_tab.tab[task_id]) = sensor;
+			sem_post(&(sensor_tab.sensor_sem_tab[task_id]));
 
 			if ((sensor.value > (control_tab.tab[control_id]->value)) || isnan(sensor.value))
 			{ //todo change the 0
@@ -172,7 +136,6 @@ void *Sensor_task(void *id)
 		{
 			consocket = connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr));
 		}
-		//sem_post(&(sensor_tab.sensor_sem_tab[task_id])); //todo remove after test
 		/*
 		if (task_id == 0)
 		{ // todo remove test sensors
@@ -199,29 +162,11 @@ void *Sensor_task(void *id)
 	pthread_exit(NULL);
 }
 
-void *RefreshSensor_task(void *id)
-{
-	logging("STARTING : refresh sensor task\n");
-
-	while (1)
-	{
-		for (uint32_t i = 0; i < MAX_SENSORS; i++)
-		{
-			if (sensor_tab.available[i] == USED)
-			{
-				sem_post(&(sensor_tab.sensor_sem_tab[i]));
-			}
-		}
-
-		if (/*timeout*/ 0)
-		{
-			//remove_sensor(sensor_id);
-		}
-		sleep(REFRESH_PERIOD_SENSOR);
-	}
-	pthread_exit(NULL);
-}
-
+/**
+ * @name Search Sensor Task
+ * @brief Search for new sensors and create a sensor task for each
+ * @param id do nothing
+ */
 void *SearchSensor_task(void *id)
 {
 	uint32_t already_registered = 0;
@@ -328,6 +273,11 @@ void *SearchSensor_task(void *id)
 	pthread_exit(NULL);
 }
 
+/**
+ * @name Save Sensor Task
+ * @brief Check all available sensor avec create sensor_string for the interface
+ * @param id do nothing
+ */
 void *SaveSensor_task(void *id)
 {
 	logging("STARTING : save sensor task\n");
@@ -342,6 +292,7 @@ void *SaveSensor_task(void *id)
 		{
 			if (sensor_tab.available[i] == USED)
 			{
+				sem_wait(&sensor_tab.sensor_sem_tab[i]);
 				json_object_array_add(sensor_json, get_json_from_sensor(*(sensor_tab.tab[i])));
 			}
 		}
@@ -361,6 +312,34 @@ void *SaveSensor_task(void *id)
 	pthread_exit(NULL);
 }
 
+/**
+ * @name Read Control Task
+ * @brief Take control_string and extract all available controls
+ * @param id do nothing
+ */
+void *ReadControl_task(void *id)
+{
+	logging("STARTING : read control task\n");
+	while (1)
+	{
+		pthread_mutex_lock(&mutex_control_interface);
+		control_json = json_tokener_parse(control_string);
+		pthread_mutex_unlock(&mutex_control_interface);
+		if (control_json != NULL)
+		{
+			set_control_from_json(control_json);
+			json_object_put(control_json);
+		}
+		sleep(REFRESH_PERIOD_INTERFACE);
+	}
+	pthread_exit(NULL);
+}
+
+/**
+ * @name Save Control Task
+ * @brief Check all available control avec create control_string_write for the interface
+ * @param id do nothing
+ */
 void *SaveControl_task(void *id)
 {
 	logging("STARTING : save control task\n");
@@ -395,6 +374,12 @@ void *SaveControl_task(void *id)
 	pthread_exit(NULL);
 }
 
+/**
+ * @name add_sensor
+ * @brief Configure the add sensor task and start it
+ * @param id the id of the task in memory
+ * @param ip the ip of the new sensors 
+ */
 void add_sensor(uint32_t id, in_addr_t ip)
 {
 	sensor_tab.tab[id] = malloc(sizeof(sensor_t));
@@ -405,6 +390,11 @@ void add_sensor(uint32_t id, in_addr_t ip)
 	pthread_create(&(sensor_tab.thread_sensor_tab[id]), NULL, Sensor_task, task_id);
 }
 
+/**
+ * @name remove_sensor
+ * @brief Remove the sensor by an id
+ * @param id the id of the task sensor to delete
+ */
 void remove_sensor(uint32_t id)
 {
 	free(sensor_tab.tab[id]);
@@ -413,10 +403,67 @@ void remove_sensor(uint32_t id)
 	pthread_join(sensor_tab.thread_sensor_tab[id], NULL);
 }
 
+/**
+ * @name add_control
+ * @brief Add a control in the control_tab
+ * @param id the id of the task in memory
+ */
+void add_control(uint32_t id)
+{
+	control_tab.tab[id] = malloc(sizeof(control_t));
+	control_tab.available[id] = USED;
+	uint32_t *task_id = malloc(sizeof(uint32_t));
+	*task_id = id;
+}
+
+/**
+ * @name remove_control
+ * @brief Remove the control by an id
+ * @param id the id of the control to delete
+ */
+void remove_control(uint32_t id)
+{
+	free(control_tab.tab[id]);
+	control_tab.available[id] = AVAILABLE;
+}
+
+/**
+ * @name get_json_from_sensor
+ * @brief Take a sensor and return a json object
+ * @param sensor The sensor we want to transform in json
+ * @return json_object of the sensor
+ */
+json_object *get_json_from_sensor(sensor_t sensor)
+{
+	json_object *json = json_object_new_object();
+	json_object_object_add(json, "id", json_object_new_int(sensor.id));
+	json_object_object_add(json, "type", json_object_new_string(MODULE_TYPE_STRING[sensor.type]));
+	json_object_object_add(json, "value", json_object_new_double(sensor.value));
+	return json;
+}
+
+/**
+ * @name get_json_from_control
+ * @brief Take a control and return a json object
+ * @param control The control we want to transform in json
+ * @return json_object of the control
+ */
+json_object *get_json_from_control(control_t control)
+{
+	json_object *json = json_object_new_object();
+	json_object_object_add(json, "id", json_object_new_int(control.id));
+	json_object_object_add(json, "type", json_object_new_string(MODULE_TYPE_STRING[control.type]));
+	json_object_object_add(json, "value", json_object_new_double(control.value));
+	return json;
+}
+
+/**
+ * @name set_control_from_json
+ * @brief Set controls from a json
+ * @param json The json we want to set the controls from
+ */
 void set_control_from_json(json_object *json)
 {
-	//todo analyse the json object todo
-	//and put ti in //control_tab[];
 	struct json_object *json_array_obj;
 	uint32_t length, i;
 	control_t control;
@@ -442,6 +489,12 @@ void set_control_from_json(json_object *json)
 	}
 }
 
+/**
+ * @name extract_a_control_from_json
+ * @brief extract a control from a json object
+ * @param json The json with one control in it
+ * @return the resulting control_t
+ */
 control_t extract_a_control_from_json(json_object *json)
 {
 	struct json_object *json_id, *json_type, *json_value;
@@ -464,6 +517,13 @@ control_t extract_a_control_from_json(json_object *json)
 	return control;
 }
 
+/**
+ * @name compare_control
+ * @brief compare 2 controls if they have the same type and id
+ * @param a the first control
+ * @param b the second control
+ * @return 1 if the same, 0 if different
+ */
 uint32_t compare_control(control_t a, control_t b)
 {
 	if ((a.id == b.id) && (a.type == b.type))
@@ -471,38 +531,4 @@ uint32_t compare_control(control_t a, control_t b)
 		return 1;
 	}
 	return 0;
-}
-
-void *ReadControl_task(void *id)
-{
-	logging("STARTING : read control task\n");
-	while (1)
-	{
-		pthread_mutex_lock(&mutex_control_interface);
-		control_json = json_tokener_parse(control_string); //todo change test2
-		pthread_mutex_unlock(&mutex_control_interface);	   //potiential memory leak
-		if (control_json != NULL)
-		{
-			set_control_from_json(control_json);
-			json_object_put(control_json);
-		}
-		//printf("%f\n", control_tab.tab[0]->value); // todo remove that
-		sleep(REFRESH_PERIOD_INTERFACE);
-	}
-	pthread_exit(NULL);
-}
-
-void add_control(uint32_t id)
-{
-	control_tab.tab[id] = malloc(sizeof(control_t));
-	control_tab.available[id] = USED;
-	uint32_t *task_id = malloc(sizeof(uint32_t));
-	*task_id = id;
-}
-
-void remove_control(uint32_t id)
-{
-	free(control_tab.tab[id]);
-	control_tab.available[id] = AVAILABLE;
-	sem_post(&(control_tab.control_sem_tab[id]));
 }
